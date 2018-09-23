@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:element name="Specialization">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Key"/>
+                <xs:element ref="Name"/>
+                <xs:element ref="Description"/>
+                <xs:element ref="Source"/>
+                <xs:element ref="CareerSkills"/>
+                <xs:element ref="TalentRows"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Name" type="xs:NCName"/>
+    <xs:element name="Description" type="xs:string"/>
+    <xs:element name="Source">
+        <xs:complexType mixed="true">
+            <xs:attribute name="Page" use="required" type="xs:integer"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="CareerSkills">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="Key"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="TalentRows">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="TalentRow"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="TalentRow">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Index"/>
+                <xs:element ref="Cost"/>
+                <xs:element ref="Talents"/>
+                <xs:element ref="Directions"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Index" type="xs:integer"/>
+    <xs:element name="Cost" type="xs:integer"/>
+    <xs:element name="Talents">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="Key"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Directions">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="Direction"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Direction">
+        <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element ref="Down"/>
+                <xs:element ref="Left"/>
+                <xs:element ref="Right"/>
+                <xs:element ref="Up"/>
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Down" type="xs:boolean"/>
+    <xs:element name="Left" type="xs:boolean"/>
+    <xs:element name="Right" type="xs:boolean"/>
+    <xs:element name="Up" type="xs:boolean"/>
+    <xs:element name="Key" type="xs:NCName"/>
+</xs:schema>

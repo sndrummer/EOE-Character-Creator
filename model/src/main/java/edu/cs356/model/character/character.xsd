@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:element name="Character">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="LastChanged"/>
+                <xs:element ref="NotPersisted"/>
+                <xs:element ref="FileName"/>
+                <xs:element ref="Name"/>
+                <xs:element ref="Key"/>
+                <xs:element ref="Description"/>
+                <xs:element ref="Characteristics"/>
+                <xs:element ref="Motivations"/>
+                <xs:element ref="Specializations"/>
+                <xs:element ref="ForcePowers"/>
+                <xs:element ref="SigAbilities"/>
+                <xs:element ref="Skills"/>
+                <xs:element ref="ObOptions"/>
+                <xs:element ref="Obligations"/>
+                <xs:element ref="DutOptions"/>
+                <xs:element ref="Duties"/>
+                <xs:element ref="Experience"/>
+                <xs:element ref="Attributes"/>
+                <xs:element ref="Species"/>
+                <xs:element ref="Career"/>
+                <xs:element ref="Class"/>
+                <xs:element ref="Hook"/>
+                <xs:element ref="Attitude"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="LastChanged" type="xs:NMTOKEN"/>
+    <xs:element name="NotPersisted" type="xs:boolean"/>
+    <xs:element name="FileName" type="xs:NCName"/>
+    <xs:element name="Description">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="CharName"/>
+                <xs:element ref="PlayerName"/>
+                <xs:element ref="GenderValue"/>
+                <xs:element ref="Age"/>
+                <xs:element ref="Height"/>
+                <xs:element ref="Build"/>
+                <xs:element ref="Hair"/>
+                <xs:element ref="Eyes"/>
+                <xs:element ref="Gender"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="CharName" type="xs:string"/>
+    <xs:element name="PlayerName" type="xs:NCName"/>
+    <xs:element name="GenderValue" type="xs:NCName"/>
+    <xs:element name="Age" type="xs:integer"/>
+    <xs:element name="Height" type="xs:string"/>
+    <xs:element name="Build" type="xs:NCName"/>
+    <xs:element name="Hair" type="xs:NCName"/>
+    <xs:element name="Eyes" type="xs:NCName"/>
+    <xs:element name="Gender" type="xs:NCName"/>
+    <xs:element name="Characteristics">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="CharCharacteristic"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="CharCharacteristic">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Key"/>
+                <xs:element ref="Name"/>
+                <xs:element ref="Rank"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Motivations">
+        <xs:complexType/>
+    </xs:element>
+    <xs:element name="Specializations">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="CharSpecialization"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="CharSpecialization">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Key"/>
+                <xs:element ref="Name"/>
+                <xs:element ref="isStartingSpec"/>
+                <xs:element ref="isCareerSpec"/>
+                <xs:element ref="Talents"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="isStartingSpec" type="xs:boolean"/>
+    <xs:element name="isCareerSpec" type="xs:boolean"/>
+    <xs:element name="Talents">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="CharTalent"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ForcePowers">
+        <xs:complexType/>
+    </xs:element>
+    <xs:element name="SigAbilities">
+        <xs:complexType/>
+    </xs:element>
+    <xs:element name="Skills">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="CharSkill"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="CharSkill">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Key"/>
+                <xs:element ref="Rank"/>
+                <xs:element minOccurs="0" ref="isCareer"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="isCareer" type="xs:boolean"/>
+    <xs:element name="ObOptions" type="StartingSize"/>
+    <xs:element name="Obligations">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="CharObligation"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="CharObligation">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Key"/>
+                <xs:element ref="Name"/>
+                <xs:element ref="Size"/>
+                <xs:element ref="ObKey"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Size" type="xs:integer"/>
+    <xs:element name="ObKey" type="xs:NCName"/>
+    <xs:element name="DutOptions" type="StartingSize"/>
+    <xs:element name="Duties">
+        <xs:complexType/>
+    </xs:element>
+    <xs:element name="Experience">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ExperienceRanks"/>
+                <xs:element ref="UsedExperience"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ExperienceRanks">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="SpeciesRanks"/>
+                <xs:element ref="PurchasedRanks"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="UsedExperience" type="xs:integer"/>
+    <xs:element name="Attributes">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="SoakValue"/>
+                <xs:element ref="WoundThreshold"/>
+                <xs:element ref="StrainThreshold"/>
+                <xs:element ref="DefenseRanged"/>
+                <xs:element ref="DefenseMelee"/>
+                <xs:element ref="ForceRating"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SoakValue">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="StartingRanks"/>
+                <xs:element ref="PurchasedRanks"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="WoundThreshold">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="StartingRanks"/>
+                <xs:element ref="SpeciesRanks"/>
+                <xs:element ref="TalentRanks"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="StrainThreshold">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="StartingRanks"/>
+                <xs:element ref="SpeciesRanks"/>
+                <xs:element ref="TalentRanks"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DefenseRanged">
+        <xs:complexType/>
+    </xs:element>
+    <xs:element name="DefenseMelee">
+        <xs:complexType/>
+    </xs:element>
+    <xs:element name="ForceRating">
+        <xs:complexType/>
+    </xs:element>
+    <xs:element name="Species">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="SpeciesKey"/>
+                <xs:element ref="SubSpeciesKey"/>
+                <xs:element ref="SelectedOptions"/>
+                <xs:element ref="SpeciesTalents"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SpeciesKey" type="xs:NCName"/>
+    <xs:element name="SubSpeciesKey">
+        <xs:complexType/>
+    </xs:element>
+    <xs:element name="SelectedOptions">
+        <xs:complexType/>
+    </xs:element>
+    <xs:element name="SpeciesTalents">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="CharTalent"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Career">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="CareerKey"/>
+                <xs:element ref="StartingSpecKey"/>
+                <xs:element ref="CareerSkills"/>
+                <xs:element ref="CareerSpecSkills"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="CareerKey" type="xs:NCName"/>
+    <xs:element name="StartingSpecKey" type="xs:NCName"/>
+    <xs:element name="CareerSkills">
+        <xs:complexType/>
+    </xs:element>
+    <xs:element name="CareerSpecSkills">
+        <xs:complexType/>
+    </xs:element>
+    <xs:element name="Class">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ClassKey"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ClassKey" type="xs:NCName"/>
+    <xs:element name="Hook">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="HookKey"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="HookKey" type="xs:NCName"/>
+    <xs:element name="Attitude">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="AttitudeKey"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AttitudeKey" type="xs:NCName"/>
+    <xs:element name="Name" type="xs:string"/>
+    <xs:element name="Key" type="xs:NMTOKEN"/>
+    <xs:element name="Rank">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="SpeciesRanks"/>
+                <xs:element minOccurs="0" ref="PurchasedRanks"/>
+                <xs:element minOccurs="0" ref="NonCareerRanks"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="NonCareerRanks" type="xs:integer"/>
+    <xs:element name="CharTalent">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Key"/>
+                <xs:sequence minOccurs="0">
+                    <xs:element ref="Col"/>
+                    <xs:element ref="Row"/>
+                </xs:sequence>
+                <xs:element minOccurs="0" ref="Purchased"/>
+                <xs:element minOccurs="0" ref="Ranks"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Col" type="xs:integer"/>
+    <xs:element name="Row" type="xs:integer"/>
+    <xs:element name="Purchased" type="xs:boolean"/>
+    <xs:element name="Ranks" type="xs:integer"/>
+    <xs:complexType name="StartingSize">
+        <xs:sequence>
+            <xs:element ref="StartingSize"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="StartingSize" type="xs:integer"/>
+    <xs:element name="SpeciesRanks" type="xs:integer"/>
+    <xs:element name="PurchasedRanks" type="xs:integer"/>
+    <xs:element name="StartingRanks" type="xs:integer"/>
+    <xs:element name="TalentRanks" type="xs:integer"/>
+</xs:schema>

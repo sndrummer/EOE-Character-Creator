@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:element name="Species">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Key"/>
+                <xs:element ref="Name"/>
+                <xs:element ref="Description"/>
+                <xs:element ref="Source"/>
+                <xs:element ref="StartingChars"/>
+                <xs:element ref="StartingAttrs"/>
+                <xs:element ref="SkillModifiers"/>
+                <xs:element ref="SubSpeciesList"/>
+                <xs:element ref="OptionChoices"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Source">
+        <xs:complexType mixed="true">
+            <xs:attribute name="Page" use="required" type="xs:integer"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="StartingChars">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Brawn"/>
+                <xs:element ref="Agility"/>
+                <xs:element ref="Intellect"/>
+                <xs:element ref="Cunning"/>
+                <xs:element ref="Willpower"/>
+                <xs:element ref="Presence"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Brawn" type="xs:integer"/>
+    <xs:element name="Agility" type="xs:integer"/>
+    <xs:element name="Intellect" type="xs:integer"/>
+    <xs:element name="Cunning" type="xs:integer"/>
+    <xs:element name="Willpower" type="xs:integer"/>
+    <xs:element name="Presence" type="xs:integer"/>
+    <xs:element name="StartingAttrs">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="WoundThreshold"/>
+                <xs:element ref="StrainThreshold"/>
+                <xs:element ref="Experience"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="WoundThreshold" type="xs:integer"/>
+    <xs:element name="StrainThreshold" type="xs:integer"/>
+    <xs:element name="Experience" type="xs:integer"/>
+    <xs:element name="SubSpeciesList">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="SubSpecies"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SubSpecies">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Key"/>
+                <xs:element ref="Name"/>
+                <xs:element ref="Description"/>
+                <xs:element minOccurs="0" ref="SkillModifiers"/>
+                <xs:element ref="OptionChoices"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Key" type="xs:NCName"/>
+    <xs:element name="Name" type="xs:string"/>
+    <xs:element name="Description" type="xs:string"/>
+    <xs:element name="SkillModifiers">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="SkillModifier"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SkillModifier">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Key"/>
+                <xs:element ref="RankStart"/>
+                <xs:element minOccurs="0" ref="RankLimit"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RankStart" type="xs:integer"/>
+    <xs:element name="RankLimit" type="xs:integer"/>
+    <xs:element name="OptionChoices">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="OptionChoice"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="OptionChoice">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Key"/>
+                <xs:element ref="Name"/>
+                <xs:element ref="Options"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Options">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="Option"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Option">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Key"/>
+                <xs:element ref="Name"/>
+                <xs:element ref="Description"/>
+                <xs:element minOccurs="0" ref="SkillModifiers"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

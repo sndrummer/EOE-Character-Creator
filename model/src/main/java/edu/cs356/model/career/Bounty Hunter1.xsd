@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:element name="Career">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Key"/>
+                <xs:element ref="Name"/>
+                <xs:element ref="Description"/>
+                <xs:element ref="Source"/>
+                <xs:element ref="CareerSkills"/>
+                <xs:element ref="Specializations"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Name" type="xs:string"/>
+    <xs:element name="Description" type="xs:string"/>
+    <xs:element name="Source">
+        <xs:complexType mixed="true">
+            <xs:attribute name="Page" use="required" type="xs:integer"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="CareerSkills">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="Key"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Specializations">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="Key"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Key" type="xs:NCName"/>
+</xs:schema>
