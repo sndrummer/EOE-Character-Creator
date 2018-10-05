@@ -1,295 +1,126 @@
+package edu.cs356.model.species;
 
-package species;
+public abstract class Species {
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+    //Characteristics
+    private int brawn;
+    private int agility;
+    private int intelligence;
+    private int cunning;
+    private int willpower;
+    private int presence;
 
+    //Starting XP
+    private int startingXP;
 
+    //Max Characteristics is six
+    public static final int MAX_ATT = 6;
 
-
-/**
- * <p>Java class for anonymous complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
- * <pre>
- * &lt;complexType>
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element ref="{}Key"/>
- *         &lt;element ref="{}Name"/>
- *         &lt;element ref="{}Description"/>
- *         &lt;element ref="{}Source"/>
- *         &lt;element ref="{}StartingChars"/>
- *         &lt;element ref="{}StartingAttrs"/>
- *         &lt;element ref="{}SkillModifiers"/>
- *         &lt;element ref="{}SubSpeciesList"/>
- *         &lt;element ref="{}OptionChoices"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
- * 
- * 
- */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "key",
-    "name",
-    "description",
-    "source",
-    "startingChars",
-    "startingAttrs",
-    "skillModifiers",
-    "subSpeciesList",
-    "optionChoices"
-})
-@XmlRootElement(name = "Species")
-public class Species {
-
-    @XmlElement(name = "Key", required = true)
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    @XmlSchemaType(name = "NCName")
-    protected String key;
-    @XmlElement(name = "Name", required = true)
-    protected String name;
-    @XmlElement(name = "Description", required = true)
-    protected String description;
-    @XmlElement(name = "Source", required = true)
-    protected Source source;
-    @XmlElement(name = "StartingChars", required = true)
-    protected StartingChars startingChars;
-    @XmlElement(name = "StartingAttrs", required = true)
-    protected StartingAttrs startingAttrs;
-    @XmlElement(name = "SkillModifiers", required = true)
-    protected SkillModifiers skillModifiers;
-    @XmlElement(name = "SubSpeciesList", required = true)
-    protected SubSpeciesList subSpeciesList;
-    @XmlElement(name = "OptionChoices", required = true)
-    protected OptionChoices optionChoices;
-
-    /**
-     * Gets the value of the key property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getKey() {
-        return key;
+    public enum Characteristic {
+        BR,
+        AG,
+        INT,
+        CUN,
+        WILL,
+        PR;
     }
 
-    /**
-     * Sets the value of the key property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setKey(String value) {
-        this.key = value;
+    public void purchaseCharacteristic(Characteristic c) {
+        switch (c) {
+            case BR:
+                if (brawn < MAX_ATT) brawn++;
+                break;
+            case AG:
+                if (agility < MAX_ATT) agility++;
+                break;
+            case INT:
+                if (intelligence < MAX_ATT) intelligence++;
+                break;
+            case CUN:
+                if (cunning < MAX_ATT) cunning++;
+                break;
+            case WILL:
+                if (willpower < MAX_ATT) willpower++;
+                break;
+            case PR:
+                if (presence < MAX_ATT) presence++;
+                break;
+        }
     }
 
-    /**
-     * Gets the value of the name property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getName() {
-        return name;
+    public int getCharacteristicValue(Characteristic c) {
+        switch (c) {
+            case BR:
+                return brawn;
+            case AG:
+                return agility;
+            case INT:
+                return intelligence;
+            case CUN:
+                return cunning;
+            case WILL:
+                return willpower;
+            case PR:
+                return presence;
+        }
+        return -1;
     }
 
-    /**
-     * Sets the value of the name property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setName(String value) {
-        this.name = value;
+
+    //getters and setters
+    public int getBrawn() {
+        return brawn;
     }
 
-    /**
-     * Gets the value of the description property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getDescription() {
-        return description;
+    public void setBrawn(int brawn) {
+        this.brawn = brawn;
     }
 
-    /**
-     * Sets the value of the description property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setDescription(String value) {
-        this.description = value;
+    public int getAgility() {
+        return agility;
     }
 
-    /**
-     * Gets the value of the source property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Source }
-     *     
-     */
-    public Source getSource() {
-        return source;
+    public void setAgility(int agility) {
+        this.agility = agility;
     }
 
-    /**
-     * Sets the value of the source property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Source }
-     *     
-     */
-    public void setSource(Source value) {
-        this.source = value;
+    public int getIntelligence() {
+        return intelligence;
     }
 
-    /**
-     * Gets the value of the startingChars property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link StartingChars }
-     *     
-     */
-    public StartingChars getStartingChars() {
-        return startingChars;
+    public void setIntelligence(int intelligence) {
+        this.intelligence = intelligence;
     }
 
-    /**
-     * Sets the value of the startingChars property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link StartingChars }
-     *     
-     */
-    public void setStartingChars(StartingChars value) {
-        this.startingChars = value;
+    public int getCunning() {
+        return cunning;
     }
 
-    /**
-     * Gets the value of the startingAttrs property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link StartingAttrs }
-     *     
-     */
-    public StartingAttrs getStartingAttrs() {
-        return startingAttrs;
+    public void setCunning(int cunning) {
+        this.cunning = cunning;
     }
 
-    /**
-     * Sets the value of the startingAttrs property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link StartingAttrs }
-     *     
-     */
-    public void setStartingAttrs(StartingAttrs value) {
-        this.startingAttrs = value;
+    public int getWillpower() {
+        return willpower;
     }
 
-    /**
-     * Gets the value of the skillModifiers property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link SkillModifiers }
-     *     
-     */
-    public SkillModifiers getSkillModifiers() {
-        return skillModifiers;
+    public void setWillpower(int willpower) {
+        this.willpower = willpower;
     }
 
-    /**
-     * Sets the value of the skillModifiers property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link SkillModifiers }
-     *     
-     */
-    public void setSkillModifiers(SkillModifiers value) {
-        this.skillModifiers = value;
+    public int getPresence() {
+        return presence;
     }
 
-    /**
-     * Gets the value of the subSpeciesList property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link SubSpeciesList }
-     *     
-     */
-    public SubSpeciesList getSubSpeciesList() {
-        return subSpeciesList;
+    public void setPresence(int presence) {
+        this.presence = presence;
     }
 
-    /**
-     * Sets the value of the subSpeciesList property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link SubSpeciesList }
-     *     
-     */
-    public void setSubSpeciesList(SubSpeciesList value) {
-        this.subSpeciesList = value;
+    public int getStartingXP() {
+        return startingXP;
     }
 
-    /**
-     * Gets the value of the optionChoices property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link OptionChoices }
-     *     
-     */
-    public OptionChoices getOptionChoices() {
-        return optionChoices;
+    public void setStartingXP(int startingXP) {
+        this.startingXP = startingXP;
     }
-
-    /**
-     * Sets the value of the optionChoices property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link OptionChoices }
-     *     
-     */
-    public void setOptionChoices(OptionChoices value) {
-        this.optionChoices = value;
-    }
-
 }

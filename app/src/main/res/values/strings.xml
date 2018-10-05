@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Edge of the Empire Character Creator</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_test">test</string>
 </resources>
