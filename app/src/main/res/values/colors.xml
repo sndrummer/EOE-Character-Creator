@@ -21,6 +21,9 @@
     <color name="navy">#000080</color>
     <color name="black">#000000</color>
     <color name="transparent">#00000000</color>
+
+    <color name="swRed">#6F0B0B</color>
+    <color name="swBlue">#445D7B</color>
 </resources>
 
 

@@ -2,4 +2,9 @@
     <string name="app_name">Edge of the Empire Character Creator</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_test">test</string>
+    <string name="title_activity_species_selection">Species Selection</string>
+
+    <!-- Species Selection -->
+    <string name="character_name">CHARACTER NAME</string>
+    <string name="human_race">Human</string>
 </resources>

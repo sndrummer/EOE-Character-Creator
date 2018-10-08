@@ -1,8 +1,5 @@
 package edu.cs356.model;
 
-import java.util.List;
-
-import edu.cs356.model.skills.Skill;
 import edu.cs356.model.skills.SkillList;
 import edu.cs356.model.species.Species;
 
