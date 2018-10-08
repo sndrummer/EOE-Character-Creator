@@ -1,5 +1,9 @@
 package edu.cs356.model;
 
+import java.util.List;
+
+import edu.cs356.model.skills.Skill;
+import edu.cs356.model.skills.SkillList;
 import edu.cs356.model.species.Species;
 
 public class Character {
@@ -10,11 +14,12 @@ public class Character {
 
     public Character(Species species){
         setSpecies(species);
+        this.skillList = new SkillList(this);
     }
 
     //USE COMPOSITION, IE the character HAS a species, not IS a species
     private Species species;
-
+    private SkillList skillList;
     private int XP;
 
     public Species getSpecies() {
@@ -61,5 +66,9 @@ public class Character {
 
     public void setSoak(int soak) {
         this.soak = soak;
+    }
+
+    public SkillList getSkillList() {
+        return skillList;
     }
 }

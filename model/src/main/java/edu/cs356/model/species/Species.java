@@ -49,21 +49,28 @@ public abstract class Species {
     }
 
     public int getCharacteristicValue(Characteristic c) {
+        int value = 0;
         switch (c) {
             case BR:
-                return brawn;
+                value = brawn;
+                break;
             case AG:
-                return agility;
+                value = agility;
+                break;
             case INT:
-                return intelligence;
+                value = intelligence;
+                break;
             case CUN:
-                return cunning;
+                value = cunning;
+                break;
             case WILL:
-                return willpower;
+                value = willpower;
+                break;
             case PR:
-                return presence;
+                value = presence;
+                break;
         }
-        return -1;
+        return value;
     }
 
 

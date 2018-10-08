@@ -6,11 +6,12 @@ import java.util.Map;
 import edu.cs356.model.Character;
 import edu.cs356.model.skills.Skill;
 
-public class Technician extends Career {
+public class Smuggler extends Career {
 
-    public Technician(Character character) {
+    public Smuggler(Character character) {
         super(character);
     }
+
 
     private String description = "Though they spend most of their lives\n" +
             "struggling to avoid Imperial entanglements,\n" +
@@ -24,24 +25,22 @@ public class Technician extends Career {
             "get through legitimate means).";
 
 
-    private String skillsDescription = "Astrogation, Computers, Coordination,\n" +
-            "Discipline, Knowledge (Outer Rim),\n" +
-            "Mechanics, Perception, and Piloting (Planetary)\n" +
-            "He automatically gains one rank in four of these skills\n" +
-            "(of his choosing) without spending experience, and\n" +
-            "he receives a discount when he spends experience to\n" +
-            "purchase ranks in any of these skills.";
+    private String skillsDescription = "Smugglers are a crafty, diverse bunch with\n" +
+            "core skills as follows: Coordination, Deception,\n" +
+            "Knowledge (Underworld), Perception,\n" +
+            "Piloting (Space), Skulduggery,\n" +
+            "Streetwise, and Vigilance.";
 
     void initCareerSkills() {
         skillsUsed = new HashMap<>();
-        skillsUsed.put(Skill.SkillType.ASTROGATION, Boolean.FALSE);
-        skillsUsed.put(Skill.SkillType.COMPUTERS, Boolean.FALSE);
         skillsUsed.put(Skill.SkillType.COORDINATION, Boolean.FALSE);
-        skillsUsed.put(Skill.SkillType.DISCIPLINE, Boolean.FALSE);
-        skillsUsed.put(Skill.SkillType.OUTER_RIM, Boolean.FALSE);
-        skillsUsed.put(Skill.SkillType.MECHANICS, Boolean.FALSE);
-        skillsUsed.put(Skill.SkillType.PERCEPTION, Boolean.FALSE);
+        skillsUsed.put(Skill.SkillType.DECEPTION, Boolean.FALSE);
+        skillsUsed.put(Skill.SkillType.UNDERWORLD, Boolean.FALSE);
         skillsUsed.put(Skill.SkillType.PILOTING, Boolean.FALSE);
+        skillsUsed.put(Skill.SkillType.PERCEPTION, Boolean.FALSE);
+        skillsUsed.put(Skill.SkillType.SKULLDUGGERY, Boolean.FALSE);
+        skillsUsed.put(Skill.SkillType.STREETWISE, Boolean.FALSE);
+        skillsUsed.put(Skill.SkillType.VIGILANCE, Boolean.FALSE);
     }
 
     @Override

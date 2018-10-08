@@ -8,7 +8,7 @@ import edu.cs356.model.species.Species;
 
 public class SkillList {
 
-    public SkillList(Character character){
+    public SkillList(Character character) {
         this.character = character;
 
         initSkillList();
@@ -25,7 +25,7 @@ public class SkillList {
     private Species.Characteristic WILL = Species.Characteristic.WILL;
     private Species.Characteristic PR = Species.Characteristic.PR;
 
-    private void initSkillList(){
+    private void initSkillList() {
         skillList = new ArrayList<>();
 
         addSkill(astrogation);
@@ -59,17 +59,24 @@ public class SkillList {
         addSkill(ranged_heavy);
         addSkill(ranged_light);
 
+        //Knowledge
+        addSkill(core_worlds);
+        addSkill(education);
+        addSkill(outer_rim);
+        addSkill(lore);
+        addSkill(underworld);
+        addSkill(warfare);
+        addSkill(xenology);
     }
 
-    private void addSkill(Skill skill){
+    //Initializes the skill with the character's base characteristic ie no ranks
+    private void addSkill(Skill skill) {
         Species.Characteristic att = skill.getGoverningAtt();
         int ability = character.getSpecies().getCharacteristicValue(att);
         skill.setAbility(ability);
 
         skillList.add(skill);
     }
-
-
 
     //skills
     private Skill astrogation = new Skill("Astrogation", INT);
@@ -105,6 +112,134 @@ public class SkillList {
     private Skill ranged_heavy = new Skill("Ranged - Heavy", AG);
     private Skill ranged_light = new Skill("Ranged - Light", AG);
 
+    //Knowledge skills
+    private Skill core_worlds = new Skill("Core Worlds", INT);
+    private Skill education = new Skill("Education", INT);
+    private Skill lore = new Skill("Lore", INT);
+    private Skill outer_rim = new Skill("Outer Rim", INT);
+    private Skill underworld = new Skill("Underworld", INT);
+    private Skill warfare = new Skill("Warfare", INT);
+    private Skill xenology = new Skill("Xenology", INT);
 
 
+    //getters
+
+
+    public List<Skill> getSkillList() {
+        return skillList;
+    }
+
+    public Skill getSkillByType(Skill.SkillType skillType) {
+        Skill result = null;
+
+        switch (skillType) {
+            case ASTROGATION:
+                result = astrogation;
+                break;
+            case ATHLETICS:
+                result = athletics;
+                break;
+            case CHARM:
+                result = charm;
+                break;
+            case COERCION:
+                result = coercion;
+                break;
+
+            case COMPUTERS:
+                result = computers;
+                break;
+            case COOL:
+                result = cool;
+                break;
+            case COORDINATION:
+                result = coordination;
+                break;
+            case DECEPTION:
+                result = deception;
+                break;
+
+            case DISCIPLINE:
+                result = discipline;
+                break;
+            case LEADERSHIP:
+                result = leadership;
+                break;
+            case MECHANICS:
+                result = mechanics;
+                break;
+            case MEDICINE:
+                result = medicine;
+                break;
+
+            case NEGOTIATION:
+                result = negotiation;
+                break;
+            case PERCEPTION:
+                result = perception;
+                break;
+            case PILOTING:
+                result = piloting;
+                break;
+            case RESILIENCE:
+                result = resilience;
+                break;
+
+            case SKULLDUGGERY:
+                result = skullduggery;
+                break;
+            case STEALTH:
+                result = stealth;
+                break;
+            case STREETWISE:
+                result = streetwise;
+                break;
+            case VIGILANCE:
+                result = vigilance;
+                break;
+
+            //Combat
+            case BRAWL:
+                result = brawl;
+                break;
+            case GUNNERY:
+                result = gunnery;
+                break;
+            case MELEE:
+                result = melee;
+                break;
+            case RANGED_HEAVY:
+                result = ranged_heavy;
+                break;
+            case RANGED_LIGHT:
+                result = ranged_light;
+                break;
+
+
+            //Knowledge
+            case CORE_WORLDS:
+                result = core_worlds;
+                break;
+            case EDUCATION:
+                result = education;
+                break;
+            case LORE:
+                result = lore;
+                break;
+            case OUTER_RIM:
+                result = outer_rim;
+                break;
+            case UNDERWORLD:
+                result = underworld;
+                break;
+            case WARFARE:
+                result = warfare;
+                break;
+            case XENOLOGY:
+                result = xenology;
+                break;
+
+        }
+        return result;
+    }
 }

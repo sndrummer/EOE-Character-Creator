@@ -11,10 +11,53 @@ public class Skill {
     5 Challenge -- red
      */
 
-    public Skill(String name, Species.Characteristic governingAtt){
+    public Skill(String name, Species.Characteristic governingAtt) {
         this.name = name;
         this.governingAtt = governingAtt;
     }
+
+    public enum SkillType {
+        ASTROGATION,
+        ATHLETICS,
+        CHARM,
+        COERCION,
+
+        COMPUTERS,
+        COOL,
+        COORDINATION,
+        DECEPTION,
+
+        DISCIPLINE,
+        LEADERSHIP,
+        MECHANICS,
+        MEDICINE,
+
+        NEGOTIATION,
+        PERCEPTION,
+        PILOTING,
+        RESILIENCE,
+
+        SKULLDUGGERY,
+        STEALTH,
+        STREETWISE,
+        VIGILANCE,
+
+        BRAWL,
+        GUNNERY,
+        MELEE,
+        RANGED_HEAVY,
+        RANGED_LIGHT,
+
+        //Knowledge Skills
+        CORE_WORLDS,
+        EDUCATION,
+        LORE,
+        OUTER_RIM,
+        UNDERWORLD,
+        WARFARE,
+        XENOLOGY;
+    }
+
 
     private String name;
 
@@ -25,7 +68,7 @@ public class Skill {
 
     private int ability; //green dice
 
-    private int rank; //yellow dice
+    private int rank = 0; //yellow dice
 
     private int bonus = 0;
     private int setback = 0;
@@ -42,8 +85,8 @@ public class Skill {
         return rank;
     }
 
-    public void setRank(int rank) {
-        this.rank = rank;
+    public void incrementRank() {
+        if (rank < MAX_RANK) rank++;
     }
 
     public int getBonus() {
