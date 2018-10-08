@@ -7,4 +7,7 @@
     <!-- Species Selection -->
     <string name="character_name">CHARACTER NAME</string>
     <string name="human_race">Human</string>
+    <string name="to_main">MAIN</string>
+    <string name="to_background">BACKGROUND</string>
+
 </resources>

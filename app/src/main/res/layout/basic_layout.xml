@@ -48,14 +48,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="75dp"
                     android:scaleType="fitStart"
-                    android:background="@drawable/arrowL" />
+                    android:background="@drawable/arrow_l" />
                 <Button
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="75dp"
                     android:layout_marginBottom="8dp"
                     android:scaleType="fitStart"
-                    android:background="@drawable/arrowR"/>
+                    android:background="@drawable/arrow_r"/>
             </LinearLayout>
         </RelativeLayout>
     </FrameLayout>
