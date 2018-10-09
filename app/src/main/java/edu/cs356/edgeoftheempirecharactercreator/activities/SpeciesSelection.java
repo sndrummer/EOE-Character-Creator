@@ -117,7 +117,7 @@ public class SpeciesSelection extends AppCompatActivity {
                 if (mCharName.getText() == null){
                     characterName = "";
                 }
-                else characterName = mCharName.getText().toString();
+                else characterName = mCharName.getText().toString().trim();
                 Model.getInstance().selectSpeciesAndName(getSpeciesBySelection(), characterName);
             }
         });

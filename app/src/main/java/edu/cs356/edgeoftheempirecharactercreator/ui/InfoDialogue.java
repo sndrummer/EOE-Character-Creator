@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.method.ScrollingMovementMethod;
 import android.view.KeyboardShortcutGroup;
 import android.view.Menu;
 import android.view.View;
@@ -32,6 +33,7 @@ public class InfoDialogue extends Dialog {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.custom_dialog);
         TextView descriptionView = findViewById(R.id.desc_text);
+        descriptionView.setMovementMethod(new ScrollingMovementMethod());
         mExitBtn = findViewById(R.id.exit_btn);
         getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
