@@ -12,6 +12,8 @@ public class Smuggler extends Career {
         super(character);
     }
 
+    private String name = "Smuggler";
+
 
     private String description = "Though they spend most of their lives\n" +
             "struggling to avoid Imperial entanglements,\n" +
@@ -57,4 +59,10 @@ public class Smuggler extends Career {
     public Map<Skill.SkillType, Boolean> getCareerSkills() {
         return skillsUsed;
     }
+
+    @Override
+    public String getName() {
+        return name;
+    }
 }
+

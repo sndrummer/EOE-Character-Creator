@@ -12,6 +12,8 @@ public class Technician extends Career {
         super(character);
     }
 
+    private String name = "Technician";
+
     private String description = "Though they spend most of their lives\n" +
             "struggling to avoid Imperial entanglements,\n" +
             "keeping their ships flying, dodgng\n" +
@@ -57,5 +59,10 @@ public class Technician extends Career {
     @Override
     public Map<Skill.SkillType, Boolean> getCareerSkills() {
         return skillsUsed;
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 }

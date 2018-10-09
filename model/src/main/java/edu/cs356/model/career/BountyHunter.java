@@ -12,6 +12,8 @@ public class BountyHunter extends Career {
         super(character);
     }
 
+    private String name = "Bounty Hunter";
+
 
     private String description = "Pretty much anything to do with technology or mechanical\n" +
             "devices lies within the Technician's purview. He\n" +
@@ -56,5 +58,8 @@ public class BountyHunter extends Career {
         return skillsUsed;
     }
 
-
+    @Override
+    public String getName() {
+        return name;
+    }
 }

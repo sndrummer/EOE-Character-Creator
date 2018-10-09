@@ -20,9 +20,10 @@
             android:layout_height="65dp"
             android:layout_margin="@dimen/fab_margin"
             android:fontFamily="@font/teuton_mager_italic"
+            android:maxLength="25"
             android:gravity="center"
             android:hint="@string/character_name"
-            android:textSize="42dp" />
+            android:textSize="42sp" />
 
 
         <android.support.v7.widget.Toolbar

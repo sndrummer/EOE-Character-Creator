@@ -16,6 +16,8 @@ public abstract class Career {
 
     public abstract Map<Skill.SkillType, Boolean> getCareerSkills();
 
+    public abstract String getName();
+
     //public abstract void chooseCareerSkill(Skill.SkillType type);
     abstract void initCareerSkills();
 

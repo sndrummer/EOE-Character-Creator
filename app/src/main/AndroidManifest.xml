@@ -15,16 +15,17 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".activities.SpeciesSelection"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_species_selection"
-            android:theme="@style/AppTheme"
             android:screenOrientation="portrait"
-            android:configChanges="keyboardHidden|orientation|screenSize">
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activities.CharacterSummary"></activity>
     </application>
 
 </manifest>
