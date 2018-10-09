@@ -56,7 +56,7 @@
             android:scaleType="fitCenter"
             android:src="@drawable/human"/>
 
-        <ImageButton
+        <Button
             android:id="@+id/species_info_btn"
             android:layout_width="80dp"
             android:layout_height="80dp"
@@ -70,7 +70,7 @@
 
 
             />
-        <ImageButton
+        <Button
             android:id="@+id/species_right_btn"
             android:layout_width="60dp"
             android:layout_height="110dp"
@@ -79,7 +79,7 @@
             android:layout_alignEnd="@id/species_img"
             android:layout_marginTop="160dp"/>
 
-        <ImageButton
+        <Button
             android:id="@+id/species_left_btn"
             android:layout_width="60dp"
             android:layout_height="110dp"
@@ -112,7 +112,8 @@
             android:layout_height="100sp"
             android:layout_alignParentBottom="true"
             android:layout_marginTop="55dp">
-            <Button android:id="@+id/species_next"
+            <Button
+                android:id="@+id/to_main_btn"
                 android:layout_weight="1"
                 android:layout_marginBottom="8dp"
                 android:layout_width="wrap_content"
@@ -124,6 +125,7 @@
                 android:textColor="@color/white"
                 android:fontFamily="@font/teuton_mager"/>
             <Button
+                android:id="@+id/to_background_btn"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="75dp"
@@ -136,8 +138,6 @@
                 android:fontFamily="@font/teuton_mager"/>
         </LinearLayout>
     </RelativeLayout>
-
-
 </FrameLayout>
 
 
