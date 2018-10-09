@@ -14,4 +14,21 @@ public class Twilek extends Species {
 
         setStartingXP(100);
     }
+
+    private String name = "Twi'lek";
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    private String description = "The Twi'leks are among the most prominent non-human\n" +
+            "species in the galaxy. They are expert bargainers,\n" +
+            "sly at reading other species and using cunning to\n" +
+            "get what they want.";
+
+    @Override
+    public String getDescription() {
+        return description;
+    }
 }

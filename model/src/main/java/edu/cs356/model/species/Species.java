@@ -25,6 +25,9 @@ public abstract class Species {
         PR;
     }
 
+    public abstract String getDescription();
+    public abstract String getName();
+
     public void purchaseCharacteristic(Characteristic c) {
         switch (c) {
             case BR:

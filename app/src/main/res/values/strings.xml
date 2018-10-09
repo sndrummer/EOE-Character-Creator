@@ -9,6 +9,6 @@
     <string name="human_race">Human</string>
     <string name="to_main">MAIN</string>
     <string name="to_background">BACKGROUND</string>
-    <string name="desc">DESCRIPTION:</string>
+    <string name="desc">description:</string>
 
 </resources>

@@ -1,25 +1,18 @@
 package edu.cs356.edgeoftheempirecharactercreator.activities;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.util.SparseIntArray;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import edu.cs356.edgeoftheempirecharactercreator.R;
 import edu.cs356.edgeoftheempirecharactercreator.model.Model;
+import edu.cs356.edgeoftheempirecharactercreator.ui.InfoDialogue;
 import edu.cs356.model.species.Human;
 import edu.cs356.model.species.Species;
 import edu.cs356.model.species.Twilek;
@@ -36,16 +29,17 @@ public class SpeciesSelection extends AppCompatActivity {
     private Button mSpeciesRightBtn;
     private Button mToMainBtn;
     private Button mToBackGroundBtn;
+    private Button mSpeciesInfoBtn; //species_info_btn
 
     //Selection arrays
     private int[] mSpeciesSelection;
-    private String[] mSpeciesNames;
+
 
     //Character Name EditText
     private TextInputEditText mCharName;
 
     //Species List
-    //private Species[] mSpeciesList;
+    private Species[] mSpecies;
 
     //Species Selection Text
     private TextView mSpeciesText; //species_text
@@ -70,6 +64,7 @@ public class SpeciesSelection extends AppCompatActivity {
         mSpeciesRightBtn = (Button) findViewById(R.id.species_right_btn);
         mToMainBtn = (Button) findViewById(R.id.to_main_btn);
         mToBackGroundBtn = (Button) findViewById(R.id.to_background_btn);
+        mSpeciesInfoBtn = (Button) findViewById(R.id.species_info_btn);
 
         setButtonListeners();
 
@@ -83,10 +78,10 @@ public class SpeciesSelection extends AppCompatActivity {
                 R.drawable.twilek
         };
 
-        mSpeciesNames = new String[]{
-                "Human",
-                "Wookiee",
-                "Twi'lek"
+        mSpecies = new Species[]{
+                new Human(),
+                new Wookiee(),
+                new Twilek()
         };
     }
 
@@ -99,7 +94,7 @@ public class SpeciesSelection extends AppCompatActivity {
                     curSelection = 2;
                 } else curSelection--;
                 mSpeciesImg.setImageDrawable(getDrawable(mSpeciesSelection[curSelection]));
-                mSpeciesText.setText(mSpeciesNames[curSelection]);
+                mSpeciesText.setText(mSpecies[curSelection].getName());
 
             }
         });
@@ -110,7 +105,7 @@ public class SpeciesSelection extends AppCompatActivity {
                 Log.d(TAG, "Right Button Clicked");
                 curSelection = (curSelection + 1) % 3;
                 mSpeciesImg.setImageDrawable(getDrawable(mSpeciesSelection[curSelection]));
-                mSpeciesText.setText(mSpeciesNames[curSelection]);
+                mSpeciesText.setText(mSpecies[curSelection].getName());
             }
         });
 
@@ -126,6 +121,21 @@ public class SpeciesSelection extends AppCompatActivity {
                 Model.getInstance().selectSpeciesAndName(getSpeciesBySelection(), characterName);
             }
         });
+
+        mSpeciesInfoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InfoDialogue dialogue = new InfoDialogue(SpeciesSelection.this, mSpecies[curSelection].getDescription());
+                dialogue.show();
+            }
+        });
+
+
+
+        /*
+          ConfirmRouteDialog dialog = new ConfirmRouteDialog(this, route);
+        dialog.show();
+         */
     }
 
     private Species getSpeciesBySelection(){

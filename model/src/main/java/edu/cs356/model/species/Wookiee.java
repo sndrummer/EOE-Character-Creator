@@ -15,4 +15,23 @@ public class Wookiee extends Species {
         setStartingXP(90);
     }
 
+    private String name = "Wookiee";
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    private String description = "Strong, intelligent, and fierce in battle, Wookiees\n" +
+            "make the best of friends for those to whom they are\n" +
+            "loyal—and the worst of enemies for anyone to whom\n" +
+            "they are not. Unfortunately, Wookiees have virtually\n" +
+            "disappeared from the population at large and are becoming\n" +
+            "a faded memory of the Old Republic.";
+
+
+    @Override
+    public String getDescription() {
+        return description;
+    }
 }

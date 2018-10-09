@@ -16,6 +16,23 @@ public class Human extends Species{
         setStartingXP(110);
     }
 
+    private String name = "Human";
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    public String description = "Humans are the most populous and gregarious of the\n" +
+            "galaxy's sapient species. They seem to be present on\n" +
+            "almost every open planet that harbors life while traveling\n" +
+            "the spacelanes looking for more.";
+
+    @Override
+    public String getDescription() {
+        return description;
+    }
+
 
     /*
      private int brawn;

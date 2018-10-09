@@ -8,8 +8,10 @@ public class Character {
     private int wound;
     private int strain;
     private int soak;
+    private String name;
 
-    public Character(Species species){
+    public Character(Species species, String name){
+        this.name = name;
         setSpecies(species);
         this.skillList = new SkillList(this);
     }
@@ -67,5 +69,13 @@ public class Character {
 
     public SkillList getSkillList() {
         return skillList;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
