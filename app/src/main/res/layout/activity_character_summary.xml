@@ -337,6 +337,14 @@
                 android:text="skills"
                 android:textColor="@color/white"
                 android:textSize="25dp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/skills_list"
+                android:scrollbars="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </android.support.v7.widget.RecyclerView>
         </LinearLayout>
 
         <Button
