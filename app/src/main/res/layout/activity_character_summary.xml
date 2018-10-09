@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.CharacterSummary">
+
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="95dp"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+
+
+
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <include layout="@layout/content_species_selection" />
+
+    <TextView
+        android:id="@+id/char_name_summary"
+        android:layout_marginTop="3dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:fontFamily="@font/starjedi_special_edition"
+        android:text="han solo"
+        android:textSize="32sp"
+        android:textColor="@color/white"/>
+    <TextView
+        android:id="@+id/char_species_class"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="42dp"
+        android:gravity="center"
+        android:fontFamily="@font/starjedi_special_edition"
+        android:text="human smuggler"
+        android:textSize="20sp"
+        android:textColor="@color/white"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="95dp"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+            
+            <ImageView
+                android:id="@+id/char_summary_img"
+                android:layout_weight="1"
+                android:layout_height="200dp"
+                android:layout_width="0dp"
+                android:layout_marginTop="35dp"
+                android:src="@drawable/human"/>
+            <TableLayout
+                android:layout_weight="1"
+                android:layout_height="320dp"
+                android:layout_width="0dp"
+                android:stretchColumns="0,1">
+                <TableRow
+                    android:layout_width="0dp"
+                    android:layout_marginTop="5dp">
+                    <ImageView
+                        android:layout_margin="2dp"
+                        android:layout_height="85dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:src="@drawable/attrribute"
+                        />
+                    <ImageView
+                        android:gravity="center"
+                        android:layout_height="85dp"
+                        android:layout_margin="2dp"
+                        android:layout_weight="1"
+                        android:src="@drawable/attrribute"
+                        android:text="Time" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="0dp"
+                    >
+                    <ImageView
+                        android:layout_margin="2dp"
+                        android:layout_height="85dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:src="@drawable/attrribute"
+                        />
+                    <ImageView
+                        android:gravity="center"
+                        android:layout_height="85dp"
+                        android:layout_margin="2dp"
+                        android:layout_weight="1"
+                        android:src="@drawable/attrribute"
+                        android:text="Time" />
+                </TableRow>
+                <TableRow
+                    android:layout_width="0dp">
+                    <ImageView
+                        android:layout_margin="2dp"
+                        android:layout_height="85dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:src="@drawable/attrribute"
+                        />
+                    <ImageView
+                        android:gravity="center"
+                        android:layout_height="85dp"
+                        android:layout_margin="2dp"
+                        android:layout_weight="1"
+                        android:src="@drawable/attrribute"
+                        android:text="Time" />
+                </TableRow>
+
+            </TableLayout>
+
+
+            
+
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="100sp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="55dp"
+                android:gravity="bottom">
+
+                <Button
+                    android:id="@+id/species_next"
+                    android:layout_width="wrap_content"
+                    android:layout_height="75dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/arrow_l"
+                    android:scaleType="fitStart" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="75dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/arrow_r"
+                    android:scaleType="fitStart" />
+            </LinearLayout>
+        </RelativeLayout>
+    </FrameLayout>
+</android.support.design.widget.CoordinatorLayout>
