@@ -18,7 +18,7 @@ public class Model {
         return sInstance;
     }
 
-    public void selectSpecies(Species species){
-        character = new Character(species);
+    public void selectSpeciesAndName(Species species, String name){
+        character = new Character(species, name);
     }
 }

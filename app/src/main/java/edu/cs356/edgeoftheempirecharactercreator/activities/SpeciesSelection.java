@@ -3,6 +3,7 @@ package edu.cs356.edgeoftheempirecharactercreator.activities;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -40,6 +41,9 @@ public class SpeciesSelection extends AppCompatActivity {
     private int[] mSpeciesSelection;
     private String[] mSpeciesNames;
 
+    //Character Name EditText
+    private TextInputEditText mCharName;
+
     //Species List
     //private Species[] mSpeciesList;
 
@@ -58,6 +62,7 @@ public class SpeciesSelection extends AppCompatActivity {
 
         mSpeciesImg = (ImageView) findViewById(R.id.species_img);
         mSpeciesText = (TextView) findViewById(R.id.species_text);
+        mCharName = (TextInputEditText) findViewById(R.id.char_name);
 
         initSpeciesOptions();
 
@@ -67,7 +72,7 @@ public class SpeciesSelection extends AppCompatActivity {
         mToBackGroundBtn = (Button) findViewById(R.id.to_background_btn);
 
         setButtonListeners();
-        
+
     }
 
     private void initSpeciesOptions() {
@@ -113,7 +118,12 @@ public class SpeciesSelection extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "To BackGround Button Clicked");
-                Model.getInstance().selectSpecies(getSpeciesBySelection());
+                String characterName;
+                if (mCharName.getText() == null){
+                    characterName = "";
+                }
+                else characterName = mCharName.getText().toString();
+                Model.getInstance().selectSpeciesAndName(getSpeciesBySelection(), characterName);
             }
         });
     }
