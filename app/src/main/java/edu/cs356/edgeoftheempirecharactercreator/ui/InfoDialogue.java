@@ -33,6 +33,7 @@ public class InfoDialogue extends Dialog {
         setContentView(R.layout.custom_dialog);
         TextView descriptionView = findViewById(R.id.desc_text);
         mExitBtn = findViewById(R.id.exit_btn);
+        getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
         descriptionView.setText(descText);
 
