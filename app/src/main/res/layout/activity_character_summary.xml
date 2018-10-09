@@ -57,8 +57,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
 
             <LinearLayout
@@ -327,18 +326,32 @@
                 </TableLayout>
             </LinearLayout>
 
+
             <TextView
+                android:id="@+id/skills_text"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@color/swBlue"
                 android:fontFamily="@font/starjedi_special_edition"
-                android:textColor="@color/white"
                 android:paddingLeft="12dp"
-                android:textSize="25dp"
                 android:text="skills"
-                />
-
+                android:textColor="@color/white"
+                android:textSize="25dp" />
         </LinearLayout>
+
+        <Button
+            android:id="@+id/skills_info_btn"
+            android:layout_width="75dp"
+            android:layout_height="70dp"
+            android:layout_gravity="right"
+            android:layout_marginTop="270dp"
+            android:layout_marginRight="@dimen/fab_margin"
+            android:background="@drawable/info_icon"
+            android:scaleType="centerCrop"
+            android:src="@drawable/info_icon"
+
+
+            />
 
 
         <RelativeLayout

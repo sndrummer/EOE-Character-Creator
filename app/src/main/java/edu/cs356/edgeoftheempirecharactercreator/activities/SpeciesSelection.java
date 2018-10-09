@@ -130,12 +130,6 @@ public class SpeciesSelection extends AppCompatActivity {
             }
         });
 
-
-
-        /*
-          ConfirmRouteDialog dialog = new ConfirmRouteDialog(this, route);
-        dialog.show();
-         */
     }
 
     private Species getSpeciesBySelection(){
