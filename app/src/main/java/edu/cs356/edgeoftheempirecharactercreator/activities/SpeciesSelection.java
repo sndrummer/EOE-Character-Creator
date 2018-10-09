@@ -11,12 +11,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import edu.cs356.edgeoftheempirecharactercreator.R;
+import edu.cs356.edgeoftheempirecharactercreator.model.Model;
+import edu.cs356.model.species.Human;
+import edu.cs356.model.species.Species;
+import edu.cs356.model.species.Twilek;
+import edu.cs356.model.species.Wookiee;
 
 public class SpeciesSelection extends AppCompatActivity {
 
@@ -29,7 +35,16 @@ public class SpeciesSelection extends AppCompatActivity {
     private Button mSpeciesRightBtn;
     private Button mToMainBtn;
     private Button mToBackGroundBtn;
+
+    //Selection arrays
     private int[] mSpeciesSelection;
+    private String[] mSpeciesNames;
+
+    //Species List
+    //private Species[] mSpeciesList;
+
+    //Species Selection Text
+    private TextView mSpeciesText; //species_text
 
     private int curSelection = 0; //Current species Selection
 
@@ -42,6 +57,7 @@ public class SpeciesSelection extends AppCompatActivity {
 
 
         mSpeciesImg = (ImageView) findViewById(R.id.species_img);
+        mSpeciesText = (TextView) findViewById(R.id.species_text);
 
         initSpeciesOptions();
 
@@ -51,21 +67,7 @@ public class SpeciesSelection extends AppCompatActivity {
         mToBackGroundBtn = (Button) findViewById(R.id.to_background_btn);
 
         setButtonListeners();
-
-
-
-        /*
-         mLoginButton = (ButtonShangText) findViewById(R.id.sign_in_button);
-        mLoginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.log(Log.Level.DEBUG, this.getClass(), "YOU HAVE CLICKED LOGIN BUTTON");
-                //PRESENTER LOGS IN**********
-               mLoginPresenter.onLoginButtonPressed();
-            // proceedToGameList();
-            }
-        });
-         */
+        
     }
 
     private void initSpeciesOptions() {
@@ -74,6 +76,12 @@ public class SpeciesSelection extends AppCompatActivity {
                 R.drawable.human,
                 R.drawable.wookiee,
                 R.drawable.twilek
+        };
+
+        mSpeciesNames = new String[]{
+                "Human",
+                "Wookiee",
+                "Twi'lek"
         };
     }
 
@@ -85,9 +93,8 @@ public class SpeciesSelection extends AppCompatActivity {
                 if (curSelection == 0) {
                     curSelection = 2;
                 } else curSelection--;
-
                 mSpeciesImg.setImageDrawable(getDrawable(mSpeciesSelection[curSelection]));
-                Log.d(TAG, "SETTING DRAWABLE!!!!!");
+                mSpeciesText.setText(mSpeciesNames[curSelection]);
 
             }
         });
@@ -95,12 +102,36 @@ public class SpeciesSelection extends AppCompatActivity {
         mSpeciesRightBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d(TAG, "Right Button Clicked");
                 curSelection = (curSelection + 1) % 3;
-
                 mSpeciesImg.setImageDrawable(getDrawable(mSpeciesSelection[curSelection]));
-
+                mSpeciesText.setText(mSpeciesNames[curSelection]);
             }
         });
+
+        mToBackGroundBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "To BackGround Button Clicked");
+                Model.getInstance().selectSpecies(getSpeciesBySelection());
+            }
+        });
+    }
+
+    private Species getSpeciesBySelection(){
+        Species species = null;
+        switch (curSelection){
+            case 0:
+                species = new Human();
+                break;
+            case 1:
+                species = new Wookiee();
+                break;
+            case 2:
+                species = new Twilek();
+                break;
+        }
+        return species;
     }
 
 
