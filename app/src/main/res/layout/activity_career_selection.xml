@@ -12,6 +12,33 @@
         android:theme="@style/AppTheme.AppBarOverlay"
         >
 
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+            <TextView
+                android:id="@+id/char_name_career"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+
+                android:fontFamily="@font/teuton_mager"
+                android:gravity="center"
+                android:text="CHEWBACCA "
+                android:textColor="@color/white"
+                android:textSize="32sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="28dp"
+                android:fontFamily="@font/starjedi_special_edition"
+                android:gravity="center"
+                android:text="career"
+                android:textColor="@color/white"
+                android:textSize="35sp" />
+        </RelativeLayout>
+
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -57,7 +84,8 @@
                 android:layout_height="100sp"
                 android:layout_alignParentBottom="true"
                 android:layout_marginTop="55dp">
-                <Button android:id="@+id/species_next"
+
+                <Button
                     android:layout_weight="1"
                     android:layout_marginBottom="8dp"
                     android:layout_width="wrap_content"
@@ -65,6 +93,7 @@
                     android:scaleType="fitStart"
                     android:background="@drawable/arrow_l" />
                 <Button
+                    android:id="@+id/career_next"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="75dp"

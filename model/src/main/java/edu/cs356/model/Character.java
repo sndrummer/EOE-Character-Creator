@@ -6,12 +6,15 @@ import edu.cs356.model.species.Species;
 
 public class Character {
 
+    private String name;
+    private Career career;
+
     private int wound;
     private int strain;
     private int soak;
-    private String name;
 
-    private Career career;
+    private String imagePath;
+
 
     public Character(Species species, String name){
         this.name = name;
@@ -88,5 +91,13 @@ public class Character {
 
     public void setCareer(Career career) {
         this.career = career;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }

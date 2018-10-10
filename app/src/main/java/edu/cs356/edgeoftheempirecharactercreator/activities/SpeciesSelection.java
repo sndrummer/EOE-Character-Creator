@@ -1,6 +1,7 @@
 package edu.cs356.edgeoftheempirecharactercreator.activities;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
@@ -125,10 +126,6 @@ public class SpeciesSelection extends AppCompatActivity {
                 Model.getInstance().selectSpeciesAndName(getSpeciesBySelection(), characterName);
 
 
-                Character character = Model.getInstance().getCharacter();
-
-                character.setCareer(new Smuggler(character));
-
                 proceedToNextScreen();
             }
         });
@@ -163,7 +160,14 @@ public class SpeciesSelection extends AppCompatActivity {
 
     private void proceedToNextScreen(){
         //Log.log(Log.Level.DEBUG, this.getClass(), "Starting GameListActivity");
-        Intent intent = new Intent(SpeciesSelection.this, CharacterSummary.class);
+        //Character character = Model.getInstance().getCharacter();
+
+        //character.setCareer(new Smuggler(character));
+
+        Drawable drawable = mSpeciesImg.getDrawable();
+        Model.getInstance().setCharacterDrawable(drawable);
+
+        Intent intent = new Intent(SpeciesSelection.this, CareerSelection.class);
 
         startActivity(intent);
     }

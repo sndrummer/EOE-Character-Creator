@@ -134,7 +134,7 @@
                 android:layout_marginBottom="8dp"
                 android:scaleType="fitStart"
                 android:background="@drawable/arrow_r"
-                android:text="@string/to_background"
+                android:text="Career"
                 android:textSize="20sp"
                 android:textColor="@color/white"
                 android:fontFamily="@font/teuton_mager"/>
