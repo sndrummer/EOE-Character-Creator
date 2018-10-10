@@ -73,6 +73,31 @@ public class Skill {
     private int bonus = 0;
     private int setback = 0;
 
+    public String getGoverningAttString() {
+        String res = "";
+        switch (governingAtt) {
+            case BR:
+                res = "(BR)";
+                break;
+            case INT:
+                res = "(INT)";
+                break;
+            case AG:
+                res = "(AG)";
+                break;
+            case CUN:
+                res = "(CUN)";
+                break;
+            case WILL:
+                res = "(WILL)";
+                break;
+            case PR:
+                res = "(PR)";
+                break;
+        }
+        return res;
+    }
+
     public int getAbility() {
         return ability;
     }
