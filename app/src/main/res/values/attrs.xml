@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CareerView">
+        <attr name="careerName" format="string"/>
+        <attr name="careerDescription" format="string"/>
+
+    </declare-styleable>
+
+</resources>
