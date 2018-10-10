@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import edu.cs356.edgeoftheempirecharactercreator.R;
 import edu.cs356.edgeoftheempirecharactercreator.model.Model;
@@ -119,8 +120,9 @@ public class SpeciesSelection extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d(TAG, "To BackGround Button Clicked");
                 String characterName;
-                if (mCharName.getText() == null){
-                    characterName = "";
+                if (mCharName.getText() == null || mCharName.getText().toString().trim().equals("")){
+                    displayMessage("Please enter a character name");
+                    return;
                 }
                 else characterName = mCharName.getText().toString().trim();
                 Model.getInstance().selectSpeciesAndName(getSpeciesBySelection(), characterName);
@@ -171,6 +173,8 @@ public class SpeciesSelection extends AppCompatActivity {
 
         startActivity(intent);
     }
-
+    public void displayMessage(String message) {
+        Toast.makeText(getBaseContext(), message, Toast.LENGTH_SHORT).show();
+    }
 
 }

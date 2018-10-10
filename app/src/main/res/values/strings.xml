@@ -2,7 +2,7 @@
     <string name="app_name">Edge of the Empire Character Creator</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_test">test</string>
-    <string name="title_activity_species_selection">Species Selection</string>
+    <string name="title_activity_species_selection">EotE Character Creator</string>
 
     <!-- Species Selection -->
     <string name="character_name">CHARACTER NAME</string>
@@ -10,6 +10,24 @@
     <string name="to_main">MAIN</string>
     <string name="to_background">BACKGROUND</string>
     <string name="desc">description:</string>
+
+    <!-- Career Selection -->
+    <string name="bounty_hunter_desc">
+        - Feared, reviled—and in great demand throughout the Galaxy\n
+        - Often in service to some guild, though some prefer to work independent\n
+        - Ruthless assassins, versatile gadgeteers, and cunning survivalists
+    </string>
+    <string name="smuggler_desc">
+        - Often seen as the freest beings in the galaxy, though that freedom is often an illusion\n
+        - Know their way around the underworld and fringe society\n
+        - Bold pilots, dashing scoundrels, and daring thieves
+    </string>
+    <string name="technician_desc">
+        - Can operate, repair, and upgrade practically anything with power and gears\n
+        - Most would rather deal with machines than people: the latter are too unpredictable\n
+        - Tough mechanics, creative outlaw techs, and brilliant slicers
+
+    </string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

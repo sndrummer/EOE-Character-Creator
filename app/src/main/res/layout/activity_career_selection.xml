@@ -3,25 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="95dp"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        >
+        android:theme="@style/AppTheme.AppBarOverlay">
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
+
             <TextView
                 android:id="@+id/char_name_career"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
-
                 android:fontFamily="@font/teuton_mager"
                 android:gravity="center"
                 android:text="CHEWBACCA "
@@ -58,48 +56,236 @@
         android:layout_marginTop="95dp"
         android:background="@color/white">
 
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                xmlns:custom="http://schemas.android.com/apk/res/edu.cs356.edgeoftheempirecharactercreator.ui">
+                android:layout_marginLeft="18dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginRight="18dp"
+                android:layout_marginBottom="95dp">
 
-                <edu.cs356.edgeoftheempirecharactercreator.ui.CareerView
+                <ScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <RelativeLayout
+                            android:id="@+id/bounty_hunter_career"
+                            android:layout_width="match_parent"
+                            android:layout_height="145dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginTop="10dp"
+                            android:background="@color/gray">
+                            <TextView
+                                android:id="@+id/bounty_career_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="34dp"
+                                android:background="@color/swBlue"
+                                android:fontFamily="@font/starjedi_special_edition"
+                                android:paddingLeft="12dp"
+                                android:text="Bounty HunteR"
+                                android:layout_marginLeft="1dp"
+                                android:layout_marginTop="1dp"
+                                android:layout_marginRight="1dp"
+                                android:textColor="@color/white"
 
-                    />
+                                android:textSize="16dp" />
+                            <ImageView
+                                android:id="@+id/bounty_img"
+                                android:layout_width="100dp"
+                                android:layout_height="match_parent"
+                                android:layout_below="@id/bounty_career_name"
+                                android:layout_alignParentStart="true"
+                                android:background="@drawable/customborder2"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/bounty_hunter_small"
+                                android:paddingRight="5dp"
+                                android:layout_margin="2dp"
+                                />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_toRightOf="@+id/bounty_img"
+                                android:layout_below="@id/bounty_career_name"
+                                android:background="@color/white"
+                                android:layout_marginTop="2dp"
+                                android:layout_marginRight="2dp"
+                                android:layout_marginBottom="2dp"
+                                android:text="@string/bounty_hunter_desc"
+                                android:textColor="@color/black"
+                                android:fontFamily="@font/teuton_mager"
+                                android:paddingLeft="4dp"
+                                android:paddingTop="5dp"
+                                android:paddingBottom="1dp"
+                                android:paddingRight="2dp"
+                                android:textStyle="bold"
+                                android:textSize="13sp"/>
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:id="@+id/smuggler_career"
+                            android:layout_width="match_parent"
+                            android:layout_height="145dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginTop="10dp"
+                            android:background="@color/gray">
+                            <TextView
+                                android:id="@+id/smuggler_career_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="34dp"
+                                android:background="@color/swBlue"
+                                android:layout_marginLeft="1dp"
+                                android:layout_marginTop="1dp"
+                                android:layout_marginRight="1dp"
+                                android:fontFamily="@font/starjedi_special_edition"
+                                android:paddingLeft="12dp"
+                                android:text="SmuggleR"
+                                android:textColor="@color/white"
+
+                                android:textSize="16dp" />
+                            <ImageView
+                                android:id="@+id/smuggler_img"
+                                android:layout_width="100dp"
+                                android:layout_height="match_parent"
+                                android:layout_below="@id/smuggler_career_name"
+                                android:layout_alignParentStart="true"
+                                android:scaleType="centerCrop"
+                                android:paddingTop="@dimen/fab_margin"
+                                android:src="@drawable/smuggler_small2"
+                                android:layout_margin="2dp"
+                                />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_toRightOf="@+id/smuggler_img"
+                                android:layout_below="@id/smuggler_career_name"
+                                android:background="@color/white"
+                                android:layout_marginTop="2dp"
+                                android:layout_marginRight="2dp"
+                                android:layout_marginBottom="2dp"
+                                android:text="@string/smuggler_desc"
+                                android:textColor="@color/black"
+                                android:fontFamily="@font/teuton_mager"
+                                android:paddingLeft="4dp"
+                                android:paddingTop="5dp"
+                                android:paddingBottom="1dp"
+                                android:paddingRight="2dp"
+                                android:textStyle="bold"
+                                android:textSize="13sp"/>
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:id="@+id/technician_career"
+                            android:layout_width="match_parent"
+                            android:layout_height="145dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginTop="10dp"
+                            android:background="@color/gray">
+                            <TextView
+                                android:id="@+id/tech_career_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="34dp"
+                                android:background="@color/swBlue"
+                                android:fontFamily="@font/starjedi_special_edition"
+                                android:paddingLeft="12dp"
+                                android:text="Technician"
+                                android:layout_marginLeft="1dp"
+                                android:layout_marginTop="1dp"
+                                android:layout_marginRight="1dp"
+                                android:textColor="@color/white"
+                                android:textSize="16dp" />
+                            <ImageView
+                                android:id="@+id/tech_img"
+                                android:layout_width="100dp"
+                                android:layout_height="match_parent"
+                                android:layout_below="@id/tech_career_name"
+                                android:layout_alignParentStart="true"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/tech_small"
+                                android:layout_margin="2dp"
+                                />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_toRightOf="@+id/tech_img"
+                                android:layout_below="@id/tech_career_name"
+                                android:background="@color/white"
+                                android:layout_marginTop="2dp"
+                                android:layout_marginRight="2dp"
+                                android:layout_marginBottom="2dp"
+                                android:text="@string/technician_desc"
+                                android:textColor="@color/black"
+                                android:fontFamily="@font/teuton_mager"
+                                android:paddingLeft="4dp"
+                                android:paddingTop="5dp"
+                                android:paddingBottom="1dp"
+                                android:paddingRight="2dp"
+                                android:textStyle="bold"
+                                android:textSize="13sp"/>
+                        </RelativeLayout>
+
+                    </LinearLayout>
+                </ScrollView>
+            </FrameLayout>
 
 
-            </LinearLayout>
+            <!-- <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:orientation="vertical"
+                 xmlns:custom="http://schemas.android.com/apk/res/edu.cs356.edgeoftheempirecharactercreator.ui">
+
+                 <edu.cs356.edgeoftheempirecharactercreator.ui.CareerView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+
+                     />
+
+
+             </LinearLayout>-->
 
             <LinearLayout
                 android:layout_width="fill_parent"
-                android:gravity="bottom"
                 android:layout_height="100sp"
                 android:layout_alignParentBottom="true"
-                android:layout_marginTop="55dp">
+                android:layout_marginTop="55dp"
+                android:gravity="bottom">
 
                 <Button
-                    android:layout_weight="1"
-                    android:layout_marginBottom="8dp"
+                    android:id="@+id/career_prev"
                     android:layout_width="wrap_content"
                     android:layout_height="75dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/arrow_l"
+                    android:fontFamily="@font/teuton_mager"
                     android:scaleType="fitStart"
-                    android:background="@drawable/arrow_l" />
+                    android:text="Species/name"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
                 <Button
                     android:id="@+id/career_next"
-                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="75dp"
                     android:layout_marginBottom="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/arrow_r"
+                    android:fontFamily="@font/teuton_mager"
                     android:scaleType="fitStart"
-                    android:background="@drawable/arrow_r"/>
+                    android:text="Abilities"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
             </LinearLayout>
         </RelativeLayout>
     </FrameLayout>
