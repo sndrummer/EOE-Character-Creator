@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import edu.cs356.edgeoftheempirecharactercreator.R;
@@ -26,7 +28,7 @@ public class SkillsAdapter extends RecyclerView.Adapter {
     private ImageView mDice7;
     private ImageView[] mDiceImages;
 
-    public TextView mSkillText;
+
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -34,6 +36,7 @@ public class SkillsAdapter extends RecyclerView.Adapter {
     public static class SkillViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         public LinearLayout mLinearLayout;
+        public TextView mSkillText;
 
         public SkillViewHolder(LinearLayout layout) {
             super(layout);
@@ -43,6 +46,12 @@ public class SkillsAdapter extends RecyclerView.Adapter {
 
     // Provide a suitable constructor (depends on the kind of dataset)
     public SkillsAdapter(List<Skill> skillList) {
+       /* Collections.sort(skillList, new Comparator<Skill>() {
+            @Override
+            public int compare(Skill skill1, Skill skill2) {
+                return (skill1.getName().compareTo(skill2.getName()));
+            }
+        });*/
         mSkillList = skillList;
     }
 
@@ -53,7 +62,6 @@ public class SkillsAdapter extends RecyclerView.Adapter {
         // create a new view
         LinearLayout layout = (LinearLayout) LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.skill_item_linear, viewGroup, false);
-        mSkillText = layout.findViewById(R.id.skill_name);
 
         //Assign Dice Images
         mDice1 = layout.findViewById(R.id.dice1);
@@ -76,7 +84,9 @@ public class SkillsAdapter extends RecyclerView.Adapter {
 
 
         SkillViewHolder vh = new SkillViewHolder(layout);
+        vh.mSkillText = layout.findViewById(R.id.skill_name);
         return vh;
+
     }
 
     // Replace the contents of a view (invoked by the layout manager)
@@ -85,7 +95,10 @@ public class SkillsAdapter extends RecyclerView.Adapter {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         Skill skill = mSkillList.get(i);
-        mSkillText.setText(skill.getName());
+       // viewHolder.mSkillText.setText(skill.getName());
+        SkillViewHolder skillViewHolder = (SkillViewHolder) viewHolder;
+        skillViewHolder.mSkillText.setText(skill.getName());
+
 
         setDiceImages(skill, viewHolder);
 
@@ -93,6 +106,7 @@ public class SkillsAdapter extends RecyclerView.Adapter {
 
     private void setDiceImages(Skill skill, RecyclerView.ViewHolder viewHolder) {
         int prof = skill.getRank();
+        int tmp = 0;
         for (int i = 0; i < skill.getAbility(); i++) {
             if (prof >= 1) {
                 mDiceImages[i].setImageDrawable(viewHolder.itemView.getContext().getDrawable(R.drawable.proficiencybg));
@@ -103,6 +117,13 @@ public class SkillsAdapter extends RecyclerView.Adapter {
                 mDiceImages[i].setImageDrawable(viewHolder.itemView.getContext().getDrawable(R.drawable.abilitybg));
                 mDiceImages[i].setVisibility(View.VISIBLE);
             }
+            tmp = i;
+        }
+        while (prof != 0 && (tmp < 7)){
+            mDiceImages[tmp].setImageDrawable(viewHolder.itemView.getContext().getDrawable(R.drawable.abilitybg));
+            mDiceImages[tmp].setVisibility(View.VISIBLE);
+            prof--;
+            tmp++;
         }
     }
 

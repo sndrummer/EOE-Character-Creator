@@ -125,7 +125,7 @@ public class SkillList {
     //getters
 
 
-    public List<Skill> getSkillList() {
+    public List<Skill> getList() {
         return skillList;
     }
 
@@ -241,5 +241,18 @@ public class SkillList {
 
         }
         return result;
+    }
+
+    @Override
+    public String toString() {
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("SkillList{");
+        for (Skill skill : skillList) {
+            sb.append("\n");
+            sb.append(skill.toString());
+        }
+
+        return sb.toString();
     }
 }

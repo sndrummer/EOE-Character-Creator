@@ -21,4 +21,8 @@ public class Model {
     public void selectSpeciesAndName(Species species, String name){
         character = new Character(species, name);
     }
+
+    public Character getCharacter() {
+        return character;
+    }
 }

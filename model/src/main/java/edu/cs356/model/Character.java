@@ -1,5 +1,6 @@
 package edu.cs356.model;
 
+import edu.cs356.model.career.Career;
 import edu.cs356.model.skills.SkillList;
 import edu.cs356.model.species.Species;
 
@@ -9,6 +10,8 @@ public class Character {
     private int strain;
     private int soak;
     private String name;
+
+    private Career career;
 
     public Character(Species species, String name){
         this.name = name;
@@ -77,5 +80,13 @@ public class Character {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Career getCareer() {
+        return career;
+    }
+
+    public void setCareer(Career career) {
+        this.career = career;
     }
 }

@@ -1,5 +1,6 @@
 package edu.cs356.edgeoftheempirecharactercreator.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,9 @@ import android.widget.TextView;
 import edu.cs356.edgeoftheempirecharactercreator.R;
 import edu.cs356.edgeoftheempirecharactercreator.model.Model;
 import edu.cs356.edgeoftheempirecharactercreator.ui.InfoDialogue;
+import edu.cs356.model.Character;
+import edu.cs356.model.career.BountyHunter;
+import edu.cs356.model.career.Smuggler;
 import edu.cs356.model.species.Human;
 import edu.cs356.model.species.Species;
 import edu.cs356.model.species.Twilek;
@@ -28,7 +32,7 @@ public class SpeciesSelection extends AppCompatActivity {
     private Button mSpeciesLeftBtn;
     private Button mSpeciesRightBtn;
     private Button mToMainBtn;
-    private Button mToBackGroundBtn;
+    private Button mToNextBtn;
     private Button mSpeciesInfoBtn; //species_info_btn
 
     //Selection arrays
@@ -63,7 +67,7 @@ public class SpeciesSelection extends AppCompatActivity {
         mSpeciesLeftBtn = (Button) findViewById(R.id.species_left_btn);
         mSpeciesRightBtn = (Button) findViewById(R.id.species_right_btn);
         mToMainBtn = (Button) findViewById(R.id.to_main_btn);
-        mToBackGroundBtn = (Button) findViewById(R.id.to_background_btn);
+        mToNextBtn = (Button) findViewById(R.id.to_background_btn);
         mSpeciesInfoBtn = (Button) findViewById(R.id.species_info_btn);
 
         setButtonListeners();
@@ -109,7 +113,7 @@ public class SpeciesSelection extends AppCompatActivity {
             }
         });
 
-        mToBackGroundBtn.setOnClickListener(new View.OnClickListener() {
+        mToNextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "To BackGround Button Clicked");
@@ -119,6 +123,13 @@ public class SpeciesSelection extends AppCompatActivity {
                 }
                 else characterName = mCharName.getText().toString().trim();
                 Model.getInstance().selectSpeciesAndName(getSpeciesBySelection(), characterName);
+
+
+                Character character = Model.getInstance().getCharacter();
+
+                character.setCareer(new Smuggler(character));
+
+                proceedToNextScreen();
             }
         });
 
@@ -129,6 +140,8 @@ public class SpeciesSelection extends AppCompatActivity {
                 dialogue.show();
             }
         });
+
+        //E/RecyclerView: No adapter attached; skipping layout
 
     }
 
@@ -146,6 +159,13 @@ public class SpeciesSelection extends AppCompatActivity {
                 break;
         }
         return species;
+    }
+
+    private void proceedToNextScreen(){
+        //Log.log(Log.Level.DEBUG, this.getClass(), "Starting GameListActivity");
+        Intent intent = new Intent(SpeciesSelection.this, CharacterSummary.class);
+
+        startActivity(intent);
     }
 
 

@@ -4,13 +4,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.List;
+
 import edu.cs356.edgeoftheempirecharactercreator.R;
+import edu.cs356.edgeoftheempirecharactercreator.adapters.SkillsAdapter;
+import edu.cs356.edgeoftheempirecharactercreator.model.Model;
+import edu.cs356.model.skills.Skill;
 
 public class CharacterSummary extends AppCompatActivity {
+
+    private static final String TAG = "CharacterSummaryTAG";
 
     //Button
     private Button mSkillsInfoBtn; //skills_info_btn
@@ -42,6 +50,18 @@ public class CharacterSummary extends AppCompatActivity {
 
         mLayoutManager = new LinearLayoutManager(this);
         mSkillsList.setLayoutManager(mLayoutManager);
+
+        List<Skill> skillList = Model.getInstance().getCharacter().getSkillList().getList();
+        String skillString = skillList.toString();
+        Log.d(TAG, skillString);
+
+
+
+        SkillsAdapter adapter = new SkillsAdapter(skillList);
+
+        mSkillsList.setAdapter(adapter);
+
+
 
         //mAdapter = new MyAdapter(myDataset);
     }

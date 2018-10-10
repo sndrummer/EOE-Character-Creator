@@ -118,5 +118,17 @@ public class Skill {
         this.name = name;
     }
 
-
+    @Override
+    public String toString() {
+        return "Skill{" +
+                "name='" + name + '\'' +
+                ", governingAtt=" + governingAtt +
+                ", ability=" + ability +
+                ", rank=" + rank +
+                '}';
+    }
 }
+
+
+
+

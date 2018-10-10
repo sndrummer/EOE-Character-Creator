@@ -408,12 +408,10 @@
             android:background="@drawable/info_icon"
             android:scaleType="centerCrop"
             android:src="@drawable/info_icon"
-
-
             />
 
 
-        <RelativeLayout
+       <!-- <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -442,6 +440,6 @@
                     android:background="@drawable/arrow_r"
                     android:scaleType="fitStart" />
             </LinearLayout>
-        </RelativeLayout>
+        </RelativeLayout>-->
     </FrameLayout>
 </android.support.design.widget.CoordinatorLayout>
