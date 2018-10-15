@@ -92,8 +92,8 @@ public class CharacterSummary extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mSkillsList.setLayoutManager(mLayoutManager);
         List<Skill> skillList = character.getSkillList().getList();
-        String skillString = skillList.toString();
-        Log.d(TAG, skillString);
+//        String skillString = skillList.toString();
+//        Log.d(TAG, skillString);
 
 
         SkillsAdapter adapter = new SkillsAdapter(skillList);

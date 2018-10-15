@@ -150,7 +150,7 @@ public class CareerSelection extends AppCompatActivity {
         }
 
         character.setCareer(career);
-        Intent intent = new Intent(CareerSelection.this, CharacterSummary.class);
+        Intent intent = new Intent(CareerSelection.this, SkillSelection.class);
         startActivity(intent);
     }
 

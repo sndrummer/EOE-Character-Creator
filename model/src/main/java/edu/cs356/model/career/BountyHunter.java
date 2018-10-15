@@ -1,10 +1,12 @@
 package edu.cs356.model.career;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import edu.cs356.model.Character;
 import edu.cs356.model.skills.Skill;
+import edu.cs356.model.skills.SkillList;
 
 public class BountyHunter extends Career {
 
@@ -34,13 +36,27 @@ public class BountyHunter extends Career {
 
     void initCareerSkills() {
         skillsUsed = new HashMap<>();
-        skillsUsed.put(Skill.SkillType.ATHLETICS, Boolean.FALSE);
-        skillsUsed.put(Skill.SkillType.BRAWL, Boolean.FALSE);
-        skillsUsed.put(Skill.SkillType.PERCEPTION, Boolean.FALSE);
-        skillsUsed.put(Skill.SkillType.PILOTING, Boolean.FALSE);
-        skillsUsed.put(Skill.SkillType.RANGED_HEAVY, Boolean.FALSE);
-        skillsUsed.put(Skill.SkillType.STREETWISE, Boolean.FALSE);
-        skillsUsed.put(Skill.SkillType.VIGILANCE, Boolean.FALSE);
+        careerSkillsList = new ArrayList<>();
+        SkillList skillList = character.getSkillList();
+
+        skillsUsed.put(skillList.getAthletics(), Boolean.FALSE);
+        skillsUsed.put(skillList.getBrawl(), Boolean.FALSE);
+        skillsUsed.put(skillList.getPerception(), Boolean.FALSE);
+        skillsUsed.put(skillList.getPiloting_space(), Boolean.FALSE);
+        skillsUsed.put(skillList.getPiloting_planetary(), Boolean.FALSE);
+        skillsUsed.put(skillList.getRanged_heavy(), Boolean.FALSE);
+        skillsUsed.put(skillList.getStreetwise(), Boolean.FALSE);
+        skillsUsed.put(skillList.getVigilance(), Boolean.FALSE);
+
+        careerSkillsList.add(skillList.getAthletics());
+        careerSkillsList.add(skillList.getBrawl());
+        careerSkillsList.add(skillList.getPerception());
+        careerSkillsList.add(skillList.getPiloting_space());
+        careerSkillsList.add(skillList.getPiloting_planetary());
+        careerSkillsList.add(skillList.getRanged_heavy());
+        careerSkillsList.add(skillList.getStreetwise());
+        careerSkillsList.add(skillList.getVigilance());
+
     }
 
     @Override
@@ -54,7 +70,7 @@ public class BountyHunter extends Career {
     }
 
     @Override
-    public Map<Skill.SkillType, Boolean> getCareerSkills() {
+    public Map<Skill, Boolean> getCareerSkills() {
         return skillsUsed;
     }
 

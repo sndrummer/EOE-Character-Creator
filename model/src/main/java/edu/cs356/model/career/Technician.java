@@ -1,10 +1,12 @@
 package edu.cs356.model.career;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import edu.cs356.model.Character;
 import edu.cs356.model.skills.Skill;
+import edu.cs356.model.skills.SkillList;
 
 public class Technician extends Career {
 
@@ -36,14 +38,27 @@ public class Technician extends Career {
 
     void initCareerSkills() {
         skillsUsed = new HashMap<>();
-        skillsUsed.put(Skill.SkillType.ASTROGATION, Boolean.FALSE);
-        skillsUsed.put(Skill.SkillType.COMPUTERS, Boolean.FALSE);
-        skillsUsed.put(Skill.SkillType.COORDINATION, Boolean.FALSE);
-        skillsUsed.put(Skill.SkillType.DISCIPLINE, Boolean.FALSE);
-        skillsUsed.put(Skill.SkillType.OUTER_RIM, Boolean.FALSE);
-        skillsUsed.put(Skill.SkillType.MECHANICS, Boolean.FALSE);
-        skillsUsed.put(Skill.SkillType.PERCEPTION, Boolean.FALSE);
-        skillsUsed.put(Skill.SkillType.PILOTING, Boolean.FALSE);
+        SkillList skillList = character.getSkillList();
+        careerSkillsList = new ArrayList<>();
+
+        skillsUsed.put(skillList.getAstrogation(), Boolean.FALSE);
+        skillsUsed.put(skillList.getComputers(), Boolean.FALSE);
+        skillsUsed.put(skillList.getCoordination(), Boolean.FALSE);
+        skillsUsed.put(skillList.getDiscipline(), Boolean.FALSE);
+        skillsUsed.put(skillList.getOuter_rim(), Boolean.FALSE);
+        skillsUsed.put(skillList.getMechanics(), Boolean.FALSE);
+        skillsUsed.put(skillList.getPerception(), Boolean.FALSE);
+        skillsUsed.put(skillList.getPiloting_planetary(), Boolean.FALSE);
+
+        careerSkillsList.add(skillList.getAstrogation());
+        careerSkillsList.add(skillList.getComputers());
+        careerSkillsList.add(skillList.getCoordination());
+        careerSkillsList.add(skillList.getDiscipline());
+        careerSkillsList.add(skillList.getOuter_rim());
+        careerSkillsList.add(skillList.getMechanics());
+        careerSkillsList.add(skillList.getPerception());
+        careerSkillsList.add(skillList.getPiloting_planetary());
+
     }
 
     @Override
@@ -57,7 +72,7 @@ public class Technician extends Career {
     }
 
     @Override
-    public Map<Skill.SkillType, Boolean> getCareerSkills() {
+    public Map<Skill, Boolean> getCareerSkills() {
         return skillsUsed;
     }
 

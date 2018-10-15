@@ -1,10 +1,12 @@
 package edu.cs356.model.career;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import edu.cs356.model.Character;
 import edu.cs356.model.skills.Skill;
+import edu.cs356.model.skills.SkillList;
 
 public class Smuggler extends Career {
 
@@ -35,14 +37,29 @@ public class Smuggler extends Career {
 
     void initCareerSkills() {
         skillsUsed = new HashMap<>();
-        skillsUsed.put(Skill.SkillType.COORDINATION, Boolean.FALSE);
-        skillsUsed.put(Skill.SkillType.DECEPTION, Boolean.FALSE);
-        skillsUsed.put(Skill.SkillType.UNDERWORLD, Boolean.FALSE);
-        skillsUsed.put(Skill.SkillType.PILOTING, Boolean.FALSE);
-        skillsUsed.put(Skill.SkillType.PERCEPTION, Boolean.FALSE);
-        skillsUsed.put(Skill.SkillType.SKULLDUGGERY, Boolean.FALSE);
-        skillsUsed.put(Skill.SkillType.STREETWISE, Boolean.FALSE);
-        skillsUsed.put(Skill.SkillType.VIGILANCE, Boolean.FALSE);
+        SkillList skillList = character.getSkillList();
+        careerSkillsList = new ArrayList<>();
+
+
+        skillsUsed.put(skillList.getCoordination(), Boolean.FALSE);
+        skillsUsed.put(skillList.getDeception(), Boolean.FALSE);
+        skillsUsed.put(skillList.getUnderworld(), Boolean.FALSE);
+        skillsUsed.put(skillList.getPiloting_space(), Boolean.FALSE);
+        skillsUsed.put(skillList.getPerception(), Boolean.FALSE);
+        skillsUsed.put(skillList.getSkullduggery(), Boolean.FALSE);
+        skillsUsed.put(skillList.getStreetwise(), Boolean.FALSE);
+        skillsUsed.put(skillList.getVigilance(), Boolean.FALSE);
+
+        careerSkillsList.add(skillList.getCoordination());
+        careerSkillsList.add(skillList.getDeception());
+        careerSkillsList.add(skillList.getUnderworld());
+        careerSkillsList.add(skillList.getPiloting_space());
+        careerSkillsList.add(skillList.getPerception());
+        careerSkillsList.add(skillList.getSkullduggery());
+        careerSkillsList.add(skillList.getStreetwise());
+        careerSkillsList.add(skillList.getVigilance());
+
+
     }
 
     @Override
@@ -56,7 +73,7 @@ public class Smuggler extends Career {
     }
 
     @Override
-    public Map<Skill.SkillType, Boolean> getCareerSkills() {
+    public Map<Skill, Boolean> getCareerSkills() {
         return skillsUsed;
     }
 

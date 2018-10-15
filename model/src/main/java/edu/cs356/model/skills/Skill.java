@@ -16,6 +16,8 @@ public class Skill {
         this.governingAtt = governingAtt;
     }
 
+    private String description;
+
     public enum SkillType {
         ASTROGATION,
         ATHLETICS,
@@ -34,7 +36,8 @@ public class Skill {
 
         NEGOTIATION,
         PERCEPTION,
-        PILOTING,
+        PILOTING_SPACE,
+        PILOTING_PLANETARY,
         RESILIENCE,
 
         SKULLDUGGERY,
@@ -152,6 +155,16 @@ public class Skill {
                 ", rank=" + rank +
                 '}';
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+
 }
 
 

@@ -22,6 +22,11 @@
     <color name="black">#000000</color>
     <color name="transparent">#00000000</color>
 
+
+    <!--BEBEBE-->
+    <color name="lightGray">#BEBEBE</color>
+    <color name="darkGray">#8a8a8a</color>
+    <color name="darkerGray">#3d3d3d</color>
     <color name="swRed">#6F0B0B</color>
     <color name="swBlue">#445D7B</color>
 </resources>
