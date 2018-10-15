@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +22,7 @@ import edu.cs356.model.Character;
 import edu.cs356.model.skills.Skill;
 import edu.cs356.model.skills.SkillList;
 
-public class SkillSelection extends AppCompatActivity {
+public class CareerSkillSelection extends AppCompatActivity {
 
     private static final String TAG = "SkillSelectionTAG";
     private Character character = Model.getInstance().getCharacter();
@@ -100,7 +101,7 @@ public class SkillSelection extends AppCompatActivity {
                 character.getCareer().chooseCareerSkill(skill);
             }
 
-            Intent intent = new Intent(SkillSelection.this, CharacterSummary.class);
+            Intent intent = new Intent(CareerSkillSelection.this, CharacterSummary.class);
             startActivity(intent);
         }
         else {
@@ -125,5 +126,14 @@ public class SkillSelection extends AppCompatActivity {
 
     public void displayMessage(String message) {
         Toast.makeText(getBaseContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onResume() {
+        mAdapter.mSkillsChosen = new ArrayList<>();
+        mAdapter.mSkillsRemaining = 4;
+        mAdapter.mSkillsUsedMap = character.getCareer().getSkillsUsed();
+        mAdapter.notifyDataSetChanged();
+        super.onResume();
     }
 }

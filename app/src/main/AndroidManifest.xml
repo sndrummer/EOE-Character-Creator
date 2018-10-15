@@ -33,7 +33,7 @@
             android:name=".activities.CareerSelection"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait" />
-        <activity android:name=".activities.SkillSelection"
+        <activity android:name=".activities.CareerSkillSelection"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"></activity>
     </application>

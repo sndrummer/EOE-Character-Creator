@@ -4,11 +4,9 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -17,11 +15,9 @@ import java.util.List;
 import java.util.Map;
 
 import edu.cs356.edgeoftheempirecharactercreator.R;
-import edu.cs356.edgeoftheempirecharactercreator.activities.SkillSelection;
+import edu.cs356.edgeoftheempirecharactercreator.activities.CareerSkillSelection;
 import edu.cs356.edgeoftheempirecharactercreator.model.Model;
-import edu.cs356.model.Character;
 import edu.cs356.model.skills.Skill;
-import edu.cs356.model.skills.SkillList;
 
 public class CareerSkillsAdapter extends RecyclerView.Adapter {
     private static final String TAG = "CareerSkillsAdapterTAG";
@@ -32,8 +28,6 @@ public class CareerSkillsAdapter extends RecyclerView.Adapter {
     public int mSkillsRemaining = 4;
 
     public List<Skill> mSkillsChosen = new ArrayList<>();
-
-
 
 
     // Provide a reference to the views for each data item
@@ -47,14 +41,14 @@ public class CareerSkillsAdapter extends RecyclerView.Adapter {
         public TextView mSkillDesc; //skill_desc
         public CheckBox mSkillCheckBox; //career_skill_checkbox
 
-        public SkillSelection curActivity;
+        public CareerSkillSelection curActivity;
 
 
         public CareerSkillViewHolder(LinearLayout layout) {
             super(layout);
             mLinearLayout = layout;
 
-            curActivity = (SkillSelection) layout.getContext();
+            curActivity = (CareerSkillSelection) layout.getContext();
         }
     }
 
@@ -78,8 +72,6 @@ public class CareerSkillsAdapter extends RecyclerView.Adapter {
         vh.mSkillText = layout.findViewById(R.id.career_skill_name);
         vh.mSkillDesc = layout.findViewById(R.id.skill_desc);
         vh.mSkillCheckBox = layout.findViewById(R.id.career_skill_checkbox);
-
-
 
 
         return vh;
@@ -107,9 +99,9 @@ public class CareerSkillsAdapter extends RecyclerView.Adapter {
 
         CheckBox checkBox = skillViewHolder.mSkillCheckBox;
 
-
+        Log.d(TAG, "HELOO!!!!!!!!!!!!!!!!!!!!!");
         checkBox.setChecked(mSkillsUsedMap.get(skill));
-        //Log.d(TAG, "SETTING " + ((CareerSkillViewHolder) viewHolder).mSkillText.getText().toString() + ", SKILL: " +skill.getName() + " to -->: " + mSkillsUsedMap.get(skill));
+        Log.d(TAG, "SETTING " + ((CareerSkillViewHolder) viewHolder).mSkillText.getText().toString() + ", SKILL: " + skill.getName() + " to -->: " + mSkillsUsedMap.get(skill));
 
         final int j = i;
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -117,29 +109,33 @@ public class CareerSkillsAdapter extends RecyclerView.Adapter {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 CareerSkillViewHolder skillViewHolder = (CareerSkillViewHolder) viewHolder;
                 CheckBox checkBox = skillViewHolder.mSkillCheckBox;
-                if (buttonView.isPressed()){
+                if (buttonView.isPressed()) {
                     Skill checkedSkill = mSkillList.get(j);
                     //Log.d(TAG, "IS " + ((CareerSkillViewHolder) viewHolder).mSkillText.getText().toString() + " Checked!!: " + isChecked);
 
-                    mSkillsUsedMap.put(checkedSkill, isChecked);
 
-                    if (isChecked && mSkillsRemaining < 1){
+
+                    if (isChecked && mSkillsRemaining < 1) {
                         checkBox.setChecked(false);
                         skillViewHolder.curActivity.displayMessage("Max amount of skills chosen");
+                        mSkillsUsedMap.put(checkedSkill, false);
 
-                    }
-                    else if (isChecked){
+                    } else if (isChecked) {
                         mSkillsRemaining--;
                         mSkillsChosen.add(checkedSkill);
-                        Log.d(TAG, checkedSkill.getName() + " added!");
-                        Log.d(TAG, "chosen size: " + mSkillsChosen.size());
-                    }
-                    else{
-                        mSkillsRemaining++;
+                        mSkillsUsedMap.put(checkedSkill, true);
+                        //Log.d(TAG, checkedSkill.getName() + " added!");
+                        // Log.d(TAG, "chosen size: " + mSkillsChosen.size());
+                    } else {
+                        if (mSkillsRemaining < 4) {
+                            mSkillsRemaining++;
+                        }
                         mSkillsChosen.remove(checkedSkill);
-                        Log.d(TAG, checkedSkill.getName() + " removed!");
-                        Log.d(TAG, "chosen size: " + mSkillsChosen.size());
+                        mSkillsUsedMap.put(checkedSkill, false);
+                        //Log.d(TAG, checkedSkill.getName() + " removed!");
+                        //Log.d(TAG, "chosen size: " + mSkillsChosen.size());
                     }
+
                 }
             }
         });

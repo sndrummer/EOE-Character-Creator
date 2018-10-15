@@ -1,5 +1,6 @@
 package edu.cs356.edgeoftheempirecharactercreator.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -121,6 +122,7 @@ public class CharacterSummary extends AppCompatActivity {
     public void onBackPressed()
     {
         Model.getInstance().getCharacter().getCareer().resetCareerSkills();
+
         super.onBackPressed();  // optional depending on your needs
     }
 }

@@ -2,7 +2,6 @@ package edu.cs356.edgeoftheempirecharactercreator.activities;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -150,7 +149,7 @@ public class CareerSelection extends AppCompatActivity {
         }
 
         character.setCareer(career);
-        Intent intent = new Intent(CareerSelection.this, SkillSelection.class);
+        Intent intent = new Intent(CareerSelection.this, CareerSkillSelection.class);
         startActivity(intent);
     }
 

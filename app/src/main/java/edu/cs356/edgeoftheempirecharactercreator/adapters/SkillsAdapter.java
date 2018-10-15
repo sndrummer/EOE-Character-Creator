@@ -9,12 +9,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import edu.cs356.edgeoftheempirecharactercreator.R;
-import edu.cs356.edgeoftheempirecharactercreator.activities.SkillSelection;
 import edu.cs356.model.skills.Skill;
 
 public class SkillsAdapter extends RecyclerView.Adapter {
