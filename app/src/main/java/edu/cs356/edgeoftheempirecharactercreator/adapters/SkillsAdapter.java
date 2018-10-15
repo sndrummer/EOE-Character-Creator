@@ -14,6 +14,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import edu.cs356.edgeoftheempirecharactercreator.R;
+import edu.cs356.edgeoftheempirecharactercreator.activities.SkillSelection;
 import edu.cs356.model.skills.Skill;
 
 public class SkillsAdapter extends RecyclerView.Adapter {
@@ -37,9 +38,12 @@ public class SkillsAdapter extends RecyclerView.Adapter {
         private ImageView mDice7;
         private ImageView[] mDiceImages;
 
+
+
         public SkillViewHolder(LinearLayout layout) {
             super(layout);
             mLinearLayout = layout;
+
         }
     }
 
@@ -120,9 +124,9 @@ public class SkillsAdapter extends RecyclerView.Adapter {
 
     private void setDiceImages(Skill skill, SkillViewHolder skillViewHolder) {
 
-        int prof = skill.getRank();
+        int prof = skill.getRank(); //3
         int tmp = 0;
-        for (int i = 0; i < skill.getAbility(); i++) {
+        for (int i = 0; i < skill.getAbility(); i++) { //2
             if (prof >= 1) {
                 skillViewHolder.mDiceImages[i].setImageDrawable(skillViewHolder.itemView.getContext().getDrawable(R.drawable.proficiencybg));
                 skillViewHolder.mDiceImages[i].setVisibility(View.VISIBLE);
@@ -132,12 +136,18 @@ public class SkillsAdapter extends RecyclerView.Adapter {
                 skillViewHolder.mDiceImages[i].setImageDrawable(skillViewHolder.itemView.getContext().getDrawable(R.drawable.abilitybg));
                 skillViewHolder.mDiceImages[i].setVisibility(View.VISIBLE);
             }
-            tmp = i;
+            tmp = i + 1;
         }
         while (prof != 0 && (tmp < 7)){
             skillViewHolder.mDiceImages[tmp].setImageDrawable(skillViewHolder.itemView.getContext().getDrawable(R.drawable.abilitybg));
             skillViewHolder.mDiceImages[tmp].setVisibility(View.VISIBLE);
             prof--;
+
+            if (prof != 0){
+                skillViewHolder.mDiceImages[tmp].setImageDrawable(skillViewHolder.itemView.getContext().getDrawable(R.drawable.proficiencybg));
+                skillViewHolder.mDiceImages[tmp].setVisibility(View.VISIBLE);
+                prof--;
+            }
             tmp++;
         }
     }

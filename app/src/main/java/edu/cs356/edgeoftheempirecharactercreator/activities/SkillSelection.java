@@ -28,7 +28,7 @@ public class SkillSelection extends AppCompatActivity {
 
     //RecyclerView
     private RecyclerView mSkillsList;
-    private RecyclerView.Adapter mAdapter;
+    private CareerSkillsAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
     //Buttons
@@ -50,7 +50,7 @@ public class SkillSelection extends AppCompatActivity {
         Map<Skill, Boolean> skillsUsedMap = character.getCareer().getSkillsUsed();
         Log.d(TAG, "Beginning search...");
 
-        for (Skill skill1 : skillsUsedMap.keySet()){
+        for (Skill skill1 : skillsUsedMap.keySet()) {
             Log.d(TAG, skill1.toString());
         }
 
@@ -94,8 +94,20 @@ public class SkillSelection extends AppCompatActivity {
 
     private void proceedToNextScreen() {
 
-        Intent intent = new Intent(SkillSelection.this, CharacterSummary.class);
-        startActivity(intent);
+        if (mAdapter.mSkillsRemaining == 0){
+
+            for (Skill skill : mAdapter.mSkillsChosen) {
+                character.getCareer().chooseCareerSkill(skill);
+            }
+
+            Intent intent = new Intent(SkillSelection.this, CharacterSummary.class);
+            startActivity(intent);
+        }
+        else {
+            displayMessage("Please select " + mAdapter.mSkillsRemaining + " more skill(s)");
+        }
+
+
     }
 
     private void initAdapter() {
@@ -106,9 +118,9 @@ public class SkillSelection extends AppCompatActivity {
         List<Skill> skillList = character.getSkillList().getList();
 
         Map<Skill, String> skillDescMap = character.getSkillList().getSkillDescriptionMap();
-        CareerSkillsAdapter adapter = new CareerSkillsAdapter(character.getCareer().getCareerSkillsList(), skillDescMap);
+        mAdapter = new CareerSkillsAdapter(character.getCareer().getCareerSkillsList(), skillDescMap);
 
-        mSkillsList.setAdapter(adapter);
+        mSkillsList.setAdapter(mAdapter);
     }
 
     public void displayMessage(String message) {

@@ -35,6 +35,16 @@ public abstract class Career {
 
     }
 
+    public void resetCareerSkills() {
+
+        for (Skill skill: skillsUsed.keySet()) {
+            skill.decrementRank();
+            skillsUsed.put(skill, Boolean.FALSE);
+        }
+
+
+    }
+
     public Map<Skill, Boolean> getSkillsUsed() {
         return skillsUsed;
     }

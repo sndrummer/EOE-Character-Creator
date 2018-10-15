@@ -116,4 +116,11 @@ public class CharacterSummary extends AppCompatActivity {
         mWillValue.setText(will.toString());
         mPresValue.setText(pres.toString());
     }
+
+    @Override
+    public void onBackPressed()
+    {
+        Model.getInstance().getCharacter().getCareer().resetCareerSkills();
+        super.onBackPressed();  // optional depending on your needs
+    }
 }

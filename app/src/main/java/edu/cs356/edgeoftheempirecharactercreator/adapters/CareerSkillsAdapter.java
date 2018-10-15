@@ -12,10 +12,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import edu.cs356.edgeoftheempirecharactercreator.R;
+import edu.cs356.edgeoftheempirecharactercreator.activities.SkillSelection;
 import edu.cs356.edgeoftheempirecharactercreator.model.Model;
 import edu.cs356.model.Character;
 import edu.cs356.model.skills.Skill;
@@ -27,6 +29,11 @@ public class CareerSkillsAdapter extends RecyclerView.Adapter {
     private List<Skill> mSkillList;
     private Map<Skill, String> mSkillDescMap;
     public Map<Skill, Boolean> mSkillsUsedMap = Model.getInstance().getCharacter().getCareer().getSkillsUsed();
+    public int mSkillsRemaining = 4;
+
+    public List<Skill> mSkillsChosen = new ArrayList<>();
+
+
 
 
     // Provide a reference to the views for each data item
@@ -40,10 +47,14 @@ public class CareerSkillsAdapter extends RecyclerView.Adapter {
         public TextView mSkillDesc; //skill_desc
         public CheckBox mSkillCheckBox; //career_skill_checkbox
 
+        public SkillSelection curActivity;
+
 
         public CareerSkillViewHolder(LinearLayout layout) {
             super(layout);
             mLinearLayout = layout;
+
+            curActivity = (SkillSelection) layout.getContext();
         }
     }
 
@@ -80,7 +91,7 @@ public class CareerSkillsAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder viewHolder, int i) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        Skill skill = mSkillList.get(i);
+        final Skill skill = mSkillList.get(i);
         // viewHolder.mSkillText.setText(skill.getName());
         CareerSkillViewHolder skillViewHolder = (CareerSkillViewHolder) viewHolder;
         StringBuilder sb = new StringBuilder();
@@ -98,17 +109,38 @@ public class CareerSkillsAdapter extends RecyclerView.Adapter {
 
 
         checkBox.setChecked(mSkillsUsedMap.get(skill));
-        Log.d(TAG, "SETTING " + ((CareerSkillViewHolder) viewHolder).mSkillText.getText().toString() + ", SKILL: " +skill.getName() + " to -->: " + mSkillsUsedMap.get(skill));
+        //Log.d(TAG, "SETTING " + ((CareerSkillViewHolder) viewHolder).mSkillText.getText().toString() + ", SKILL: " +skill.getName() + " to -->: " + mSkillsUsedMap.get(skill));
 
         final int j = i;
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Skill checkedSkill = mSkillList.get(j);
-                Log.d(TAG, "IS " + ((CareerSkillViewHolder) viewHolder).mSkillText.getText().toString() + " Checked!!: " + isChecked);
+                CareerSkillViewHolder skillViewHolder = (CareerSkillViewHolder) viewHolder;
+                CheckBox checkBox = skillViewHolder.mSkillCheckBox;
+                if (buttonView.isPressed()){
+                    Skill checkedSkill = mSkillList.get(j);
+                    //Log.d(TAG, "IS " + ((CareerSkillViewHolder) viewHolder).mSkillText.getText().toString() + " Checked!!: " + isChecked);
 
-                mSkillsUsedMap.put(checkedSkill, isChecked);
+                    mSkillsUsedMap.put(checkedSkill, isChecked);
 
+                    if (isChecked && mSkillsRemaining < 1){
+                        checkBox.setChecked(false);
+                        skillViewHolder.curActivity.displayMessage("Max amount of skills chosen");
+
+                    }
+                    else if (isChecked){
+                        mSkillsRemaining--;
+                        mSkillsChosen.add(checkedSkill);
+                        Log.d(TAG, checkedSkill.getName() + " added!");
+                        Log.d(TAG, "chosen size: " + mSkillsChosen.size());
+                    }
+                    else{
+                        mSkillsRemaining++;
+                        mSkillsChosen.remove(checkedSkill);
+                        Log.d(TAG, checkedSkill.getName() + " removed!");
+                        Log.d(TAG, "chosen size: " + mSkillsChosen.size());
+                    }
+                }
             }
         });
 
@@ -117,6 +149,13 @@ public class CareerSkillsAdapter extends RecyclerView.Adapter {
     @Override
     public void onViewRecycled(@NonNull RecyclerView.ViewHolder holder) {
         super.onViewRecycled(holder);
+        CareerSkillViewHolder skillViewHolder = (CareerSkillViewHolder) holder;
+        CheckBox checkBox = skillViewHolder.mSkillCheckBox;
+
+
+        //checkBox.setChecked(mSkillsUsedMap.get(skill));
+
+
         // CareerSkillViewHolder skillViewHolder = (CareerSkillViewHolder) holder;
 
     }

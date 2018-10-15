@@ -117,6 +117,10 @@ public class Skill {
         if (rank < MAX_RANK) rank++;
     }
 
+    public void decrementRank() {
+        if (rank > 0) rank--;
+    }
+
     public int getBonus() {
         return bonus;
     }
