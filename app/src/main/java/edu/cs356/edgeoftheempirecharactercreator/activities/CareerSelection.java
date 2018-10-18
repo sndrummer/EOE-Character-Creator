@@ -47,11 +47,16 @@ public class CareerSelection extends AppCompatActivity {
 
     private TextView mCharacterName; //char_name_career
 
+    private boolean switching = false;
+    private Model model;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_career_selection);
+
+        model = Model.getInstance();
 
         mCharacterName = findViewById(R.id.char_name_career);
         mToNextBtn = findViewById(R.id.career_next);
@@ -67,6 +72,7 @@ public class CareerSelection extends AppCompatActivity {
         mToPrevBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                switching = true;
                 finish();
             }
         });
@@ -98,6 +104,25 @@ public class CareerSelection extends AppCompatActivity {
                 makeSelection(mTechnician);
             }
         });
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        if(!switching) {
+            model.getBackGroundMusic().setAction("PAUSE");
+            startService(model.getBackGroundMusic());
+        }
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        if(!switching) {
+            model.getBackGroundMusic().setAction("RESUME");
+            startService(model.getBackGroundMusic());
+        }
+        else switching = false;
     }
 
     private void makeSelection(RelativeLayout curSelection){
@@ -140,8 +165,9 @@ public class CareerSelection extends AppCompatActivity {
     }
 
     private void proceedToNextScreen(){
+        switching = true;
         Log.d(TAG, "Starting Character Summary Activity");
-        Character character = Model.getInstance().getCharacter();
+        Character character = model.getCharacter();
         career = selectCareer();
         if (career == null){
             displayMessage("Please select a career");

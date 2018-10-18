@@ -1,5 +1,6 @@
 package edu.cs356.edgeoftheempirecharactercreator.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import edu.cs356.edgeoftheempirecharactercreator.R;
 import edu.cs356.edgeoftheempirecharactercreator.model.Model;
+import edu.cs356.edgeoftheempirecharactercreator.services.OnSwipeTouchListener;
 import edu.cs356.edgeoftheempirecharactercreator.ui.InfoDialogue;
 import edu.cs356.model.Character;
 import edu.cs356.model.career.BountyHunter;
@@ -52,9 +54,17 @@ public class SpeciesSelection extends AppCompatActivity {
 
     private int curSelection = 0; //Current species Selection
 
+    boolean switching = false;
+    Model model;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Music Controls
+        switching = false;
+        model = Model.getInstance();
+
         setContentView(R.layout.activity_species_selection);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -72,8 +82,28 @@ public class SpeciesSelection extends AppCompatActivity {
         mToNextBtn = (Button) findViewById(R.id.to_background_btn);
         mSpeciesInfoBtn = (Button) findViewById(R.id.species_info_btn);
 
+        setSwipeListeners(this.getApplicationContext());
         setButtonListeners();
 
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        if(!switching) {
+            model.getBackGroundMusic().setAction("PAUSE");
+            startService(model.getBackGroundMusic());
+        }
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        if(!switching) {
+            model.getBackGroundMusic().setAction("RESUME");
+            startService(model.getBackGroundMusic());
+        }
+        else switching = false;
     }
 
     private void initSpeciesOptions() {
@@ -91,17 +121,28 @@ public class SpeciesSelection extends AppCompatActivity {
         };
     }
 
+    private void setSwipeListeners(Context context) {
+        mSpeciesImg.setOnTouchListener(new OnSwipeTouchListener(context) {
+            @Override
+            public void onSwipeRight() {
+                Log.d(TAG, "Right Swipe");
+                changeSpecies(false);
+            }
+
+            @Override
+            public void onSwipeLeft() {
+                Log.d(TAG, "Left Swipe");
+                changeSpecies(true);
+            }
+        });
+    }
+
     private void setButtonListeners() {
         mSpeciesLeftBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "Left Button Clicked");
-                if (curSelection == 0) {
-                    curSelection = 2;
-                } else curSelection--;
-                mSpeciesImg.setImageDrawable(getDrawable(mSpeciesSelection[curSelection]));
-                mSpeciesText.setText(mSpecies[curSelection].getName());
-
+                changeSpecies(false);
             }
         });
 
@@ -109,9 +150,7 @@ public class SpeciesSelection extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "Right Button Clicked");
-                curSelection = (curSelection + 1) % 3;
-                mSpeciesImg.setImageDrawable(getDrawable(mSpeciesSelection[curSelection]));
-                mSpeciesText.setText(mSpecies[curSelection].getName());
+                changeSpecies(true);
             }
         });
 
@@ -125,10 +164,18 @@ public class SpeciesSelection extends AppCompatActivity {
                     return;
                 }
                 else characterName = mCharName.getText().toString().trim();
-                Model.getInstance().selectSpeciesAndName(getSpeciesBySelection(), characterName);
+                model.selectSpeciesAndName(getSpeciesBySelection(), characterName);
 
 
                 proceedToNextScreen();
+            }
+        });
+
+        mToMainBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switching = true;
+                finish();
             }
         });
 
@@ -142,6 +189,21 @@ public class SpeciesSelection extends AppCompatActivity {
 
         //E/RecyclerView: No adapter attached; skipping layout
 
+    }
+
+    private void changeSpecies(boolean next) {
+        if(next) {
+            curSelection = (curSelection + 1) % 3;
+            mSpeciesImg.setImageDrawable(getDrawable(mSpeciesSelection[curSelection]));
+            mSpeciesText.setText(mSpecies[curSelection].getName());
+        }
+        else {
+            if (curSelection == 0) {
+                curSelection = 2;
+            } else curSelection--;
+            mSpeciesImg.setImageDrawable(getDrawable(mSpeciesSelection[curSelection]));
+            mSpeciesText.setText(mSpecies[curSelection].getName());
+        }
     }
 
     private Species getSpeciesBySelection(){
@@ -165,9 +227,10 @@ public class SpeciesSelection extends AppCompatActivity {
         //Character character = Model.getInstance().getCharacter();
 
         //character.setCareer(new Smuggler(character));
+        switching = true;
 
         Drawable drawable = mSpeciesImg.getDrawable();
-        Model.getInstance().setCharacterDrawable(drawable);
+        model.setCharacterDrawable(drawable);
 
         Intent intent = new Intent(SpeciesSelection.this, CareerSelection.class);
 

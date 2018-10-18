@@ -48,11 +48,17 @@ public class CharacterSummary extends AppCompatActivity {
     //ImageViews
     private ImageView mCharacterImg; //char_summary_img
 
+    //Sound
+    private boolean switching = false;
+    private Model model;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character_summary);
+
+        model = Model.getInstance();
 
         mCharacterName = findViewById(R.id.char_name_summary);
         mSpeciesClassDescriptor = findViewById(R.id.char_species_class);
@@ -70,6 +76,25 @@ public class CharacterSummary extends AppCompatActivity {
         initAdapter();
 
         //mAdapter = new MyAdapter(myDataset);
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        if(!switching) {
+            model.getBackGroundMusic().setAction("PAUSE");
+            startService(model.getBackGroundMusic());
+        }
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        if(!switching) {
+            model.getBackGroundMusic().setAction("RESUME");
+            startService(model.getBackGroundMusic());
+        }
+        else switching = false;
     }
 
 
@@ -122,7 +147,7 @@ public class CharacterSummary extends AppCompatActivity {
     public void onBackPressed()
     {
         Model.getInstance().getCharacter().getCareer().resetCareerSkills();
-
+        switching = true;
         super.onBackPressed();  // optional depending on your needs
     }
 }

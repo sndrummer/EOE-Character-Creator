@@ -40,11 +40,16 @@ public class CareerSkillSelection extends AppCompatActivity {
     private TextView mCharacterName; //char_name_career_skills
     private TextView mChooseFourText;
 
+    //Music Control
+    private boolean switching = false;
+    private Model model;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_skill_selection);
 
+        model = Model.getInstance();
 
         Character character = Model.getInstance().getCharacter();
         SkillList skillList = Model.getInstance().getCharacter().getSkillList();
@@ -66,6 +71,7 @@ public class CareerSkillSelection extends AppCompatActivity {
         mToPrevBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                switching = true;
                 resetSkills();
                 finish();
             }
@@ -84,6 +90,15 @@ public class CareerSkillSelection extends AppCompatActivity {
         initAdapter();
     }
 
+    @Override
+    protected void onPause(){
+        super.onPause();
+        if(!switching) {
+            model.getBackGroundMusic().setAction("PAUSE");
+            startService(model.getBackGroundMusic());
+        }
+    }
+
     private void resetSkills() {
         Map<Skill, Boolean> skillsUsedMap = character.getCareer().getSkillsUsed();
         for (Map.Entry<Skill, Boolean> entry : skillsUsedMap.entrySet()) {
@@ -96,6 +111,8 @@ public class CareerSkillSelection extends AppCompatActivity {
     private void proceedToNextScreen() {
 
         if (mAdapter.mSkillsRemaining == 0){
+
+            switching = true;
 
             for (Skill skill : mAdapter.mSkillsChosen) {
                 character.getCareer().chooseCareerSkill(skill);
@@ -135,5 +152,10 @@ public class CareerSkillSelection extends AppCompatActivity {
         mAdapter.mSkillsUsedMap = character.getCareer().getSkillsUsed();
         mAdapter.notifyDataSetChanged();
         super.onResume();
+        if(!switching) {
+            model.getBackGroundMusic().setAction("RESUME");
+            startService(model.getBackGroundMusic());
+        }
+        else switching = false;
     }
 }

@@ -1,11 +1,15 @@
 package edu.cs356.edgeoftheempirecharactercreator.model;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 
 import edu.cs356.model.Character;
 import edu.cs356.model.species.Species;
 
 public class Model {
+
+    private Intent backGroundMusic;
+    private boolean music;
 
     private Character character = null;
 
@@ -36,5 +40,21 @@ public class Model {
 
     public void setCharacterDrawable(Drawable characterDrawable) {
         this.characterDrawable = characterDrawable;
+    }
+
+    public Intent getBackGroundMusic() {
+        return backGroundMusic;
+    }
+
+    public void setBackGroundMusic(Intent backGroundMusic) {
+        this.backGroundMusic = backGroundMusic;
+    }
+
+    public boolean isMusic() {
+        return music;
+    }
+
+    public void setMusic(boolean music) {
+        this.music = music;
     }
 }
