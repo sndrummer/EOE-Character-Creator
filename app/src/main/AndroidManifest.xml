@@ -43,7 +43,11 @@
         <activity android:name=".activities.CareerSkillSelection"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"></activity>
-        <service android:name=".services.BackgroundSoundService" android:enabled="true"></service>
+        <service android:name=".services.BackgroundSoundService"
+            android:stopWithTask="true"
+            android:enabled="true">
+
+        </service>
     </application>
 
 </manifest>

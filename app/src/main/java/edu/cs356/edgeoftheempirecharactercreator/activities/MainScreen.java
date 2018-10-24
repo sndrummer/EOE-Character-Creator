@@ -29,7 +29,7 @@ public class MainScreen extends AppCompatActivity {
     //Buttons
     private Button mNewBtn;
     private Button mLoadBtn;
-    private boolean mMusic = true;
+    private boolean mMusic = false;
     private boolean switching = false;
     private Model model;
 
@@ -50,7 +50,11 @@ public class MainScreen extends AppCompatActivity {
 
         Model.getInstance().setMusic(mMusic);
         Model.getInstance().setBackGroundMusic( new Intent(this, BackgroundSoundService.class));
-        Model.getInstance().getBackGroundMusic().setAction("PLAY");
+        Model.getInstance().getBackGroundMusic().setAction("PAUSE");
+
+        if (mMusic){
+            Model.getInstance().getBackGroundMusic().setAction("PLAY");
+        }
         startService(Model.getInstance().getBackGroundMusic());
 
     }
@@ -74,6 +78,7 @@ public class MainScreen extends AppCompatActivity {
         }
         else switching = false;
     }
+
 
 
     private void setButtonListeners() {
@@ -115,4 +120,8 @@ public class MainScreen extends AppCompatActivity {
         Toast.makeText(getBaseContext(), message, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

@@ -23,7 +23,7 @@
             android:inputType="textPersonName|textCapWords"
             android:gravity="center"
             android:hint="@string/character_name"
-            android:textSize="42sp" />
+            android:textSize="44dp" />
 
 
         <android.support.v7.widget.Toolbar
@@ -60,7 +60,7 @@
 
         <Button
             android:id="@+id/species_info_btn"
-            android:layout_width="80dp"
+            android:layout_width="85dp"
             android:layout_height="80dp"
             android:layout_alignParentEnd="true"
             android:layout_marginRight="@dimen/fab_margin"

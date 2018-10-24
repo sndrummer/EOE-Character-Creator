@@ -13,7 +13,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/title_screen">
+        android:background="@drawable/title_screen_smaller">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -26,26 +26,26 @@
                 android:layout_height="100sp"
                 android:layout_alignParentBottom="true"
                 android:layout_marginTop="55dp">
-                <Button android:id="@+id/new_btn"
+                <Button android:id="@+id/load_btn"
                     android:layout_weight="1"
                     android:layout_marginBottom="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="75dp"
                     android:scaleType="fitStart"
                     android:background="@drawable/arrow_l"
-                    android:text="   NEW CHARACTER"
-                    android:textSize="20sp"
+                    android:text="  LOAD CHARACTER"
+                    android:textSize="20dp"
                     android:textColor="@color/white"
                     android:fontFamily="@font/teuton_mager"/>
-                <Button android:id="@+id/load_btn"
+                <Button android:id="@+id/new_btn"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="75dp"
                     android:layout_marginBottom="8dp"
                     android:scaleType="fitStart"
                     android:background="@drawable/arrow_r"
-                    android:text="LOAD CHARACTER   "
-                    android:textSize="20sp"
+                    android:text="NEW CHARACTER  "
+                    android:textSize="20dp"
                     android:textColor="@color/white"
                     android:fontFamily="@font/teuton_mager"/>
             </LinearLayout>

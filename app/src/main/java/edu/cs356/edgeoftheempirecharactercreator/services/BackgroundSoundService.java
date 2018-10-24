@@ -34,33 +34,33 @@ public class BackgroundSoundService extends Service {
 
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        if(playMusic) {
-
-            if (intent.getAction().equals("PLAY")) {
-                if (!mPlayer.isPlaying()) mPlayer.start();
-            } else if (intent.getAction().equals("PAUSE")) {
-                if (mPlayer.isPlaying()) {
-                    mPos = mPlayer.getCurrentPosition();
-                    mPlayer.pause();
-                }
-            } else if (intent.getAction().equals("RESUME")) {
-                if (!mPlayer.isPlaying()) {
-                    mPlayer.start();
-                    mPlayer.seekTo(mPos);
-                }
-            } else if (intent.getAction().equals("MUTE")) {
-                playMusic = false;
-                mPlayer.stop();
-                mPlayer.release();
-            }
-        }
-        else if (intent.getAction().equals("UNMUTE")) {
-            playMusic = true;
-            mPlayer = MediaPlayer.create(this, R.raw.title);
-            mPlayer.setLooping(false); // Set looping
-            mPlayer.setVolume(100, 100);
-            mPlayer.start();
-        }
+//        if(playMusic) {
+//
+//            if (intent.getAction().equals("PLAY")) {
+//                if (!mPlayer.isPlaying()) mPlayer.start();
+//            } else if (intent.getAction().equals("PAUSE")) {
+//                if (mPlayer.isPlaying()) {
+//                    mPos = mPlayer.getCurrentPosition();
+//                    mPlayer.pause();
+//                }
+//            } else if (intent.getAction().equals("RESUME")) {
+//                if (!mPlayer.isPlaying()) {
+//                    mPlayer.start();
+//                    mPlayer.seekTo(mPos);
+//                }
+//            } else if (intent.getAction().equals("MUTE")) {
+//                playMusic = false;
+//                mPlayer.stop();
+//                mPlayer.release();
+//            }
+//        }
+//        else if (intent.getAction().equals("UNMUTE")) {
+//            playMusic = true;
+//            mPlayer = MediaPlayer.create(this, R.raw.title);
+//            mPlayer.setLooping(false); // Set looping
+//            mPlayer.setVolume(100, 100);
+//            mPlayer.start();
+//        }
 
         return Service.START_STICKY;
     }

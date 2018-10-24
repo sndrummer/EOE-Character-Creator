@@ -1,5 +1,6 @@
 package edu.cs356.edgeoftheempirecharactercreator.activities;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -9,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -160,6 +162,7 @@ public class SpeciesSelection extends AppCompatActivity {
                 Log.d(TAG, "To BackGround Button Clicked");
                 String characterName;
                 if (mCharName.getText() == null || mCharName.getText().toString().trim().equals("")){
+                    showKeyboard(mCharName, getApplicationContext());
                     displayMessage("Please enter a character name");
                     return;
                 }
@@ -191,6 +194,11 @@ public class SpeciesSelection extends AppCompatActivity {
 
     }
 
+    public static void showKeyboard(TextInputEditText mEditText, Context context) {
+        mEditText.requestFocus();
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+    }
     private void changeSpecies(boolean next) {
         if(next) {
             curSelection = (curSelection + 1) % 3;
