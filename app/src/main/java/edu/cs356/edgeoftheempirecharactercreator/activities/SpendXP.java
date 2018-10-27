@@ -18,14 +18,19 @@ import java.util.List;
 import edu.cs356.edgeoftheempirecharactercreator.R;
 import edu.cs356.edgeoftheempirecharactercreator.adapters.SkillsAdapter;
 import edu.cs356.edgeoftheempirecharactercreator.model.Model;
+import edu.cs356.edgeoftheempirecharactercreator.model.Result;
+import edu.cs356.edgeoftheempirecharactercreator.model.XPModel;
 import edu.cs356.model.Character;
 import edu.cs356.model.skills.Skill;
+
+import static edu.cs356.edgeoftheempirecharactercreator.model.XPModel.AttrType.*;
 
 public class SpendXP extends AppCompatActivity {
 
     private static final String TAG = "CharacterSummaryTAG";
 
     private Character character = Model.getInstance().getCharacter();
+    private XPModel xpModel = XPModel.getInstance();
 
     //Button
     private Button mSkillsInfoBtn; //skills_info_btn
@@ -59,9 +64,6 @@ public class SpendXP extends AppCompatActivity {
     private TextView mWoundValue;
     private TextView mSoakValue;
     private TextView mStrainValue;
-
-    //ImageViews
-    private ImageView mCharacterImg; //char_summary_img
 
     //Sound
     private boolean switching = false;
@@ -139,42 +141,42 @@ public class SpendXP extends AppCompatActivity {
         mBrView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBrTouched();
+                onAttrTouched(BRAWN);
             }
         });
 
         mAgView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onAgTouched();
+                onAttrTouched(AGILITY);
             }
         });
 
         mIntView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onIntTouched();
+                onAttrTouched(INTELLECT);
             }
         });
 
         mCunView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onCunTouched();
+                onAttrTouched(CUNNING);
             }
         });
 
         mWillView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onWillTouched();
+                onAttrTouched(WILL);
             }
         });
 
         mPrView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onPrTouched();
+                onAttrTouched(PRESENCE);
             }
         });
 
@@ -198,21 +200,16 @@ public class SpendXP extends AppCompatActivity {
     }
 
     private void initCharact() {
-        Integer brawn = character.getSpecies().getBrawn();
-        Integer agility = character.getSpecies().getAgility();
-        Integer cun = character.getSpecies().getCunning();
-        Integer will = character.getSpecies().getWillpower();
-        Integer pres = character.getSpecies().getPresence();
-        Integer intelligence = character.getSpecies().getIntelligence();
+        xpModel.initValues(character);
 
-        mBrawnValue.setText(brawn.toString());
-        mAgilityValue.setText(agility.toString());
-        mIntValue.setText(intelligence.toString());
-        mCunValue.setText(cun.toString());
-        mWillValue.setText(will.toString());
-        mPresValue.setText(pres.toString());
+        mBrawnValue.setText(xpModel.getBrawnValue().toString());
+        mAgilityValue.setText(xpModel.getAgilityValue().toString());
+        mIntValue.setText(xpModel.getIntValue().toString());
+        mCunValue.setText(xpModel.getCunValue().toString());
+        mWillValue.setText(xpModel.getWillValue().toString());
+        mPresValue.setText(xpModel.getPresValue().toString());
 
-        mExperience.setText(character.getSpecies().getStartingXP());
+        mExperience.setText(xpModel.getXp().toString());
     }
 
     @Override
@@ -224,24 +221,54 @@ public class SpendXP extends AppCompatActivity {
     }
 
     public void onUndoPressed(){
+        Result result = xpModel.undoAction();
+
+        if (result.isSuccess()) {
+            if (result.getResult() instanceof XPModel.AttrType) {
+                updateAttr( (XPModel.AttrType) result.getResult());
+            }
+            else updateSkill( (Skill) result.getResult());
+        }
+
 
     }
 
-    public void onBrTouched(){
+    private void onAttrTouched(XPModel.AttrType ATTR) {
+        Result result = xpModel.increaseAttr(ATTR);
+
+        if (result.isSuccess()){
+            updateAttr(ATTR);
+        }
     }
 
-    public void onAgTouched(){
+    private void updateAttr(XPModel.AttrType ATTR){
+
+        switch(ATTR){
+            case BRAWN:
+                mBrawnValue.setText(xpModel.getBrawnValue().toString());
+                break;
+            case AGILITY:
+                mAgilityValue.setText(xpModel.getAgilityValue().toString());
+                break;
+            case INTELLECT:
+                mIntValue.setText(xpModel.getIntValue().toString());
+                break;
+            case CUNNING:
+                mCunValue.setText(xpModel.getCunValue().toString());
+                break;
+            case WILL:
+                mWillValue.setText(xpModel.getWillValue().toString());
+                break;
+            case PRESENCE:
+                mPresValue.setText(xpModel.getPresValue().toString());
+                break;
+            default:
+        }
+
+        mExperience.setText(xpModel.getXp().toString());
     }
 
-    public void onIntTouched(){
-    }
+    public void updateSkill(Skill skill){
 
-    public void onCunTouched(){
-    }
-
-    public void onPrTouched(){
-    }
-
-    public void onWillTouched(){
     }
 }

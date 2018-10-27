@@ -14,9 +14,12 @@ public class Skill {
     public Skill(String name, Species.Characteristic governingAtt) {
         this.name = name;
         this.governingAtt = governingAtt;
+        isCareerSkill = false;
     }
 
     private String description;
+
+    private boolean isCareerSkill;
 
     public enum SkillType {
         ASTROGATION,
@@ -75,6 +78,14 @@ public class Skill {
 
     private int bonus = 0;
     private int setback = 0;
+
+    public boolean isCareerSkill() {
+        return isCareerSkill;
+    }
+
+    public void setCareerSkill(boolean careerSkill) {
+        isCareerSkill = careerSkill;
+    }
 
     public String getGoverningAttString() {
         String res = "";
