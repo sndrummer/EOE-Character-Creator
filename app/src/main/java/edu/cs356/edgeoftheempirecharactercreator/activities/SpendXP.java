@@ -5,13 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -22,9 +22,14 @@ import edu.cs356.edgeoftheempirecharactercreator.model.Result;
 import edu.cs356.edgeoftheempirecharactercreator.model.XPModel;
 import edu.cs356.model.Character;
 import edu.cs356.model.skills.Skill;
+import edu.cs356.model.species.Species;
 
-import static edu.cs356.edgeoftheempirecharactercreator.model.XPModel.AttrType.*;
-
+import static edu.cs356.model.species.Species.Characteristic.AG;
+import static edu.cs356.model.species.Species.Characteristic.BR;
+import static edu.cs356.model.species.Species.Characteristic.CUN;
+import static edu.cs356.model.species.Species.Characteristic.INT;
+import static edu.cs356.model.species.Species.Characteristic.PR;
+import static edu.cs356.model.species.Species.Characteristic.WILL;
 public class SpendXP extends AppCompatActivity {
 
     private static final String TAG = "CharacterSummaryTAG";
@@ -35,6 +40,7 @@ public class SpendXP extends AppCompatActivity {
     //Button
     private Button mSkillsInfoBtn; //skills_info_btn
     private ImageButton mUndoBtn;
+    private ImageButton mSaveBtn;
 
     //RecyclerView
     private RecyclerView mSkillsList;
@@ -80,6 +86,7 @@ public class SpendXP extends AppCompatActivity {
         mCharacterName = findViewById(R.id.char_name_xp);
         mSkillsInfoBtn = findViewById(R.id.skills_info_btn);
         mUndoBtn = findViewById(R.id.undo_btn);
+        mSaveBtn = findViewById(R.id.save_button);
 
         mBrView = findViewById(R.id.br_view);
         mAgView = findViewById(R.id.ag_view);
@@ -138,31 +145,38 @@ public class SpendXP extends AppCompatActivity {
             }
         });
 
+        mSaveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                proceedToNextScreen();
+            }
+        });
+
         mBrView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onAttrTouched(BRAWN);
+                onAttrTouched(BR);
             }
         });
 
         mAgView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onAttrTouched(AGILITY);
+                onAttrTouched(AG);
             }
         });
 
         mIntView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onAttrTouched(INTELLECT);
+                onAttrTouched(INT);
             }
         });
 
         mCunView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onAttrTouched(CUNNING);
+                onAttrTouched(CUN);
             }
         });
 
@@ -176,7 +190,7 @@ public class SpendXP extends AppCompatActivity {
         mPrView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onAttrTouched(PRESENCE);
+                onAttrTouched(PR);
             }
         });
 
@@ -197,6 +211,41 @@ public class SpendXP extends AppCompatActivity {
         SkillsAdapter adapter = new SkillsAdapter(skillList);
 
         mSkillsList.setAdapter(adapter);
+
+        mSkillsList.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+            @Override
+            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+
+                //View child = rv.findChildViewUnder(e.getX(), e.getY());
+                //if (child != null) {
+
+                    //return true;
+
+                //}
+
+                return false;
+            }
+
+            @Override
+            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+                //View child = rv.findChildViewUnder(e.getX(), e.getY());
+                //int i = rv.getChildAdapterPosition(child);
+
+                //SkillsAdapter adapter = (SkillsAdapter) mSkillsList.getAdapter();
+                //Skill skill = adapter.getSkill(i);
+
+                //Result result = xpModel.increaseSkill2(skill);
+
+                //if (result.isSuccess()) {
+                //    updateSkill(skill);
+                //}
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+            }
+        });
     }
 
     private void initCharact() {
@@ -224,8 +273,8 @@ public class SpendXP extends AppCompatActivity {
         Result result = xpModel.undoAction();
 
         if (result.isSuccess()) {
-            if (result.getResult() instanceof XPModel.AttrType) {
-                updateAttr( (XPModel.AttrType) result.getResult());
+            if (result.getResult() instanceof Species.Characteristic) {
+                updateAttr( (Species.Characteristic) result.getResult());
             }
             else updateSkill( (Skill) result.getResult());
         }
@@ -233,7 +282,7 @@ public class SpendXP extends AppCompatActivity {
 
     }
 
-    private void onAttrTouched(XPModel.AttrType ATTR) {
+    private void onAttrTouched(Species.Characteristic ATTR) {
         Result result = xpModel.increaseAttr(ATTR);
 
         if (result.isSuccess()){
@@ -241,25 +290,25 @@ public class SpendXP extends AppCompatActivity {
         }
     }
 
-    private void updateAttr(XPModel.AttrType ATTR){
+    private void updateAttr(Species.Characteristic ATTR){
 
         switch(ATTR){
-            case BRAWN:
+            case BR:
                 mBrawnValue.setText(xpModel.getBrawnValue().toString());
                 break;
-            case AGILITY:
+            case AG:
                 mAgilityValue.setText(xpModel.getAgilityValue().toString());
                 break;
-            case INTELLECT:
+            case INT:
                 mIntValue.setText(xpModel.getIntValue().toString());
                 break;
-            case CUNNING:
+            case CUN:
                 mCunValue.setText(xpModel.getCunValue().toString());
                 break;
             case WILL:
                 mWillValue.setText(xpModel.getWillValue().toString());
                 break;
-            case PRESENCE:
+            case PR:
                 mPresValue.setText(xpModel.getPresValue().toString());
                 break;
             default:
@@ -271,4 +320,33 @@ public class SpendXP extends AppCompatActivity {
     public void updateSkill(Skill skill){
 
     }
+
+    private void proceedToNextScreen() {
+
+        if (xpModel.getXp() == 0){
+
+            switching = true;
+
+            character.setBrawn(xpModel.getBrawnValue());
+            character.setAgility(xpModel.getAgilityValue());
+            character.setIntellect(xpModel.getIntValue());
+            character.setCunning(xpModel.getCunValue());
+            character.setWillpower(xpModel.getWillValue());
+            character.setPresence(xpModel.getPresValue());
+
+            Intent intent = new Intent(SpendXP.this, CharacterSummary.class);
+            startActivity(intent);
+        }
+        else {
+            displayMessage("Please spend " + xpModel.getXp() + " xp");
+        }
+
+
+    }
+
+    public void displayMessage(String message) {
+        Toast.makeText(getBaseContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+
 }

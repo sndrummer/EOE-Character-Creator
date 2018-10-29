@@ -128,12 +128,12 @@ public class CharacterSummary extends AppCompatActivity {
     }
 
     private void initCharact() {
-        Integer brawn = character.getSpecies().getBrawn();
-        Integer agility = character.getSpecies().getAgility();
-        Integer cun = character.getSpecies().getCunning();
-        Integer will = character.getSpecies().getWillpower();
-        Integer pres = character.getSpecies().getPresence();
-        Integer intelligence = character.getSpecies().getIntelligence();
+        Integer brawn = character.getBrawn();
+        Integer agility = character.getAgility();
+        Integer cun = character.getCunning();
+        Integer will = character.getWillpower();
+        Integer pres = character.getPresence();
+        Integer intelligence = character.getIntellect();
 
         mBrawnValue.setText(brawn.toString());
         mAgilityValue.setText(agility.toString());
@@ -146,7 +146,6 @@ public class CharacterSummary extends AppCompatActivity {
     @Override
     public void onBackPressed()
     {
-        Model.getInstance().getCharacter().getCareer().resetCareerSkills();
         switching = true;
         super.onBackPressed();  // optional depending on your needs
     }

@@ -36,6 +36,15 @@
                 android:text="spend xp"
                 android:textColor="@color/white"
                 android:textSize="35sp" />
+
+            <ImageButton
+                android:id="@+id/save_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginHorizontal="16dp"
+                app:srcCompat="@drawable/ic_exit_to_app_blue_24dp" />
         </RelativeLayout>
 
 
@@ -91,7 +100,7 @@
                             android:layout_alignParentBottom="true"
                             android:layout_alignParentRight="true"
                             android:layout_margin="12dp"
-                            android:background="@drawable/Undo" />
+                            android:background="@drawable/undo" />
 
                         <ImageView
                             android:id="@+id/imageView"

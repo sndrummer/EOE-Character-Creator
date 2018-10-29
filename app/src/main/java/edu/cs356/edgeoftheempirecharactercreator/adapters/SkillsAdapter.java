@@ -119,7 +119,7 @@ public class SkillsAdapter extends RecyclerView.Adapter {
         }
     }
 
-    private void setDiceImages(Skill skill, SkillViewHolder skillViewHolder) {
+    public void setDiceImages(Skill skill, SkillViewHolder skillViewHolder) {
 
         int prof = skill.getRank(); //3
         int tmp = 0;
@@ -150,6 +150,9 @@ public class SkillsAdapter extends RecyclerView.Adapter {
     }
 
 
+    public Skill getSkill(int i) {
+        return mSkillList.get(i);
+    }
 
     @Override
     public int getItemCount() {

@@ -11,15 +11,18 @@ public class Skill {
     5 Challenge -- red
      */
 
-    public Skill(String name, Species.Characteristic governingAtt) {
+    public Skill(String name, Species.Characteristic governingAtt, SkillList wrapper) {
         this.name = name;
         this.governingAtt = governingAtt;
         isCareerSkill = false;
+        listWrapper = wrapper;
     }
 
     private String description;
 
     private boolean isCareerSkill;
+
+    private SkillList listWrapper;
 
     public enum SkillType {
         ASTROGATION,
@@ -79,6 +82,8 @@ public class Skill {
     private int bonus = 0;
     private int setback = 0;
 
+    private Character charWrapper;
+
     public boolean isCareerSkill() {
         return isCareerSkill;
     }
@@ -113,7 +118,7 @@ public class Skill {
     }
 
     public int getAbility() {
-        return ability;
+        return listWrapper.getAttr(governingAtt);
     }
 
     public void setAbility(int ability) {
@@ -151,7 +156,6 @@ public class Skill {
     public Species.Characteristic getGoverningAtt() {
         return governingAtt;
     }
-
 
     public String getName() {
         return name;

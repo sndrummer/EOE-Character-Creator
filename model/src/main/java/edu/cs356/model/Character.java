@@ -9,6 +9,13 @@ public class Character {
     private String name;
     private Career career;
 
+    private Integer brawn;
+    private Integer agility;
+    private Integer intellect;
+    private Integer cunning;
+    private Integer willpower;
+    private Integer presence;
+
     private int wound;
     private int strain;
     private int soak;
@@ -20,6 +27,13 @@ public class Character {
         this.name = name;
         setSpecies(species);
         this.skillList = new SkillList(this);
+
+        brawn = species.getBrawn();
+        agility = species.getAgility();
+        intellect = species.getIntelligence();
+        cunning = species.getCunning();
+        willpower = species.getWillpower();
+        presence = species.getPresence();
     }
 
     //USE COMPOSITION, IE the character HAS a species, not IS a species
@@ -99,5 +113,53 @@ public class Character {
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+    }
+
+    public Integer getBrawn() {
+        return brawn;
+    }
+
+    public void setBrawn(Integer brawn) {
+        this.brawn = brawn;
+    }
+
+    public Integer getAgility() {
+        return agility;
+    }
+
+    public void setAgility(Integer agility) {
+        this.agility = agility;
+    }
+
+    public Integer getIntellect() {
+        return intellect;
+    }
+
+    public void setIntellect(Integer intellect) {
+        this.intellect = intellect;
+    }
+
+    public Integer getCunning() {
+        return cunning;
+    }
+
+    public void setCunning(Integer cunning) {
+        this.cunning = cunning;
+    }
+
+    public Integer getWillpower() {
+        return willpower;
+    }
+
+    public void setWillpower(Integer willpower) {
+        this.willpower = willpower;
+    }
+
+    public Integer getPresence() {
+        return presence;
+    }
+
+    public void setPresence(Integer presence) {
+        this.presence = presence;
     }
 }

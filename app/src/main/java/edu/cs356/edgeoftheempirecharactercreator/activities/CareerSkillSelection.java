@@ -118,7 +118,7 @@ public class CareerSkillSelection extends AppCompatActivity {
                 character.getCareer().chooseCareerSkill(skill);
             }
 
-            Intent intent = new Intent(CareerSkillSelection.this, CharacterSummary.class);
+            Intent intent = new Intent(CareerSkillSelection.this, SpendXP.class);
             startActivity(intent);
         }
         else {

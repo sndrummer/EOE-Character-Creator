@@ -6,18 +6,9 @@ import java.util.List;
 import edu.cs356.model.Character;
 import edu.cs356.model.skills.Skill;
 import edu.cs356.model.skills.SkillList;
+import edu.cs356.model.species.Species;
 
 public class XPModel {
-
-    public enum AttrType {
-        BRAWN,
-        AGILITY,
-        INTELLECT,
-        CUNNING,
-        WILL,
-        PRESENCE;
-
-    }
 
     private Integer xp;
 
@@ -84,28 +75,28 @@ public class XPModel {
         return mPresValue;
     }
 
-    public Result increaseAttr(AttrType ATTR){
+    public Result increaseAttr(Species.Characteristic ATTR){
 
         int xpCost;
         xpAction action;
 
         switch(ATTR){
-            case BRAWN:
+            case BR:
                 xpCost = (mBrawnValue + 1)*5;
                 break;
-            case AGILITY:
+            case AG:
                 xpCost = (mAgilityValue + 1)*5;
                 break;
-            case INTELLECT:
+            case INT:
                 xpCost = (mIntValue + 1)*5;
                 break;
-            case CUNNING:
+            case CUN:
                 xpCost = (mCunValue + 1)*5;
                 break;
             case WILL:
                 xpCost = (mWillValue + 1)*5;
                 break;
-            case PRESENCE:
+            case PR:
                 xpCost = (mPresValue + 1)*5;
                 break;
             default:
@@ -139,6 +130,25 @@ public class XPModel {
 
     }
 
+    public Result increaseSkill2(Skill skill){
+
+        if (skill.getRank() == 5){
+            return new Result(false, "Cannot increase a skill past rank 5");
+        }
+
+        int xpCost;
+
+        if(skill.isCareerSkill()){
+            xpCost = (skill.getRank()+1)*5;
+        }
+        else xpCost = (skill.getRank()+2)*5;
+
+        xpAction action = new xpAction(false, skill, xpCost);
+
+        return executeAction(action);
+
+    }
+
     private Result executeAction(xpAction action){
         int xpCost = action.cost;
 
@@ -151,25 +161,25 @@ public class XPModel {
         }
 
         if(action.isAttr){
-            AttrType ATTR = (AttrType) action.increased;
+            Species.Characteristic ATTR = (Species.Characteristic) action.increased;
 
             switch(ATTR){
-                case BRAWN:
+                case BR:
                     mBrawnValue += 1;
                     break;
-                case AGILITY:
+                case AG:
                     mAgilityValue += 1;
                     break;
-                case INTELLECT:
+                case INT:
                     mIntValue += 1;
                     break;
-                case CUNNING:
+                case CUN:
                     mCunValue += 1;
                     break;
                 case WILL:
                     mWillValue += 1;
                     break;
-                case PRESENCE:
+                case PR:
                     mPresValue += 1;
                     break;
                 default:
@@ -202,26 +212,26 @@ public class XPModel {
 
         if (action.isAttr) {
 
-            AttrType ATTR = (AttrType) action.increased;
+            Species.Characteristic ATTR = (Species.Characteristic) action.increased;
             result.setResult(ATTR);
 
             switch(ATTR){
-                case BRAWN:
+                case BR:
                     mBrawnValue -= 1;
                     break;
-                case AGILITY:
+                case AG:
                     mAgilityValue -= 1;
                     break;
-                case INTELLECT:
+                case INT:
                     mIntValue -= 1;
                     break;
-                case CUNNING:
+                case CUN:
                     mCunValue -= 1;
                     break;
                 case WILL:
                     mWillValue -= 1;
                     break;
-                case PRESENCE:
+                case PR:
                     mPresValue -= 1;
                     break;
                 default:

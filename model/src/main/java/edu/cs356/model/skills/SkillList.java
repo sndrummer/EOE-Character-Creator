@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import edu.cs356.edgeoftheempirecharactercreator.model.XPModel.AttrType;
 import edu.cs356.model.Character;
 import edu.cs356.model.species.Species;
 
@@ -85,49 +86,69 @@ public class SkillList {
         skillList.add(skill);
     }
 
+    public Integer getAttr(Species.Characteristic ATTR) {
+
+        switch (ATTR) {
+            case BR:
+                return character.getBrawn();
+            case AG:
+                return character.getAgility();
+            case INT:
+                return character.getIntellect();
+            case CUN:
+                return character.getCunning();
+            case WILL:
+                return character.getWillpower();
+            case PR:
+                return character.getPresence();
+                default:
+                    return null;
+        }
+    }
+
     //skills
-    private Skill astrogation = new Skill("Astrogation", INT);
-    private Skill athletics = new Skill("Athletics", BR);
-    private Skill charm = new Skill("Charm", PR);
-    private Skill coercion = new Skill("Coercion", WILL);
+    private Skill astrogation = new Skill("Astrogation", INT, this);
+    private Skill athletics = new Skill("Athletics", BR, this);
+    private Skill charm = new Skill("Charm", PR, this);
+    private Skill coercion = new Skill("Coercion", WILL, this);
 
-    private Skill computers = new Skill("Computers", INT);
-    private Skill cool = new Skill("Cool", PR);
-    private Skill coordination = new Skill("Coordination", AG);
-    private Skill deception = new Skill("Deception", CUN);
+    private Skill computers = new Skill("Computers", INT, this);
+    private Skill cool = new Skill("Cool", PR, this);
+    private Skill coordination = new Skill("Coordination", AG, this);
+    private Skill deception = new Skill("Deception", CUN, this);
 
-    private Skill discipline = new Skill("Discipline", WILL);
-    private Skill leadership = new Skill("Leadership", PR);
-    private Skill mechanics = new Skill("Mechanics", INT);
-    private Skill medicine = new Skill("Medicine", INT);
+    private Skill discipline = new Skill("Discipline", WILL, this);
+    private Skill leadership = new Skill("Leadership", PR, this);
+    private Skill mechanics = new Skill("Mechanics", INT, this);
+    private Skill medicine = new Skill("Medicine", INT, this);
 
-    private Skill negotiation = new Skill("Negotiation", PR);
-    private Skill perception = new Skill("Perception", CUN);
-    private Skill piloting_space = new Skill("Piloting - Space", AG);
-    private Skill piloting_planetary = new Skill("Piloting - Planetary", AG);
-    private Skill resilience = new Skill("Resilience", BR);
+    private Skill negotiation = new Skill("Negotiation", PR, this);
+    private Skill perception = new Skill("Perception", CUN, this);
+    private Skill piloting_space = new Skill("Piloting - Space", AG, this);
+    private Skill piloting_planetary = new Skill("Piloting - Planetary", AG, this);
+    private Skill resilience = new Skill("Resilience", BR, this);
 
-    private Skill skullduggery = new Skill("Skullduggery", CUN);
-    private Skill stealth = new Skill("Stealth", AG);
-    private Skill streetwise = new Skill("Streetwise", CUN);
-    private Skill survival = new Skill("Survival", CUN);
-    private Skill vigilance = new Skill("Vigilance", WILL);
+    private Skill skullduggery = new Skill("Skullduggery", CUN, this);
+    private Skill stealth = new Skill("Stealth", AG, this);
+    private Skill streetwise = new Skill("Streetwise", CUN, this);
+    private Skill survival = new Skill("Survival", CUN, this);
+    private Skill vigilance = new Skill("Vigilance", WILL, this);
 
     //COMBAT SKILLS
-    private Skill brawl = new Skill("Brawl", BR);
-    private Skill gunnery = new Skill("Gunnery", AG);
-    private Skill melee = new Skill("Melee", BR);
-    private Skill ranged_heavy = new Skill("Ranged - Heavy", AG);
-    private Skill ranged_light = new Skill("Ranged - Light", AG);
+    private Skill brawl = new Skill("Brawl", BR, this);
+    private Skill gunnery = new Skill("Gunnery", AG, this);
+    private Skill melee = new Skill("Melee", BR, this);
+    private Skill ranged_heavy = new Skill("Ranged - Heavy", AG, this);
+    private Skill ranged_light = new Skill("Ranged - Light", AG, this);
 
     //Knowledge skills
-    private Skill core_worlds = new Skill("Core Worlds", INT);
-    private Skill education = new Skill("Education", INT);
-    private Skill lore = new Skill("Lore", INT);
-    private Skill outer_rim = new Skill("Outer Rim", INT);
-    private Skill underworld = new Skill("Underworld", INT);
-    private Skill warfare = new Skill("Warfare", INT);
-    private Skill xenology = new Skill("Xenology", INT);
+    private Skill core_worlds = new Skill("Core Worlds", INT, this);
+    private Skill education = new Skill("Education", INT, this);
+    private Skill lore = new Skill("Lore", INT, this);
+    private Skill outer_rim = new Skill("Outer Rim", INT, this);
+    private Skill underworld = new Skill("Underworld", INT, this);
+    private Skill warfare = new Skill("Warfare", INT, this);
+    private Skill xenology = new Skill("Xenology", INT, this);
 
 
     //getters
@@ -135,6 +156,133 @@ public class SkillList {
 
     public List<Skill> getList() {
         return skillList;
+    }
+
+    public Skill getSkillByName(String skillName) {
+        Skill result = null;
+
+        String name = skillName.toUpperCase();
+
+        switch (name) {
+            case "ASTROGATION":
+                result = astrogation;
+                break;
+            case "ATHLETICS":
+                result = athletics;
+                break;
+            case "CHARM":
+                result = charm;
+                break;
+            case "COERCION":
+                result = coercion;
+                break;
+
+            case "COMPUTERS":
+                result = computers;
+                break;
+            case "COOL":
+                result = cool;
+                break;
+            case "COORDINATION":
+                result = coordination;
+                break;
+            case "DECEPTION":
+                result = deception;
+                break;
+
+            case "DISCIPLINE":
+                result = discipline;
+                break;
+            case "LEADERSHIP":
+                result = leadership;
+                break;
+            case "MECHANICS":
+                result = mechanics;
+                break;
+            case "MEDICINE":
+                result = medicine;
+                break;
+
+            case "NEGOTIATION":
+                result = negotiation;
+                break;
+            case "PERCEPTION":
+                result = perception;
+                break;
+            case "PILOTING_SPACE":
+                result = piloting_space;
+                break;
+            case "PILOTING PLANETARY":
+                result = piloting_planetary;
+                break;
+            case "RESILIENCE":
+                result = resilience;
+                break;
+
+            case "SKULLDUGGERY":
+                result = skullduggery;
+                break;
+            case "STEALTH":
+                result = stealth;
+                break;
+            case "STREETWISE":
+                result = streetwise;
+                break;
+            case "VIGILANCE":
+                result = vigilance;
+                break;
+
+            //Combat
+            case "BRAWL":
+                result = brawl;
+                break;
+            case "GUNNERY":
+                result = gunnery;
+                break;
+            case "MELEE":
+                result = melee;
+                break;
+            case "RANGED HEAVY":
+                result = ranged_heavy;
+                break;
+            case "RANGED LIGHT":
+                result = ranged_light;
+                break;
+
+
+            //Knowledge
+            case "CORE WORLDS":
+                result = core_worlds;
+                break;
+            case "EDUCATION":
+                result = education;
+                break;
+            case "LORE":
+                result = lore;
+                break;
+            case "OUTER RIM":
+                result = outer_rim;
+                break;
+            case "UNDERWORLD":
+                result = underworld;
+                break;
+            case "WARFARE":
+                result = warfare;
+                break;
+            case "XENOLOGY":
+                result = xenology;
+                break;
+
+        }
+        return result;
+    }
+
+    public void updateSkillAttributes(AttrType ATTR) {
+
+        switch (ATTR){
+            case BRAWN:
+
+        }
     }
 
     public Skill getSkillByType(Skill.SkillType skillType) {
