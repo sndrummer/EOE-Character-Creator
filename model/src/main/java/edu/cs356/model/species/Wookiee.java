@@ -13,6 +13,9 @@ public class Wookiee extends Species {
         setPresence(2);
 
         setStartingXP(90);
+
+        setBaseWound(14);
+        setBaseStrain(8);
     }
 
     private String name = "Wookiee";

@@ -13,6 +13,9 @@ public class Twilek extends Species {
         setPresence(3);
 
         setStartingXP(100);
+
+        setBaseWound(10);
+        setBaseStrain(11);
     }
 
     private String name = "Twi'lek";

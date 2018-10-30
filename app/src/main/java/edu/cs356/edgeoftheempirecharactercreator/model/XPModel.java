@@ -19,6 +19,10 @@ public class XPModel {
     private Integer mWillValue;
     private Integer mPresValue;
 
+    private Integer mMaxWound;
+    private Integer mMaxStrain;
+    private Integer mSoak;
+
     private SkillList skillList;
 
     private List<xpAction> actions;
@@ -45,6 +49,10 @@ public class XPModel {
         skillList = character.getSkillList();
 
         xp = character.getSpecies().getStartingXP();
+
+        mMaxWound = character.getWound();
+        mMaxStrain = character.getStrain();
+        mSoak = character.getSoak();
     }
 
     public Integer getXp() {
@@ -73,6 +81,18 @@ public class XPModel {
 
     public Integer getPresValue() {
         return mPresValue;
+    }
+
+    public Integer getMaxWound() {
+        return mMaxWound;
+    }
+
+    public Integer getMaxStrain() {
+        return mMaxStrain;
+    }
+
+    public Integer getSoak() {
+        return mSoak;
     }
 
     public Result increaseAttr(Species.Characteristic ATTR){
@@ -166,6 +186,8 @@ public class XPModel {
             switch(ATTR){
                 case BR:
                     mBrawnValue += 1;
+                    mMaxWound += 1;
+                    mSoak += 1;
                     break;
                 case AG:
                     mAgilityValue += 1;
@@ -178,6 +200,7 @@ public class XPModel {
                     break;
                 case WILL:
                     mWillValue += 1;
+                    mMaxStrain += 1;
                     break;
                 case PR:
                     mPresValue += 1;
@@ -218,6 +241,8 @@ public class XPModel {
             switch(ATTR){
                 case BR:
                     mBrawnValue -= 1;
+                    mMaxWound -= 1;
+                    mSoak -= 1;
                     break;
                 case AG:
                     mAgilityValue -= 1;
@@ -230,6 +255,7 @@ public class XPModel {
                     break;
                 case WILL:
                     mWillValue -= 1;
+                    mMaxStrain -= 1;
                     break;
                 case PR:
                     mPresValue -= 1;

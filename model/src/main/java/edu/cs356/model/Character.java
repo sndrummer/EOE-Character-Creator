@@ -34,6 +34,10 @@ public class Character {
         cunning = species.getCunning();
         willpower = species.getWillpower();
         presence = species.getPresence();
+
+        wound = species.getBaseWound()+brawn;
+        strain = species.getBaseStrain()+willpower;
+        soak = species.getBrawn();
     }
 
     //USE COMPOSITION, IE the character HAS a species, not IS a species

@@ -14,6 +14,9 @@ public class Human extends Species{
         setPresence(2);
 
         setStartingXP(110);
+
+        setBaseWound(10);
+        setBaseStrain(10);
     }
 
     private String name = "Human";

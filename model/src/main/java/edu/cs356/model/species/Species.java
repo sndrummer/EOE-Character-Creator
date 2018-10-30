@@ -13,6 +13,9 @@ public abstract class Species {
     //Starting XP
     private int startingXP;
 
+    private int baseWound;
+    private int baseStrain;
+
     //Max Characteristics is six
     public static final int MAX_ATT = 6;
 
@@ -132,5 +135,21 @@ public abstract class Species {
 
     public void setStartingXP(int startingXP) {
         this.startingXP = startingXP;
+    }
+
+    public int getBaseWound() {
+        return baseWound;
+    }
+
+    public void setBaseWound(int baseWound) {
+        this.baseWound = baseWound;
+    }
+
+    public int getBaseStrain() {
+        return baseStrain;
+    }
+
+    public void setBaseStrain(int baseStrain) {
+        this.baseStrain = baseStrain;
     }
 }

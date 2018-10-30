@@ -259,6 +259,10 @@ public class SpendXP extends AppCompatActivity {
         mPresValue.setText(xpModel.getPresValue().toString());
 
         mExperience.setText(xpModel.getXp().toString());
+
+        mWoundValue.setText(xpModel.getMaxWound().toString());
+        mStrainValue.setText(xpModel.getMaxStrain().toString());
+        mSoakValue.setText(xpModel.getSoak().toString());
     }
 
     @Override
@@ -295,6 +299,8 @@ public class SpendXP extends AppCompatActivity {
         switch(ATTR){
             case BR:
                 mBrawnValue.setText(xpModel.getBrawnValue().toString());
+                mWoundValue.setText(xpModel.getMaxWound().toString());
+                mSoakValue.setText(xpModel.getSoak().toString());
                 break;
             case AG:
                 mAgilityValue.setText(xpModel.getAgilityValue().toString());
@@ -307,6 +313,7 @@ public class SpendXP extends AppCompatActivity {
                 break;
             case WILL:
                 mWillValue.setText(xpModel.getWillValue().toString());
+                mStrainValue.setText(xpModel.getMaxStrain().toString());
                 break;
             case PR:
                 mPresValue.setText(xpModel.getPresValue().toString());
@@ -333,6 +340,10 @@ public class SpendXP extends AppCompatActivity {
             character.setCunning(xpModel.getCunValue());
             character.setWillpower(xpModel.getWillValue());
             character.setPresence(xpModel.getPresValue());
+
+            character.setStrain(xpModel.getMaxStrain());
+            character.setWound(xpModel.getMaxWound());
+            character.setSoak(xpModel.getSoak());
 
             Intent intent = new Intent(SpendXP.this, CharacterSummary.class);
             startActivity(intent);
