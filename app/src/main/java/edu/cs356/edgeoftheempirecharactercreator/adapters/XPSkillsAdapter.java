@@ -1,5 +1,6 @@
 package edu.cs356.edgeoftheempirecharactercreator.adapters;
 
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,7 +11,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import edu.cs356.edgeoftheempirecharactercreator.R;
 import edu.cs356.edgeoftheempirecharactercreator.activities.SpendXP;
@@ -24,6 +27,8 @@ public class XPSkillsAdapter extends RecyclerView.Adapter {
     private XPModel xpModel;
 
     private SpendXP wrapper;
+
+    private Map<String, SkillViewHolder> holderMap;
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
@@ -48,6 +53,8 @@ public class XPSkillsAdapter extends RecyclerView.Adapter {
             mLinearLayout = layout;
 
         }
+
+
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
@@ -61,6 +68,8 @@ public class XPSkillsAdapter extends RecyclerView.Adapter {
         mSkillList = skillList;
         xpModel = model;
         this.wrapper = wrapper;
+
+        holderMap = new HashMap<>();
     }
 
     @NonNull
@@ -94,6 +103,10 @@ public class XPSkillsAdapter extends RecyclerView.Adapter {
                 vh.mDice7
         };
 
+        for (int j = 0; j < 7; j++) {
+            vh.mDiceImages[j].setImageDrawable(vh.itemView.getContext().getDrawable(R.drawable.abilitybg));
+        }
+
         vh.mLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,13 +116,15 @@ public class XPSkillsAdapter extends RecyclerView.Adapter {
                 Skill skill = mSkillList.get(position);
 
                 if (xpModel.increaseSkill2(skill).isSuccess()){
-                    setDiceImages(skill, vh);
+                    updateSkill(skill);
                     wrapper.updateXP();
                     Toast.makeText(v.getContext(), skill.getName() + " rank " + skill.getRank(), Toast.LENGTH_SHORT).show();
                 }
 
             }
         });
+
+
 
         return vh;
 
@@ -130,7 +145,11 @@ public class XPSkillsAdapter extends RecyclerView.Adapter {
         sb.append(skill.getGoverningAttString());
         skillViewHolder.mSkillText.setText(sb.toString());
 
+        if (xpModel.isCareerSkill(skill)) {
+            skillViewHolder.mSkillText.setTypeface(Typeface.DEFAULT_BOLD);
+        }
 
+        holderMap.put(skill.getName(), skillViewHolder);
 
         setDiceImages(skill, skillViewHolder);
 
@@ -144,35 +163,23 @@ public class XPSkillsAdapter extends RecyclerView.Adapter {
         for (ImageView img: skillViewHolder.mDiceImages) {
             img.setVisibility(View.INVISIBLE);
         }
+
+        final int position = holder.getAdapterPosition();
+        Skill skill = mSkillList.get(position);
+
+        holderMap.remove(skill.getName());
     }
 
     public void setDiceImages(Skill skill, SkillViewHolder skillViewHolder) {
 
-        int prof = skill.getRank(); //3
-        int tmp = 0;
-        for (int i = 0; i < skill.getAbility(); i++) { //2
-            if (prof >= 1) {
-                skillViewHolder.mDiceImages[i].setImageDrawable(skillViewHolder.itemView.getContext().getDrawable(R.drawable.proficiencybg));
-                skillViewHolder.mDiceImages[i].setVisibility(View.VISIBLE);
-                prof--;
-            }
-            else {
-                skillViewHolder.mDiceImages[i].setImageDrawable(skillViewHolder.itemView.getContext().getDrawable(R.drawable.abilitybg));
-                skillViewHolder.mDiceImages[i].setVisibility(View.VISIBLE);
-            }
-            tmp = i + 1;
-        }
-        while (prof != 0 && (tmp < 7)){
-            skillViewHolder.mDiceImages[tmp].setImageDrawable(skillViewHolder.itemView.getContext().getDrawable(R.drawable.abilitybg));
-            skillViewHolder.mDiceImages[tmp].setVisibility(View.VISIBLE);
-            prof--;
 
-            if (prof != 0){
-                skillViewHolder.mDiceImages[tmp].setImageDrawable(skillViewHolder.itemView.getContext().getDrawable(R.drawable.proficiencybg));
-                skillViewHolder.mDiceImages[tmp].setVisibility(View.VISIBLE);
-                prof--;
-            }
-            tmp++;
+        for (int i = 0; i < 7; i++) {
+            skillViewHolder.mDiceImages[i].setVisibility(View.INVISIBLE);
+        }
+
+
+        for (int i = 0; i < skill.getRank(); i++){
+            skillViewHolder.mDiceImages[i].setVisibility(View.VISIBLE);
         }
     }
 
@@ -184,5 +191,13 @@ public class XPSkillsAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemCount() {
         return mSkillList.size();
+    }
+
+    public void updateSkill(Skill skill){
+        if  (holderMap.containsKey(skill.getName())) {
+            SkillViewHolder holder = holderMap.get(skill.getName());
+
+            setDiceImages(skill, holder);
+        }
     }
 }

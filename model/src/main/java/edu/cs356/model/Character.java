@@ -1,6 +1,10 @@
 package edu.cs356.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.cs356.model.career.Career;
+import edu.cs356.model.skills.Skill;
 import edu.cs356.model.skills.SkillList;
 import edu.cs356.model.species.Species;
 
@@ -22,6 +26,8 @@ public class Character {
 
     private String imagePath;
 
+    private List<Skill> careerSkills;
+
 
     public Character(Species species, String name){
         this.name = name;
@@ -38,6 +44,8 @@ public class Character {
         wound = species.getBaseWound()+brawn;
         strain = species.getBaseStrain()+willpower;
         soak = species.getBrawn();
+
+        careerSkills = new ArrayList<>();
     }
 
     //USE COMPOSITION, IE the character HAS a species, not IS a species
@@ -109,6 +117,7 @@ public class Character {
 
     public void setCareer(Career career) {
         this.career = career;
+        this.careerSkills = career.getCareerSkillsList();
     }
 
     public String getImagePath() {
@@ -165,5 +174,9 @@ public class Character {
 
     public void setPresence(Integer presence) {
         this.presence = presence;
+    }
+
+    public boolean isCareerSkill(Skill skill) {
+        return careerSkills.contains(skill);
     }
 }

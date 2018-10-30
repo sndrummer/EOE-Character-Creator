@@ -23,6 +23,8 @@ public class XPModel {
     private Integer mMaxStrain;
     private Integer mSoak;
 
+    private Character mCharacter;
+
     private SkillList skillList;
 
     private List<xpAction> actions;
@@ -45,6 +47,8 @@ public class XPModel {
         mCunValue = character.getSpecies().getCunning();
         mWillValue = character.getSpecies().getWillpower();
         mPresValue = character.getSpecies().getPresence();
+
+        mCharacter = character;
 
         skillList = character.getSkillList();
 
@@ -77,6 +81,14 @@ public class XPModel {
 
     public Integer getWillValue() {
         return mWillValue;
+    }
+
+    public boolean isCareerSkill(Skill skill){
+        return mCharacter.isCareerSkill(skill);
+    }
+
+    public int stepsToReset(){
+        return actions.size();
     }
 
     public Integer getPresValue() {
@@ -158,7 +170,7 @@ public class XPModel {
 
         int xpCost;
 
-        if(skill.isCareerSkill()){
+        if(mCharacter.isCareerSkill(skill)){
             xpCost = (skill.getRank()+1)*5;
         }
         else xpCost = (skill.getRank()+2)*5;

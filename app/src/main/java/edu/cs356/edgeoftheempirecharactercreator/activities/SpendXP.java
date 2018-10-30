@@ -212,41 +212,6 @@ public class SpendXP extends AppCompatActivity {
         XPSkillsAdapter adapter = new XPSkillsAdapter(skillList, xpModel, this);
 
         mSkillsList.setAdapter(adapter);
-
-        mSkillsList.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-            @Override
-            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-
-                //View child = rv.findChildViewUnder(e.getX(), e.getY());
-                //if (child != null) {
-
-                    //return true;
-
-                //}
-
-                return false;
-            }
-
-            @Override
-            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
-                //View child = rv.findChildViewUnder(e.getX(), e.getY());
-                //int i = rv.getChildAdapterPosition(child);
-
-                //SkillsAdapter adapter = (SkillsAdapter) mSkillsList.getAdapter();
-                //Skill skill = adapter.getSkill(i);
-
-                //Result result = xpModel.increaseSkill2(skill);
-
-                //if (result.isSuccess()) {
-                //    updateSkill(skill);
-                //}
-            }
-
-            @Override
-            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
-            }
-        });
     }
 
     private void initCharact() {
@@ -270,6 +235,11 @@ public class SpendXP extends AppCompatActivity {
     public void onBackPressed()
     {
         Model.getInstance().getCharacter().getCareer().resetCareerSkills();
+
+        for(int i = xpModel.stepsToReset(); i > 0; i-- ) {
+            onUndoPressed();
+        }
+
         switching = true;
         super.onBackPressed();  // optional depending on your needs
     }
@@ -329,12 +299,15 @@ public class SpendXP extends AppCompatActivity {
     }
 
     public void updateSkill(Skill skill){
+        ((XPSkillsAdapter) mSkillsList.getAdapter()).updateSkill(skill);
         updateXP();
     }
 
     private void proceedToNextScreen() {
 
-        if (xpModel.getXp() == 0){
+        if (xpModel.getXp() != 0) {
+            displayMessage(xpModel.getXp() + " xp remaining");
+        }
 
             switching = true;
 
@@ -351,12 +324,6 @@ public class SpendXP extends AppCompatActivity {
 
             Intent intent = new Intent(SpendXP.this, CharacterSummary.class);
             startActivity(intent);
-        }
-        else {
-            displayMessage("Please spend " + xpModel.getXp() + " xp");
-        }
-
-
     }
 
     public void displayMessage(String message) {
