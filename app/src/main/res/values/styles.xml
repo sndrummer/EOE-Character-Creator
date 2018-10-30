@@ -15,5 +15,9 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="TeutonBoldTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/teuton_mager_bold</item>
+    </style>
+
 
 </resources>

@@ -118,7 +118,7 @@ public class XPSkillsAdapter extends RecyclerView.Adapter {
                 if (xpModel.increaseSkill2(skill).isSuccess()){
                     updateSkill(skill);
                     wrapper.updateXP();
-                    Toast.makeText(v.getContext(), skill.getName() + " rank " + skill.getRank(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(v.getContext(), skill.getName() + " rank " + skill.getRank(), Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -146,7 +146,7 @@ public class XPSkillsAdapter extends RecyclerView.Adapter {
         skillViewHolder.mSkillText.setText(sb.toString());
 
         if (xpModel.isCareerSkill(skill)) {
-            skillViewHolder.mSkillText.setTypeface(Typeface.DEFAULT_BOLD);
+            skillViewHolder.mSkillText.setTextAppearance(R.style.TeutonBoldTextViewStyle);
         }
 
         holderMap.put(skill.getName(), skillViewHolder);
