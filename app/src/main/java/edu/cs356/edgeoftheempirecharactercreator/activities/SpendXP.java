@@ -17,6 +17,7 @@ import java.util.List;
 
 import edu.cs356.edgeoftheempirecharactercreator.R;
 import edu.cs356.edgeoftheempirecharactercreator.adapters.SkillsAdapter;
+import edu.cs356.edgeoftheempirecharactercreator.adapters.XPSkillsAdapter;
 import edu.cs356.edgeoftheempirecharactercreator.model.Model;
 import edu.cs356.edgeoftheempirecharactercreator.model.Result;
 import edu.cs356.edgeoftheempirecharactercreator.model.XPModel;
@@ -208,7 +209,7 @@ public class SpendXP extends AppCompatActivity {
 //        Log.d(TAG, skillString);
 
 
-        SkillsAdapter adapter = new SkillsAdapter(skillList);
+        XPSkillsAdapter adapter = new XPSkillsAdapter(skillList, xpModel, this);
 
         mSkillsList.setAdapter(adapter);
 
@@ -258,7 +259,7 @@ public class SpendXP extends AppCompatActivity {
         mWillValue.setText(xpModel.getWillValue().toString());
         mPresValue.setText(xpModel.getPresValue().toString());
 
-        mExperience.setText(xpModel.getXp().toString());
+        updateXP();
 
         mWoundValue.setText(xpModel.getMaxWound().toString());
         mStrainValue.setText(xpModel.getMaxStrain().toString());
@@ -282,7 +283,6 @@ public class SpendXP extends AppCompatActivity {
             }
             else updateSkill( (Skill) result.getResult());
         }
-
 
     }
 
@@ -321,11 +321,15 @@ public class SpendXP extends AppCompatActivity {
             default:
         }
 
+        updateXP();
+    }
+
+    public void updateXP(){
         mExperience.setText(xpModel.getXp().toString());
     }
 
     public void updateSkill(Skill skill){
-
+        updateXP();
     }
 
     private void proceedToNextScreen() {

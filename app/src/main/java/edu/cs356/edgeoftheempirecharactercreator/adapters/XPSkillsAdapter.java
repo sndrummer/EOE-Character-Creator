@@ -8,16 +8,22 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
 import edu.cs356.edgeoftheempirecharactercreator.R;
+import edu.cs356.edgeoftheempirecharactercreator.activities.SpendXP;
+import edu.cs356.edgeoftheempirecharactercreator.model.Result;
+import edu.cs356.edgeoftheempirecharactercreator.model.XPModel;
 import edu.cs356.model.skills.Skill;
 
-public class SkillsAdapter extends RecyclerView.Adapter {
+public class XPSkillsAdapter extends RecyclerView.Adapter {
     private List<Skill> mSkillList;
 
+    private XPModel xpModel;
 
+    private SpendXP wrapper;
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
@@ -45,7 +51,7 @@ public class SkillsAdapter extends RecyclerView.Adapter {
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public SkillsAdapter(List<Skill> skillList) {
+    public XPSkillsAdapter(List<Skill> skillList, XPModel model, SpendXP wrapper) {
        /* Collections.sort(skillList, new Comparator<Skill>() {
             @Override
             public int compare(Skill skill1, Skill skill2) {
@@ -53,6 +59,8 @@ public class SkillsAdapter extends RecyclerView.Adapter {
             }
         });*/
         mSkillList = skillList;
+        xpModel = model;
+        this.wrapper = wrapper;
     }
 
     @NonNull
@@ -64,7 +72,7 @@ public class SkillsAdapter extends RecyclerView.Adapter {
                 .inflate(R.layout.skill_item_linear, viewGroup, false);
 
 
-        SkillViewHolder vh = new SkillViewHolder(layout);
+        final SkillViewHolder vh = new SkillViewHolder(layout);
         vh.mSkillText = layout.findViewById(R.id.skill_name);
 
         //Assign Dice Images
@@ -86,6 +94,22 @@ public class SkillsAdapter extends RecyclerView.Adapter {
                 vh.mDice7
         };
 
+        vh.mLinearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView skillName = (TextView) ((LinearLayout) v).getChildAt(0);
+
+                final int position = vh.getAdapterPosition();
+                Skill skill = mSkillList.get(position);
+
+                if (xpModel.increaseSkill2(skill).isSuccess()){
+                    setDiceImages(skill, vh);
+                    wrapper.updateXP();
+                    Toast.makeText(v.getContext(), skill.getName() + " rank " + skill.getRank(), Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
 
         return vh;
 
@@ -97,15 +121,16 @@ public class SkillsAdapter extends RecyclerView.Adapter {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
 
-
         Skill skill = mSkillList.get(i);
-       // viewHolder.mSkillText.setText(skill.getName());
+        // viewHolder.mSkillText.setText(skill.getName());
         SkillViewHolder skillViewHolder = (SkillViewHolder) viewHolder;
         StringBuilder sb = new StringBuilder();
         sb.append(skill.getName());
         sb.append(" ");
         sb.append(skill.getGoverningAttString());
         skillViewHolder.mSkillText.setText(sb.toString());
+
+
 
         setDiceImages(skill, skillViewHolder);
 
