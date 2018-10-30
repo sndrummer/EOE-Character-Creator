@@ -13,12 +13,11 @@ import android.widget.TextView;
 import edu.cs356.edgeoftheempirecharactercreator.R;
 
 public class DiceInfoDialogue extends Dialog {
-    private String descText;
     private Button mExitBtn;
 
-    public DiceInfoDialogue(@NonNull Context context, String descText) {
+    public DiceInfoDialogue(@NonNull Context context) {
         super(context);
-        this.descText = descText;
+
     }
 
     @Override
@@ -26,11 +25,8 @@ public class DiceInfoDialogue extends Dialog {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dice_dialog);
-        TextView descriptionView = findViewById(R.id.desc_text);
-        descriptionView.setMovementMethod(new ScrollingMovementMethod());
         mExitBtn = findViewById(R.id.exit_btn);
         getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        descriptionView.setText(descText);
         mExitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

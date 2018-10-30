@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,6 +16,7 @@ import java.util.List;
 import edu.cs356.edgeoftheempirecharactercreator.R;
 import edu.cs356.edgeoftheempirecharactercreator.adapters.SkillsAdapter;
 import edu.cs356.edgeoftheempirecharactercreator.model.Model;
+import edu.cs356.edgeoftheempirecharactercreator.ui.DiceInfoDialogue;
 import edu.cs356.model.Character;
 import edu.cs356.model.skills.Skill;
 
@@ -71,6 +73,14 @@ public class CharacterSummary extends AppCompatActivity {
         mCunValue = findViewById(R.id.cunning_value);
         mWillValue = findViewById(R.id.willpower_value);
         mPresValue = findViewById(R.id.presence_value);
+
+        mSkillsInfoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DiceInfoDialogue dialogue = new DiceInfoDialogue(CharacterSummary.this);
+                dialogue.show();
+            }
+        });
 
         initDisplay();
         initAdapter();
