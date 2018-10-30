@@ -82,22 +82,22 @@ public class XPModel {
 
         switch(ATTR){
             case BR:
-                xpCost = (mBrawnValue + 1)*5;
+                xpCost = (mBrawnValue + 1)*10;
                 break;
             case AG:
-                xpCost = (mAgilityValue + 1)*5;
+                xpCost = (mAgilityValue + 1)*10;
                 break;
             case INT:
-                xpCost = (mIntValue + 1)*5;
+                xpCost = (mIntValue + 1)*10;
                 break;
             case CUN:
-                xpCost = (mCunValue + 1)*5;
+                xpCost = (mCunValue + 1)*10;
                 break;
             case WILL:
-                xpCost = (mWillValue + 1)*5;
+                xpCost = (mWillValue + 1)*10;
                 break;
             case PR:
-                xpCost = (mPresValue + 1)*5;
+                xpCost = (mPresValue + 1)*10;
                 break;
             default:
                 return new Result(false, "Invalid Attribute Value");
