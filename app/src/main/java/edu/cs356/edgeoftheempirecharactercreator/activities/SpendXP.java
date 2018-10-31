@@ -68,6 +68,11 @@ public class SpendXP extends AppCompatActivity {
     private ImageView mWillView;
     private ImageView mPrView;
 
+    //ICONS
+    private ImageView mStrainIcon;
+    private ImageView mWoundsIcon;
+    private ImageView mSoakIcon;
+
     private TextView mExperience;
 
     private TextView mWoundValue;
@@ -110,6 +115,11 @@ public class SpendXP extends AppCompatActivity {
         mWoundValue = findViewById(R.id.wound_value);
         mStrainValue = findViewById(R.id.strain_value);
         mSoakValue = findViewById(R.id.soak_value);
+
+        //ICONS
+        mWoundsIcon = findViewById(R.id.wound_icon);
+        mStrainIcon = findViewById(R.id.strain_icon);
+        mSoakIcon = findViewById(R.id.soak_icon);
 
         initDisplay();
         initAdapter();
@@ -158,10 +168,14 @@ public class SpendXP extends AppCompatActivity {
         mSkillsInfoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                InfoDialogue dialogue = new XPInfoDialogue2(SpendXP.this, "Stuff here");
+                InfoDialogue dialogue = new XPInfoDialogue2(SpendXP.this, true);
                 dialogue.show();
             }
         });
+
+        setIconListener(mSoakIcon);
+        setIconListener(mWoundsIcon);
+        setIconListener(mStrainIcon);
 
         mBrView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -207,6 +221,16 @@ public class SpendXP extends AppCompatActivity {
 
         initCharact();
 
+    }
+
+    private void setIconListener(ImageView icon){
+        icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                InfoDialogue dialogue = new XPInfoDialogue2(SpendXP.this, false);
+                dialogue.show();
+            }
+        });
     }
 
     private void initAdapter() {

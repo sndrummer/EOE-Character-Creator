@@ -17,13 +17,15 @@ public class XPInfoDialogue2 extends InfoDialogue {
     private Button mExitBtn;
     boolean page1;
 
-    public XPInfoDialogue2(@NonNull Context context, String descText) {
-        super(context, descText);
+    public XPInfoDialogue2(@NonNull Context context, boolean page1) {
+        super(context, "");
+        this.page1 = page1;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        page1 = true;
+        //page1 = true;
+
 
         super.onCreate(savedInstanceState);
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -40,6 +42,11 @@ public class XPInfoDialogue2 extends InfoDialogue {
                 switchView();
             }
         });
+
+        if (!page1){
+            page1 = true;
+            switchView();
+        }
     }
 
     private void switchView() {
