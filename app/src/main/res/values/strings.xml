@@ -29,8 +29,27 @@
 
     </string>
 
-    <!-- Character Summary -->
-    <string name="dice_text"><u>Edge of the Empire Dice</u></string>
+
+    <!-- Spending XP -->
+    <string name="explain_xp">
+        Increasing an attribute score (BRAWN, AGILITY, INTELLECT, CUNNING, WILLPOWER, or PRESENCE) costs 10*(your current score + 1) xp.\n\n
+        Increasing a career skill (bolded) costs 5*(your current skill rank + 1) xp.\n\n
+        Increasing a non-career skill costs 5*(your current skill rank + 2) xp.\n\n
+        Your current skill rank is represented by green triangles.\n
+    </string>
+    <string name="explain_wound">
+        Wound threshold: determines how much physical damage your character can withstand before they are knocked out.
+        Increased by Brawn.
+    </string>
+    <string name="explain_strain">
+        Strain threshold: determines how much psychological or mental damage your character can withstand before they are stunned, dazed or incapacitated.
+        Increased by Willpower.
+    </string>
+    <string name="explain_soak">
+        Soak value: determines how much damage your character can shrug off before being seriously wounded.
+        Equal to Brawn rating.
+    </string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

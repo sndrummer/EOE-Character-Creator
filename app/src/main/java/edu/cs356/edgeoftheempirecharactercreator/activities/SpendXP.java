@@ -21,6 +21,8 @@ import edu.cs356.edgeoftheempirecharactercreator.adapters.XPSkillsAdapter;
 import edu.cs356.edgeoftheempirecharactercreator.model.Model;
 import edu.cs356.edgeoftheempirecharactercreator.model.Result;
 import edu.cs356.edgeoftheempirecharactercreator.model.XPModel;
+import edu.cs356.edgeoftheempirecharactercreator.ui.InfoDialogue;
+import edu.cs356.edgeoftheempirecharactercreator.ui.XPInfoDialogue2;
 import edu.cs356.model.Character;
 import edu.cs356.model.skills.Skill;
 import edu.cs356.model.species.Species;
@@ -150,6 +152,14 @@ public class SpendXP extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 proceedToNextScreen();
+            }
+        });
+
+        mSkillsInfoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InfoDialogue dialogue = new XPInfoDialogue2(SpendXP.this, "Stuff here");
+                dialogue.show();
             }
         });
 
