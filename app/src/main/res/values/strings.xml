@@ -50,6 +50,9 @@
         Equal to Brawn rating.
     </string>
 
+    <!-- Character Summary -->
+    <string name="dice_text"><u>Edge of the Empire Dice</u></string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
