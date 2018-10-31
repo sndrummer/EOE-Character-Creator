@@ -21,11 +21,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="16dp"
-                android:fontFamily="@font/teuton_mager"
+                android:layout_marginTop="2dp"
+                android:fontFamily="@font/teuton_mager_bold"
                 android:gravity="center|left"
-                android:text="CHEWBACCA "
+                android:text="TAP ATTRIBUTES\nOR SKILLS TO"
                 android:textColor="@color/white"
-                android:textSize="32sp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:layout_width="match_parent"

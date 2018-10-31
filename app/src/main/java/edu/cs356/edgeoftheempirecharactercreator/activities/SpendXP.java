@@ -51,7 +51,7 @@ public class SpendXP extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
 
     //TextViews
-    private TextView mCharacterName;
+    //private TextView mCharacterName;
 
     //Characteristic Value Text Views
     private TextView mBrawnValue;
@@ -86,7 +86,7 @@ public class SpendXP extends AppCompatActivity {
 
         model = Model.getInstance();
 
-        mCharacterName = findViewById(R.id.char_name_xp);
+        //mCharacterName = findViewById(R.id.char_name_xp);
         mSkillsInfoBtn = findViewById(R.id.skills_info_btn);
         mUndoBtn = findViewById(R.id.undo_btn);
         mSaveBtn = findViewById(R.id.save_button);
@@ -139,7 +139,7 @@ public class SpendXP extends AppCompatActivity {
 
     private void initDisplay() {
         Character character = Model.getInstance().getCharacter();
-        mCharacterName.setText(character.getName());
+        //mCharacterName.setText(character.getName());
 
         mUndoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
