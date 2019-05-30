@@ -97,7 +97,11 @@ public class MainScreen extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d(TAG, "Load Character Button Clicked");
 
-                displayMessage("Coming soon!");
+                Log.d(TAG, "Loading files ... ");
+
+                for ( String file : fileList()) {
+                    Log.d(TAG, "File: " + file);
+                }
             }
         });
 

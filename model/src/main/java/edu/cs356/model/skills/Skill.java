@@ -1,8 +1,10 @@
 package edu.cs356.model.skills;
 
+import java.io.Serializable;
+
 import edu.cs356.model.species.Species;
 
-public class Skill {
+public class Skill implements Serializable {
 
     /* MAX DICE ROLLS !!!!!!!!!
     6 Ability -- green
@@ -11,7 +13,7 @@ public class Skill {
     5 Challenge -- red
      */
 
-    public Skill(String name, Species.Characteristic governingAtt, SkillList wrapper) {
+    public Skill(String name, Species.Characteristic governingAtt, SkillListWrapper wrapper) {
         this.name = name;
         this.governingAtt = governingAtt;
         isCareerSkill = false;
@@ -19,10 +21,18 @@ public class Skill {
     }
 
     private String description;
-
     private boolean isCareerSkill;
+    private transient SkillListWrapper listWrapper;
+    private String name;
 
-    private SkillList listWrapper;
+    public static final int MAX_RANK = 5;
+    private Species.Characteristic governingAtt;
+    private int ability; //green dice
+    private int rank = 0; //yellow dice
+    private int bonus = 0;
+    private int setback = 0;
+
+
 
     public enum SkillType {
         ASTROGATION,
@@ -67,22 +77,6 @@ public class Skill {
         XENOLOGY;
     }
 
-
-    private String name;
-
-    public static final int MAX_RANK = 5;
-    //private static final int MAX_ABILITY = 6;
-
-    private Species.Characteristic governingAtt;
-
-    private int ability; //green dice
-
-    private int rank = 0; //yellow dice
-
-    private int bonus = 0;
-    private int setback = 0;
-
-    private Character charWrapper;
 
     public boolean isCareerSkill() {
         return isCareerSkill;

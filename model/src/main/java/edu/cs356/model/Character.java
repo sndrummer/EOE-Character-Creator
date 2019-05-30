@@ -1,17 +1,18 @@
 package edu.cs356.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import edu.cs356.model.career.Career;
 import edu.cs356.model.skills.Skill;
-import edu.cs356.model.skills.SkillList;
+import edu.cs356.model.skills.SkillListWrapper;
 import edu.cs356.model.species.Species;
 
-public class Character {
+public class Character implements Serializable {
 
     private String name;
-    private Career career;
+    private transient Career career;
 
     private Integer brawn;
     private Integer agility;
@@ -32,7 +33,7 @@ public class Character {
     public Character(Species species, String name){
         this.name = name;
         setSpecies(species);
-        this.skillList = new SkillList(this);
+        this.skillList = new SkillListWrapper(this);
 
         brawn = species.getBrawn();
         agility = species.getAgility();
@@ -50,7 +51,7 @@ public class Character {
 
     //USE COMPOSITION, IE the character HAS a species, not IS a species
     private Species species;
-    private SkillList skillList;
+    private SkillListWrapper skillList;
     private int XP;
 
     public Species getSpecies() {
@@ -99,7 +100,7 @@ public class Character {
         this.soak = soak;
     }
 
-    public SkillList getSkillList() {
+    public SkillListWrapper getSkillList() {
         return skillList;
     }
 

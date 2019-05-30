@@ -20,7 +20,7 @@ import edu.cs356.edgeoftheempirecharactercreator.adapters.CareerSkillsAdapter;
 import edu.cs356.edgeoftheempirecharactercreator.model.Model;
 import edu.cs356.model.Character;
 import edu.cs356.model.skills.Skill;
-import edu.cs356.model.skills.SkillList;
+import edu.cs356.model.skills.SkillListWrapper;
 
 public class CareerSkillSelection extends AppCompatActivity {
 
@@ -52,7 +52,7 @@ public class CareerSkillSelection extends AppCompatActivity {
         model = Model.getInstance();
 
         Character character = Model.getInstance().getCharacter();
-        SkillList skillList = Model.getInstance().getCharacter().getSkillList();
+        SkillListWrapper skillList = Model.getInstance().getCharacter().getSkillList();
         Map<Skill, Boolean> skillsUsedMap = character.getCareer().getSkillsUsed();
         Log.d(TAG, "Beginning search...");
 

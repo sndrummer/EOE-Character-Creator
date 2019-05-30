@@ -1,5 +1,6 @@
 package edu.cs356.model.skills;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,15 +10,15 @@ import edu.cs356.edgeoftheempirecharactercreator.model.XPModel.AttrType;
 import edu.cs356.model.Character;
 import edu.cs356.model.species.Species;
 
-public class SkillList {
+public class SkillListWrapper implements Serializable {
 
-    public SkillList(Character character) {
+    public SkillListWrapper(Character character) {
         this.character = character;
 
         initSkillList();
     }
 
-    private Character character;
+    private transient Character character;
 
     private List<Skill> skillList;
 
@@ -277,13 +278,6 @@ public class SkillList {
         return result;
     }
 
-    public void updateSkillAttributes(AttrType ATTR) {
-
-        switch (ATTR){
-            case BRAWN:
-
-        }
-    }
 
     public Skill getSkillByType(Skill.SkillType skillType) {
         Skill result = null;
@@ -408,7 +402,7 @@ public class SkillList {
     public String toString() {
 
         StringBuilder sb = new StringBuilder();
-        sb.append("SkillList{");
+        sb.append("SkillListWrapper{");
         for (Skill skill : skillList) {
             sb.append("\n");
             sb.append(skill.toString());

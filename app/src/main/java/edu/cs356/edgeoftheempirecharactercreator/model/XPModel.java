@@ -5,7 +5,7 @@ import java.util.List;
 
 import edu.cs356.model.Character;
 import edu.cs356.model.skills.Skill;
-import edu.cs356.model.skills.SkillList;
+import edu.cs356.model.skills.SkillListWrapper;
 import edu.cs356.model.species.Species;
 
 public class XPModel {
@@ -25,7 +25,7 @@ public class XPModel {
 
     private Character mCharacter;
 
-    private SkillList skillList;
+    private SkillListWrapper skillList;
 
     private List<xpAction> actions;
 

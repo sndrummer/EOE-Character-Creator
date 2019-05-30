@@ -1,6 +1,8 @@
 package edu.cs356.model.species;
 
-public abstract class Species {
+import java.io.Serializable;
+
+public abstract class Species implements Serializable {
 
     //Characteristics
     private int brawn;
