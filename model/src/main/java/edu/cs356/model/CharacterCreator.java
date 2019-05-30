@@ -14,9 +14,7 @@ public class CharacterCreator {
             } else if (listOfFiles[i].isDirectory()) {
                 System.out.println("Directory " + listOfFiles[i].getName());
             }
-
         }
     }
-
 
 }

@@ -26,8 +26,16 @@ public class Model {
         return sInstance;
     }
 
+    public static void loadInstance(Model instance) {
+        sInstance = instance;
+    }
+
     public void selectSpeciesAndName(Species species, String name){
         character = new Character(species, name);
+    }
+
+    public void setCharacter(Character character) {
+        this.character = character;
     }
 
     public Character getCharacter() {

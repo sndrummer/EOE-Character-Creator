@@ -1,10 +1,12 @@
 package edu.cs356.edgeoftheempirecharactercreator.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +15,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.ObjectOutputStream;
+import java.io.Writer;
 import java.util.List;
 
 import edu.cs356.edgeoftheempirecharactercreator.R;
@@ -21,6 +32,7 @@ import edu.cs356.edgeoftheempirecharactercreator.model.Model;
 import edu.cs356.edgeoftheempirecharactercreator.model.Result;
 import edu.cs356.edgeoftheempirecharactercreator.model.XPModel;
 import edu.cs356.model.Character;
+import edu.cs356.model.TestSave;
 import edu.cs356.model.skills.Skill;
 import edu.cs356.model.species.Species;
 
@@ -30,9 +42,10 @@ import static edu.cs356.model.species.Species.Characteristic.CUN;
 import static edu.cs356.model.species.Species.Characteristic.INT;
 import static edu.cs356.model.species.Species.Characteristic.PR;
 import static edu.cs356.model.species.Species.Characteristic.WILL;
+
 public class SpendXP extends AppCompatActivity {
 
-    private static final String TAG = "CharacterSummaryTAG";
+    private static final String TAG = "SpendXPTAG";
 
     private Character character = Model.getInstance().getCharacter();
     private XPModel xpModel = XPModel.getInstance();
@@ -115,22 +128,21 @@ public class SpendXP extends AppCompatActivity {
     }
 
     @Override
-    protected void onPause(){
+    protected void onPause() {
         super.onPause();
-        if(!switching) {
+        if (!switching) {
             model.getBackGroundMusic().setAction("PAUSE");
             startService(model.getBackGroundMusic());
         }
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
-        if(!switching) {
+        if (!switching) {
             model.getBackGroundMusic().setAction("RESUME");
             startService(model.getBackGroundMusic());
-        }
-        else switching = false;
+        } else switching = false;
     }
 
 
@@ -219,7 +231,7 @@ public class SpendXP extends AppCompatActivity {
                 //View child = rv.findChildViewUnder(e.getX(), e.getY());
                 //if (child != null) {
 
-                    //return true;
+                //return true;
 
                 //}
 
@@ -262,21 +274,19 @@ public class SpendXP extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed()
-    {
+    public void onBackPressed() {
         Model.getInstance().getCharacter().getCareer().resetCareerSkills();
         switching = true;
         super.onBackPressed();  // optional depending on your needs
     }
 
-    public void onUndoPressed(){
+    public void onUndoPressed() {
         Result result = xpModel.undoAction();
 
         if (result.isSuccess()) {
             if (result.getResult() instanceof Species.Characteristic) {
-                updateAttr( (Species.Characteristic) result.getResult());
-            }
-            else updateSkill( (Skill) result.getResult());
+                updateAttr((Species.Characteristic) result.getResult());
+            } else updateSkill((Skill) result.getResult());
         }
 
 
@@ -285,14 +295,14 @@ public class SpendXP extends AppCompatActivity {
     private void onAttrTouched(Species.Characteristic ATTR) {
         Result result = xpModel.increaseAttr(ATTR);
 
-        if (result.isSuccess()){
+        if (result.isSuccess()) {
             updateAttr(ATTR);
         }
     }
 
-    private void updateAttr(Species.Characteristic ATTR){
+    private void updateAttr(Species.Characteristic ATTR) {
 
-        switch(ATTR){
+        switch (ATTR) {
             case BR:
                 mBrawnValue.setText(xpModel.getBrawnValue().toString());
                 break;
@@ -317,32 +327,149 @@ public class SpendXP extends AppCompatActivity {
         mExperience.setText(xpModel.getXp().toString());
     }
 
-    public void updateSkill(Skill skill){
+    public void updateSkill(Skill skill) {
 
     }
 
     private void proceedToNextScreen() {
 
-        if (xpModel.getXp() == 0){
+        switching = true;
 
-            switching = true;
+        character.setBrawn(xpModel.getBrawnValue());
+        character.setAgility(xpModel.getAgilityValue());
+        character.setIntellect(xpModel.getIntValue());
+        character.setCunning(xpModel.getCunValue());
+        character.setWillpower(xpModel.getWillValue());
+        character.setPresence(xpModel.getPresValue());
 
-            character.setBrawn(xpModel.getBrawnValue());
-            character.setAgility(xpModel.getAgilityValue());
-            character.setIntellect(xpModel.getIntValue());
-            character.setCunning(xpModel.getCunValue());
-            character.setWillpower(xpModel.getWillValue());
-            character.setPresence(xpModel.getPresValue());
+        Log.d(TAG, "SAVING FILE");
+        saveCharacterToFile();
 
-            Intent intent = new Intent(SpendXP.this, CharacterSummary.class);
-            startActivity(intent);
-        }
-        else {
-            displayMessage("Please spend " + xpModel.getXp() + " xp");
-        }
+        Intent intent = new Intent(SpendXP.this, CharacterSummary.class);
+        startActivity(intent);
+
+//        if (xpModel.getXp() == 0){
+//
+//
+//        }
+//        else {
+//            displayMessage("Please spend " + xpModel.getXp() + " xp");
+//        }
+
+    }
+
+    public void saveCharacterToFile() {
+
+        Log.d(TAG, "SAVING FILE");
+//        String filename = character.getName().toLowerCase() + ".json";
+//        File file = new File(getApplicationContext().getFilesDir(), filename);
+//        StringBuilder sb = new StringBuilder();
+//        sb.append(getApplicationContext().getFilesDir().getPath());
+//        sb.append("/");
+//        sb.append(character.getName().toLowerCase());
+//        sb.append(".json");
+//        Log.d(TAG, sb.toString());
+
+//        try (Writer writer = new FileWriter(sb.toString())) {
+//            Gson gson = new GsonBuilder().create();
+//            TestSave test = new TestSave();
+//            test.setCheese(5);
+//            test.setQueso(7);
+//            gson.toJson(new TestSave(), writer);
+//            writer.close();
+//        } catch (Exception ex) {
+//            displayMessage("Failed to save file");
+//            Log.e(TAG, ex.toString());
+//        }
+
+
+        //displayMessage("SAVED file");
+
+
+
+//
+//
+//
+//        sb.append(character.getName().toLowerCase());
+//        sb.append(".json");
+//        Log.d(TAG, sb.toString());
+//        try {
+//            String filename = sb.toString();
+//            File file = new File(getApplicationContext().getFilesDir(), filename);
+//            String fileContents = "Hello world!";
+//            FileOutputStream outputStream;
+//
+//            try {
+//                outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
+//                outputStream.write(fileContents.getBytes());
+//
+//
+//                Gson gson = new GsonBuilder().create();
+//                TestSave test = new TestSave();
+//                test.setCheese(5);
+//                test.setQueso(7);
+//                gson.toJson(new TestSave(), outputStream);
+//
+//                Writer output = null;
+//                //File file = new File(sb.toString());
+//                output = new BufferedWriter(new FileWriter(file));
+//                //            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+//
+//                FileOutputStream fos = getApplicationContext().openFileOutput(character.getName() + ".json", Context.MODE_PRIVATE);
+//                ObjectOutputStream os = new ObjectOutputStream(fos);
+//                os.writeObject(Model.getInstance());
+//                os.close();
+//                fos.close();
+//
+//                output.close();
+//
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+////            Writer output = null;
+////            File file = new File(sb.toString());
+////            output = new BufferedWriter(new FileWriter(file));
+//
+////            output.close();
+////            Toast.makeText(getApplicationContext(), "Character saved", Toast.LENGTH_LONG).show();
+//
+//        } catch (Exception e) {
+//            Toast.makeText(getBaseContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+//        }
 
 
     }
+//        Log.d(TAG, "SAVING FILE");
+//        StringBuilder sb = new StringBuilder();
+//        sb.append(getApplicationContext().getFilesDir().getPath());
+//        sb.append("/");
+//        sb.append(character.getName().toLowerCase());
+//        sb.append(".json");
+//        Log.d(TAG, sb.toString());
+////        try (Writer writer = new FileWriter(sb.toString())) {
+////            Gson gson = new GsonBuilder().create();
+////            gson.toJson(Model.getInstance(), writer);
+////        } catch (Exception ex) {
+////            displayMessage("Failed to save file");
+////            Log.e(TAG, ex.toString());
+////        }
+////        displayMessage("SAVED file");
+//
+//        try {
+//
+//
+//            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+//            FileOutputStream fos = getApplicationContext().openFileOutput(character.getName() + ".json", Context.MODE_PRIVATE);
+//            ObjectOutputStream os = new ObjectOutputStream(fos);
+//            os.writeObject(Model.getInstance());
+//            os.close();
+//            fos.close();
+//            displayMessage("Saved file");
+//        } catch (Exception ex) {
+//            displayMessage("Failed to save file");
+//            Log.e(TAG, ex.toString());
+//        }
+//    }
 
     public void displayMessage(String message) {
         Toast.makeText(getBaseContext(), message, Toast.LENGTH_SHORT).show();

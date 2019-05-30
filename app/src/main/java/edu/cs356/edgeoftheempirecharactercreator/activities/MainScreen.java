@@ -14,9 +14,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.ObjectInputStream;
+import java.io.Reader;
+
 import edu.cs356.edgeoftheempirecharactercreator.R;
 import edu.cs356.edgeoftheempirecharactercreator.model.Model;
 import edu.cs356.edgeoftheempirecharactercreator.services.BackgroundSoundService;
+import edu.cs356.model.TestSave;
 
 /**
  * Created by jalton on 10/18/18.
@@ -49,10 +62,10 @@ public class MainScreen extends AppCompatActivity {
 
 
         Model.getInstance().setMusic(mMusic);
-        Model.getInstance().setBackGroundMusic( new Intent(this, BackgroundSoundService.class));
+        Model.getInstance().setBackGroundMusic(new Intent(this, BackgroundSoundService.class));
         Model.getInstance().getBackGroundMusic().setAction("PAUSE");
 
-        if (mMusic){
+        if (mMusic) {
             Model.getInstance().getBackGroundMusic().setAction("PLAY");
         }
         startService(Model.getInstance().getBackGroundMusic());
@@ -60,9 +73,9 @@ public class MainScreen extends AppCompatActivity {
     }
 
     @Override
-    protected void onPause(){
+    protected void onPause() {
         super.onPause();
-        if(!switching) {
+        if (!switching) {
             model.getBackGroundMusic().setAction("PAUSE");
             startService(model.getBackGroundMusic());
         }
@@ -70,15 +83,13 @@ public class MainScreen extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
-        if(!switching) {
+        if (!switching) {
             model.getBackGroundMusic().setAction("RESUME");
             startService(model.getBackGroundMusic());
-        }
-        else switching = false;
+        } else switching = false;
     }
-
 
 
     private void setButtonListeners() {
@@ -97,7 +108,28 @@ public class MainScreen extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d(TAG, "Load Character Button Clicked");
 
-                displayMessage("Coming soon!");
+
+//                Log.d(TAG, "LOADING FILE");
+//                StringBuilder sb = new StringBuilder();
+//                sb.append(getApplicationContext().getFilesDir().getPath());
+//                sb.append("/");
+//                sb.append("samuel");
+//                sb.append(".json");
+//                Log.d(TAG, sb.toString());
+
+                try {
+
+//                    Gson gson = new GsonBuilder().create();
+//                    TestSave test = gson.fromJson(new FileReader(sb.toString()), TestSave.class);
+//                    //output.close();
+//                    displayMessage("Character loaded "  + test.getCheese());
+//                    Toast.makeText(getApplicationContext(), "Character loaded", Toast.LENGTH_LONG).show();
+
+                } catch (Exception ex) {
+                    displayMessage("Load Failed!");
+                    Log.e(TAG, ex.getMessage());
+                }
+
             }
         });
 
@@ -105,17 +137,13 @@ public class MainScreen extends AppCompatActivity {
 
     }
 
-    private void proceedToNextScreen(){
-        //Log.log(Log.Level.DEBUG, this.getClass(), "Starting GameListActivity");
-        //Character character = Model.getInstance().getCharacter();
-
-        //character.setCareer(new Smuggler(character));
+    private void proceedToNextScreen() {
         switching = true;
-
         Intent intent = new Intent(MainScreen.this, SpeciesSelection.class);
 
         startActivity(intent);
     }
+
     public void displayMessage(String message) {
         Toast.makeText(getBaseContext(), message, Toast.LENGTH_SHORT).show();
     }
