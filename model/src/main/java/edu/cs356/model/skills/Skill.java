@@ -1,8 +1,11 @@
 package edu.cs356.model.skills;
 
+import java.io.Serializable;
+
 import edu.cs356.model.species.Species;
 
-public class Skill {
+
+public class Skill implements Serializable {
 
     /* MAX DICE ROLLS !!!!!!!!!
     6 Ability -- green
@@ -22,7 +25,7 @@ public class Skill {
 
     private boolean isCareerSkill;
 
-    private SkillList listWrapper;
+    private transient SkillList listWrapper;
 
     public enum SkillType {
         ASTROGATION,
@@ -82,7 +85,7 @@ public class Skill {
     private int bonus = 0;
     private int setback = 0;
 
-    private Character charWrapper;
+    private transient Character charWrapper;
 
     public boolean isCareerSkill() {
         return isCareerSkill;

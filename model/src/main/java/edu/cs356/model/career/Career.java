@@ -8,7 +8,7 @@ import edu.cs356.model.skills.Skill;
 
 public abstract class Career {
 
-    Character character;
+    transient Character character;
     Map<Skill, Boolean> skillsUsed;
     List<Skill> careerSkillsList;
 
@@ -36,7 +36,6 @@ public abstract class Career {
     }
 
     public void resetCareerSkills() {
-
         for (Skill skill: skillsUsed.keySet()) {
             skill.decrementRank();
             skillsUsed.put(skill, Boolean.FALSE);

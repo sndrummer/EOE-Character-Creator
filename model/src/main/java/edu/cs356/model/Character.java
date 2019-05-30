@@ -22,6 +22,11 @@ public class Character {
 
     private String imagePath;
 
+    //USE COMPOSITION, IE the character HAS a species, not IS a species
+    private Species species;
+    private SkillList skillList;
+    private int XP;
+
 
     public Character(Species species, String name){
         this.name = name;
@@ -36,10 +41,7 @@ public class Character {
         presence = species.getPresence();
     }
 
-    //USE COMPOSITION, IE the character HAS a species, not IS a species
-    private Species species;
-    private SkillList skillList;
-    private int XP;
+
 
     public Species getSpecies() {
         return species;

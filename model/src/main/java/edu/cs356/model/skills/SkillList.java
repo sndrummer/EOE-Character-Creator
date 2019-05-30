@@ -17,7 +17,7 @@ public class SkillList {
         initSkillList();
     }
 
-    private Character character;
+    private transient Character character;
 
     private List<Skill> skillList;
 

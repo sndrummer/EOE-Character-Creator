@@ -360,8 +360,7 @@ public class SpendXP extends AppCompatActivity {
 
     private String serializeCharacter(Character character) {
         Gson gson = new Gson();
-        Character pc = Model.getInstance().getCharacter();
-        return gson.toJson(pc);
+        return gson.toJson(character);
     }
 
     //TODO implement using json
@@ -375,6 +374,7 @@ public class SpendXP extends AppCompatActivity {
         Log.d(TAG, "SAVING FILE");
         Character pc = Model.getInstance().getCharacter();
         String characterSerialized = serializeCharacter(pc);
+        Log.d(TAG, "SUCCESS!!");
         Log.d(TAG, characterSerialized);
 
 
