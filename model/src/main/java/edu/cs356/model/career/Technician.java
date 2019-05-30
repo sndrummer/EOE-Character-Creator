@@ -6,7 +6,7 @@ import java.util.Map;
 
 import edu.cs356.model.Character;
 import edu.cs356.model.skills.Skill;
-import edu.cs356.model.skills.SkillList;
+import edu.cs356.model.skills.SkillListWrapper;
 
 public class Technician extends Career {
 
@@ -38,7 +38,7 @@ public class Technician extends Career {
 
     void initCareerSkills() {
         skillsUsed = new HashMap<>();
-        SkillList skillList = character.getSkillList();
+        SkillListWrapper skillList = character.getSkillList();
         careerSkillsList = new ArrayList<>();
 
         skillsUsed.put(skillList.getAstrogation(), Boolean.FALSE);

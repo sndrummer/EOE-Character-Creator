@@ -13,7 +13,7 @@ public class Skill implements Serializable {
     5 Challenge -- red
      */
 
-    public Skill(String name, Species.Characteristic governingAtt, SkillList wrapper) {
+    public Skill(String name, Species.Characteristic governingAtt, SkillListWrapper wrapper) {
         this.name = name;
         this.governingAtt = governingAtt;
         isCareerSkill = false;
@@ -22,7 +22,7 @@ public class Skill implements Serializable {
 
     private String description;
     private boolean isCareerSkill;
-    private transient SkillList listWrapper;
+    private transient SkillListWrapper listWrapper;
     private String name;
 
     public static final int MAX_RANK = 5;

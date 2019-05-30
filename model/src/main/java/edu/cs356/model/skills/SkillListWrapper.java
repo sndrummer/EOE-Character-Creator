@@ -10,9 +10,9 @@ import edu.cs356.edgeoftheempirecharactercreator.model.XPModel.AttrType;
 import edu.cs356.model.Character;
 import edu.cs356.model.species.Species;
 
-public class SkillList implements Serializable {
+public class SkillListWrapper implements Serializable {
 
-    public SkillList(Character character) {
+    public SkillListWrapper(Character character) {
         this.character = character;
 
         initSkillList();
@@ -402,7 +402,7 @@ public class SkillList implements Serializable {
     public String toString() {
 
         StringBuilder sb = new StringBuilder();
-        sb.append("SkillList{");
+        sb.append("SkillListWrapper{");
         for (Skill skill : skillList) {
             sb.append("\n");
             sb.append(skill.toString());

@@ -6,7 +6,7 @@ import java.util.Map;
 
 import edu.cs356.model.Character;
 import edu.cs356.model.skills.Skill;
-import edu.cs356.model.skills.SkillList;
+import edu.cs356.model.skills.SkillListWrapper;
 
 public class Smuggler extends Career {
 
@@ -37,7 +37,7 @@ public class Smuggler extends Career {
 
     void initCareerSkills() {
         skillsUsed = new HashMap<>();
-        SkillList skillList = character.getSkillList();
+        SkillListWrapper skillList = character.getSkillList();
         careerSkillsList = new ArrayList<>();
 
 

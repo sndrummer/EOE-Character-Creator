@@ -6,7 +6,7 @@ import java.util.Map;
 
 import edu.cs356.model.Character;
 import edu.cs356.model.skills.Skill;
-import edu.cs356.model.skills.SkillList;
+import edu.cs356.model.skills.SkillListWrapper;
 
 public class BountyHunter extends Career {
 
@@ -37,7 +37,7 @@ public class BountyHunter extends Career {
     void initCareerSkills() {
         skillsUsed = new HashMap<>();
         careerSkillsList = new ArrayList<>();
-        SkillList skillList = character.getSkillList();
+        SkillListWrapper skillList = character.getSkillList();
 
         skillsUsed.put(skillList.getAthletics(), Boolean.FALSE);
         skillsUsed.put(skillList.getBrawl(), Boolean.FALSE);
