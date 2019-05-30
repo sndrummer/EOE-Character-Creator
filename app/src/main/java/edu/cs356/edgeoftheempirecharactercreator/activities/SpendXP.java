@@ -358,9 +358,29 @@ public class SpendXP extends AppCompatActivity {
 
     }
 
+    private String serializeCharacter(Character character) {
+        Gson gson = new Gson();
+        Character pc = Model.getInstance().getCharacter();
+        return gson.toJson(pc);
+    }
+
+    //TODO implement using json
+
+    /**
+     * Step 1. Create a gson string
+     * Step 2. Save the serialized object string to file
+     */
     public void saveCharacterToFile() {
 
         Log.d(TAG, "SAVING FILE");
+        Character pc = Model.getInstance().getCharacter();
+        String characterSerialized = serializeCharacter(pc);
+        Log.d(TAG, characterSerialized);
+
+
+
+
+
 //        String filename = character.getName().toLowerCase() + ".json";
 //        File file = new File(getApplicationContext().getFilesDir(), filename);
 //        StringBuilder sb = new StringBuilder();

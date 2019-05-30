@@ -51,11 +51,11 @@
         <activity android:name=".activities.SpendXP"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"></activity>
-        <service android:name=".services.BackgroundSoundService"
+       <!-- <service android:name=".services.BackgroundSoundService"
             android:stopWithTask="true"
             android:enabled="true">
 
-        </service>
+        </service>-->
     </application>
 
 </manifest>
