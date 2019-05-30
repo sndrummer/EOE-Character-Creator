@@ -1,11 +1,12 @@
 package edu.cs356.edgeoftheempirecharactercreator.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.MotionEvent;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -13,10 +14,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
 
 import edu.cs356.edgeoftheempirecharactercreator.R;
-import edu.cs356.edgeoftheempirecharactercreator.adapters.SkillsAdapter;
 import edu.cs356.edgeoftheempirecharactercreator.adapters.XPSkillsAdapter;
 import edu.cs356.edgeoftheempirecharactercreator.model.Model;
 import edu.cs356.edgeoftheempirecharactercreator.model.Result;
@@ -33,6 +38,7 @@ import static edu.cs356.model.species.Species.Characteristic.CUN;
 import static edu.cs356.model.species.Species.Characteristic.INT;
 import static edu.cs356.model.species.Species.Characteristic.PR;
 import static edu.cs356.model.species.Species.Characteristic.WILL;
+
 public class SpendXP extends AppCompatActivity {
 
     private static final String TAG = "CharacterSummaryTAG";
@@ -128,22 +134,21 @@ public class SpendXP extends AppCompatActivity {
     }
 
     @Override
-    protected void onPause(){
+    protected void onPause() {
         super.onPause();
-        if(!switching) {
+        if (!switching) {
             model.getBackGroundMusic().setAction("PAUSE");
             startService(model.getBackGroundMusic());
         }
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
-        if(!switching) {
+        if (!switching) {
             model.getBackGroundMusic().setAction("RESUME");
             startService(model.getBackGroundMusic());
-        }
-        else switching = false;
+        } else switching = false;
     }
 
 
@@ -223,7 +228,7 @@ public class SpendXP extends AppCompatActivity {
 
     }
 
-    private void setIconListener(ImageView icon){
+    private void setIconListener(ImageView icon) {
         icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -266,11 +271,10 @@ public class SpendXP extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed()
-    {
+    public void onBackPressed() {
         Model.getInstance().getCharacter().getCareer().resetCareerSkills();
 
-        for(int i = xpModel.stepsToReset(); i > 0; i-- ) {
+        for (int i = xpModel.stepsToReset(); i > 0; i--) {
             onUndoPressed();
         }
 
@@ -278,14 +282,13 @@ public class SpendXP extends AppCompatActivity {
         super.onBackPressed();  // optional depending on your needs
     }
 
-    public void onUndoPressed(){
+    public void onUndoPressed() {
         Result result = xpModel.undoAction();
 
         if (result.isSuccess()) {
             if (result.getResult() instanceof Species.Characteristic) {
-                updateAttr( (Species.Characteristic) result.getResult());
-            }
-            else updateSkill( (Skill) result.getResult());
+                updateAttr((Species.Characteristic) result.getResult());
+            } else updateSkill((Skill) result.getResult());
         }
 
     }
@@ -293,14 +296,14 @@ public class SpendXP extends AppCompatActivity {
     private void onAttrTouched(Species.Characteristic ATTR) {
         Result result = xpModel.increaseAttr(ATTR);
 
-        if (result.isSuccess()){
+        if (result.isSuccess()) {
             updateAttr(ATTR);
         }
     }
 
-    private void updateAttr(Species.Characteristic ATTR){
+    private void updateAttr(Species.Characteristic ATTR) {
 
-        switch(ATTR){
+        switch (ATTR) {
             case BR:
                 mBrawnValue.setText(xpModel.getBrawnValue().toString());
                 mWoundValue.setText(xpModel.getMaxWound().toString());
@@ -328,11 +331,11 @@ public class SpendXP extends AppCompatActivity {
         updateXP();
     }
 
-    public void updateXP(){
+    public void updateXP() {
         mExperience.setText(xpModel.getXp().toString());
     }
 
-    public void updateSkill(Skill skill){
+    public void updateSkill(Skill skill) {
         ((XPSkillsAdapter) mSkillsList.getAdapter()).updateSkill(skill);
         updateXP();
     }
@@ -343,26 +346,63 @@ public class SpendXP extends AppCompatActivity {
             displayMessage(xpModel.getXp() + " xp remaining");
         }
 
-            switching = true;
+        switching = true;
 
-            character.setBrawn(xpModel.getBrawnValue());
-            character.setAgility(xpModel.getAgilityValue());
-            character.setIntellect(xpModel.getIntValue());
-            character.setCunning(xpModel.getCunValue());
-            character.setWillpower(xpModel.getWillValue());
-            character.setPresence(xpModel.getPresValue());
+        character.setBrawn(xpModel.getBrawnValue());
+        character.setAgility(xpModel.getAgilityValue());
+        character.setIntellect(xpModel.getIntValue());
+        character.setCunning(xpModel.getCunValue());
+        character.setWillpower(xpModel.getWillValue());
+        character.setPresence(xpModel.getPresValue());
 
-            character.setStrain(xpModel.getMaxStrain());
-            character.setWound(xpModel.getMaxWound());
-            character.setSoak(xpModel.getSoak());
+        character.setStrain(xpModel.getMaxStrain());
+        character.setWound(xpModel.getMaxWound());
+        character.setSoak(xpModel.getSoak());
 
-            Intent intent = new Intent(SpendXP.this, CharacterSummary.class);
-            startActivity(intent);
+        Intent intent = new Intent(SpendXP.this, CharacterSummary.class);
+        startActivity(intent);
     }
 
     public void displayMessage(String message) {
         Toast.makeText(getBaseContext(), message, Toast.LENGTH_SHORT).show();
     }
 
+    private String serializeCharacter(Character character) {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        return gson.toJson(character);
+    }
+
+    //TODO implement using json
+
+    /**
+     * Step 1. Create a gson string
+     * Step 2. Save the serialized object string to file
+     */
+    public void saveCharacterToFile() {
+
+        Log.d(TAG, "SAVING FILE");
+        Character pc = Model.getInstance().getCharacter();
+        String characterSerialized = serializeCharacter(pc);
+        Log.d(TAG, "Serialization was successful!!");
+        Log.d(TAG, characterSerialized);
+
+        //Filename is the name of the character
+        String filename = pc.getName() + ".json";
+
+        //Create the file
+        File file = new File(getFilesDir(), filename);
+
+        FileOutputStream outputStream;
+
+        try {
+            outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
+            outputStream.write(characterSerialized.getBytes());
+            outputStream.close();
+        } catch (Exception e) {
+            Log.e(TAG, e.toString());
+        }
+
+
+    }
 
 }
