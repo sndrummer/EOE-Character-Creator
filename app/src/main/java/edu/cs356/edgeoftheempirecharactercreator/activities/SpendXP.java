@@ -359,7 +359,7 @@ public class SpendXP extends AppCompatActivity {
     }
 
     private String serializeCharacter(Character character) {
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
         return gson.toJson(character);
     }
 
@@ -374,8 +374,24 @@ public class SpendXP extends AppCompatActivity {
         Log.d(TAG, "SAVING FILE");
         Character pc = Model.getInstance().getCharacter();
         String characterSerialized = serializeCharacter(pc);
-        Log.d(TAG, "SUCCESS!!");
+        Log.d(TAG, "Serialization was successful!!");
         Log.d(TAG, characterSerialized);
+
+        //Filename is the name of the character
+        String filename = pc.getName() + ".json";
+
+        //Create the file
+        File file = new File(getFilesDir(), filename);
+
+        FileOutputStream outputStream;
+
+        try {
+            outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
+            outputStream.write(characterSerialized.getBytes());
+            outputStream.close();
+        } catch (Exception e) {
+            Log.e(TAG, e.toString());
+        }
 
 
 

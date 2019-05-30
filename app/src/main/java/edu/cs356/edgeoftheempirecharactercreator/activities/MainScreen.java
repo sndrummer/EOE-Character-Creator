@@ -70,6 +70,13 @@ public class MainScreen extends AppCompatActivity {
         }
         startService(Model.getInstance().getBackGroundMusic());
 
+        Log.d(TAG, "Loading files ... ");
+
+        for ( String file : fileList()) {
+            Log.d(TAG, "File: " + file);
+        }
+
+
     }
 
     @Override
