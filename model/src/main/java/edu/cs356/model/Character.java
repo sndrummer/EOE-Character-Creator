@@ -1,5 +1,6 @@
 package edu.cs356.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +9,7 @@ import edu.cs356.model.skills.Skill;
 import edu.cs356.model.skills.SkillList;
 import edu.cs356.model.species.Species;
 
-public class Character {
+public class Character implements Serializable {
 
     private String name;
     private Career career;
